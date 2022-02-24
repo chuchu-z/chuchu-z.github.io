@@ -1,0 +1,47 @@
+ # 编译语言、环境
+language: node_js
+# 需要管理员权限
+# sudo: required
+
+#Node.js 版本
+# node_js: stable
+node_js:
+    - "14"
+
+# 指定 CI 系统版本为 Ubuntu16.04 LTS
+dist: xenial
+
+os: linux
+
+# 设置钩子只检测master分支的push变动
+branches:
+  only:
+    - src
+
+# node_modules 经常会由于没有及时更新，在添加其他组件之后出现「博客生成静态文件步骤」失败的情况，因此建议不进行缓存处理。
+# 设置缓存文件
+# cache:
+#   directories:
+#     - node_modules
+
+#在构建之前安装hexo环境和主题，这里的主题就是原来修改过的主题，我将其托管到另一个github仓库，直接clone就行，否则每次都是新的主题，要重新设置。
+before_install:
+  - rm -rf /home/travis/build/chuchu-z/blog/node_modules
+  - npm install hexo-cli --no-fund
+
+#安装插件
+install:
+  - npm install --no-fund
+
+# 执行清缓存，生成网页操作
+script:
+  - hexo clean
+  - hexo generate
+
+# 设置git提交名，邮箱；替换真实token到_config.yml文件，最后depoy部署
+after_script:
+  - git config user.name "chuchu-z"
+  - git config user.email "1813713320@qq.com"
+  # 替换同目录下的_config.yml文件中github_token字符串为travis后台刚才配置的变量，注>意此处sed命令用了双引号。单引号无效！
+  - sed -i "s/github_token/${github_token}/g" ./_config.yml
+  - hexo deploy

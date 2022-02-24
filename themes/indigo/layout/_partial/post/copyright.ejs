@@ -1,0 +1,10 @@
+<blockquote class="post-copyright">
+    <% if(theme.postMessage || theme.show_last_updated) { %>
+    <div class="content">
+        <%- partial('updated') %>
+        <% if(theme.postMessage) {%>
+        <%- _.template(theme.postMessage)(locals) %>
+        <% } %>
+    </div>
+    <% } %>
+</blockquote>
