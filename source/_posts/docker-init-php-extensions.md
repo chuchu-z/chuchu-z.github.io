@@ -2,9 +2,16 @@
 title: docker环境初始化及安装php扩展
 date: 2021-12-30 14:53:42
 tags: docker
+categories: docker
 ---
 
+
+
 ### docker环境初始化及安装php扩展
+
+
+
+<!--more-->
 
 ```bash
 yum -y install vim
@@ -85,7 +92,7 @@ Net start com.docker.service
 
 
 
-### 以往安装时执行过的命令
+### 以往安装时执行过的命令参考
 
 ```bash
 1   vp
