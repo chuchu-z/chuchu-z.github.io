@@ -1,13 +1,13 @@
 ---
-title: docker环境初始化及安装php扩展
+title: Docker环境初始化及安装php扩展
 date: 2021-12-30 14:53:42
-tags: docker
-categories: docker
+tags: Docker
+categories: Docker
 ---
 
 
 
-### docker环境初始化及安装php扩展
+### Docker环境初始化及安装php扩展
 
 
 
@@ -33,7 +33,7 @@ export PS1="\[\033]0;Docker\007\]\n\[\033[32;1m\] ➜ \[\033[33;1m\]\W\[\033[34;
 # 保存退出
 source /root/.bashrc
 
-# 新框架资产中心需要用到GRPC, docker环境下安装GRPC
+# 新框架资产中心需要用到GRPC, Docker环境下安装GRPC
 
 # 查看版本
 pecl version 
@@ -71,12 +71,12 @@ echo "extension=grpc.so" >> /usr/local/php/etc/php.ini
 echo "extension=protobuf.so" >> /usr/local/php/etc/php.ini
 echo "extension=apcu.so" >> /usr/local/php/etc/php.ini
 
-#重启docker
+#重启Docker
 ```
 
 
 
-### docker 启动报错
+### Docker 启动报错
 
 ```bash
 Docker.Core.Backend.BackendException:

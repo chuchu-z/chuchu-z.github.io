@@ -1,5 +1,5 @@
 <% if (post.prev || post.next){ %>
-<nav class="post-nav flex-row flex-justify-between<% if(!post.prev){ %> flex-row-reverse<% } %>">
+<nav class="post-nav flex-row flex-justify-between<% if(!post.prev){ %> flex-row-reverse<% } %>" style="display:none">
   <% if (post.prev){
     var prevTitle = post.prev.title || '[no title]';
     %>

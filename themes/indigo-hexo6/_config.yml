@@ -15,9 +15,9 @@ menu:
     url: /archives
   tags:
     url: /tags
-  th-list:
-    text: Categories
-    url: /categories
+  # th-list:
+  #   text: Categories
+  #   url: /categories
   github:
     url: https://github.com/chuchu-z
     target: _blank
@@ -40,7 +40,7 @@ color: '#3F51B5'
 # 页面标题
 tags_title: Tags
 archives_title: Archives
-categories_title: Categories
+# categories_title: Categories
 
 # 文章截断
 excerpt_render: false
@@ -50,7 +50,7 @@ mathjax: false
 archive_yearly: true
 
 # 是否显示文章最后更新时间
-show_last_updated: true
+show_last_updated: false
 
 # 是否开启分享
 share: false
@@ -70,7 +70,7 @@ hideMenu: false
 # 是否开启toc
 # toc: false
 toc:
-  list_number: true  # 是否显示数字排序
+  list_number: false  # 是否显示数字排序
 
 # 文章页留言内容，hexo中所有变量及辅助函数等均可调用，具体请查阅 hexo.io
 postMessage: ''
@@ -145,6 +145,13 @@ since_year: 2021
 
 # 用户页面中作者相关的描述性文字，如不需要设为 false
 about: false
+
+# Post wordcount display settings
+# Dependencies: https://github.com/willin/hexo-wordcount
+post_wordcount:
+  item_text: true
+  wordcount: true
+  min2read: true
 
 # “不蒜子”访问量统计，详见 http://ibruce.info/2015/04/04/busuanzi/
 # visit_counter:
