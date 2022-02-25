@@ -112,10 +112,10 @@ gitment: false
 
 # use gitalk://github.com/gitalk/gitalk
 gitalk: false
-#  owner: 
-#  repo: 
-#  client_id: 
-#  client_secret: 
+#  owner:
+#  repo:
+#  client_id:
+#  client_secret:
 
 # Valine Comment system. https://valine.js.org
 valine:
@@ -159,9 +159,9 @@ post_wordcount:
 #   site_pv: 站点总访问量：
 
 # 动态定义title
-title_change:
-  normal: (つェ⊂)咦!你回来啦!
-  leave: ε=(´ο｀*)))诶,哪去了！
+# title_change:
+#   normal: (つェ⊂)咦!你回来啦!
+#   leave: ε=(´ο｀*)))诶,哪去了！
 
 # 设置为 true 发布后将使用 unpkg cdn 最新的主题样式
 # 如果想让你的自定义样式生效，把此项设为 false
