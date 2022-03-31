@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Linux Shell脚本中使用alias定义别名 | chuchu-z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,Shell">
+    <meta name="description" content="在我们使用终端时, 为了提高平时工作效率和减少常用命令过长, 敲起来浪费时间, 可在&#x2F;etc&#x2F;profile文件中配置alias，自定指令的别名">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux Shell脚本中使用alias定义别名">
+<meta property="og:url" content="https://github.com/chuchu-z/posts/linux-shell-alias-config/">
+<meta property="og:site_name" content="chuchu-z">
+<meta property="og:description" content="在我们使用终端时, 为了提高平时工作效率和减少常用命令过长, 敲起来浪费时间, 可在&#x2F;etc&#x2F;profile文件中配置alias，自定指令的别名">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-03-31T01:57:18.000Z">
+<meta property="article:modified_time" content="2022-03-31T02:36:04.528Z">
+<meta property="article:author" content="chuchu-z">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Shell">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">chuchu-z</h5>
+          <p class="description">借君三十年，繁花万里好江山</p>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/chuchu-z" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux Shell脚本中使用alias定义别名</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale" style="padding-left: 5%;">
+        <h1 class="title">Linux Shell脚本中使用alias定义别名</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-03-31T01:57:18.000Z" itemprop="datePublished" class="page-time">
+  2022-03-31
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/">Linux</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/shell/">Shell</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-linux-shell-alias-config"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Linux Shell脚本中使用alias定义别名</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-03-31 09:57:18" datetime="2022-03-31T01:57:18.000Z"  itemprop="datePublished">2022-03-31</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/">Linux</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/shell/">Shell</a></li></ul></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在我们使用终端时, 为了提高平时工作效率和减少常用命令过长, 敲起来浪费时间, 可在<code>/etc/profile</code>文件中配置<code>alias</code>，自定指令的别名</p>
+<span id="more"></span>
+
+
+
+<p>打开<code>/etc/profile</code>配置文件</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token function">vim</span> /etc/profile</code></pre>
+
+
+
+<p>在文件末尾增加以下配置</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#[alias]</span>
+
+<span class="token comment">##cd dir##</span>
+<span class="token builtin class-name">alias</span> -- -<span class="token operator">=</span><span class="token string">'cd -'</span>  		<span class="token comment"># 此处意思为输入 - 回车, 相当于执行 cd -, 快速切换回上一个目录(两个目录之间来回切换)</span>
+<span class="token builtin class-name">alias</span> <span class="token punctuation">..</span><span class="token operator">=</span><span class="token string">'cd ..'</span>
+<span class="token builtin class-name">alias</span> <span class="token assign-left variable">e</span><span class="token operator">=</span><span class="token string">'exit'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'www'</span><span class="token operator">=</span><span class="token string">'cd $www'</span> 	<span class="token comment"># $www是个人配置的环境变量, $www指向的是工作目录</span>
+
+<span class="token comment">##vim file##</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'vp'</span><span class="token operator">=</span><span class="token string">'vim /etc/profile'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'vv'</span><span class="token operator">=</span><span class="token string">'vim /etc/vimrc'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'sp'</span><span class="token operator">=</span><span class="token string">'source /etc/profile'</span>
+
+<span class="token comment">##git##</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'gs'</span><span class="token operator">=</span><span class="token string">'git status'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'gaa'</span><span class="token operator">=</span><span class="token string">'git add .'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'gcm'</span><span class="token operator">=</span><span class="token string">'git commit -m'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'gco'</span><span class="token operator">=</span><span class="token string">'git checkout'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'gb'</span><span class="token operator">=</span><span class="token string">'git branch -vvv'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'gd'</span><span class="token operator">=</span><span class="token string">'git diff'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'cls'</span><span class="token operator">=</span><span class="token string">'clear'</span>
+<span class="token builtin class-name">alias</span> -- --<span class="token operator">=</span><span class="token string">'git checkout -'</span> <span class="token comment">#此处意思为输入 -- 回车, 相当于执行 git checkout -, 快速切换回上一个分支(两个分支之间来回切换)</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'show'</span><span class="token operator">=</span><span class="token string">'git show'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'push'</span><span class="token operator">=</span><span class="token string">'git push origin `git branch --show-current`'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'fpush'</span><span class="token operator">=</span><span class="token string">'git push -f origin `git branch --show-current`'</span> 			<span class="token comment">#强推</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'pull'</span><span class="token operator">=</span><span class="token string">'git pull origin `git branch --show-current`'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'rpull'</span><span class="token operator">=</span><span class="token string">'git pull origin `git branch --show-current` --rebase'</span> 	<span class="token comment">#pull时增加 --rebase参数</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'ml'</span><span class="token operator">=</span><span class="token string">'git log --author=`git config user.name`'</span> 					<span class="token comment">#查看本人提交的log</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'gl'</span><span class="token operator">=</span><span class="token string">'git log'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'ggl'</span><span class="token operator">=</span><span class="token string">'git log --graph'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'gglp'</span><span class="token operator">=</span><span class="token string">'git log --graph --pretty=oneline --abbrev-commit'</span>			<span class="token comment">#可视化查看分支线的情况</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'review'</span><span class="token operator">=</span><span class="token string">'review() &#123; git status --short | egrep ^*.php | sed "s/^ *//" | egrep ^[^D] | tr -s " "| cut -d" " -f 2 | egrep -v database/migrations | xargs $1;&#125;;review'</span>  <span class="token comment">#列出修改过未提交的php文件</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'qq'</span><span class="token operator">=</span><span class="token string">'review "git checkout"'</span>			<span class="token comment">#把列出修改过未提交的php文件当做参数 提供给git checkout, 全部撤销</span>
+
+<span class="token comment">##ssh##</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'chuchu'</span><span class="token operator">=</span><span class="token string">'ssh root@ip'</span>
+
+<span class="token comment">##Docker##</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'dkre'</span><span class="token operator">=</span><span class="token string">'docker-compose restart'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'dkup'</span><span class="token operator">=</span><span class="token string">'docker-compose up'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'dkop'</span><span class="token operator">=</span><span class="token string">'docker-compose stop'</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'dkphp'</span><span class="token operator">=</span><span class="token string">"winpty docker exec -it <span class="token variable"><span class="token variable">`</span><span class="token function">docker</span> <span class="token function">ps</span> --filter<span class="token operator">=</span><span class="token string">'name=php7'</span> -q<span class="token variable">`</span></span> bash"</span> 	<span class="token comment">#快速进入docker的php7容器</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'dkphp5'</span><span class="token operator">=</span><span class="token string">"winpty docker exec -it <span class="token variable"><span class="token variable">`</span><span class="token function">docker</span> <span class="token function">ps</span> --filter<span class="token operator">=</span><span class="token string">'name=php5'</span> -q<span class="token variable">`</span></span> bash"</span></code></pre>
+
+
+
+<p>执行 <code>source /etc/profile</code> 重新加载刚修改配置生效</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">source</span> /etc/profile</code></pre>
+
+
+        </div>
+
+        <blockquote class="post-copyright" style="display:none">
+    
+    <footer>
+        <a href="https://github.com/chuchu-z">
+            <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4" alt="chuchu-z">
+            chuchu-z
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        
+            
+
+            
+
+        
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/git-ridiculous-behavior/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Git 中的奇葩玩法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            <span>chuchu-z &copy; 2021 - 2022</span>
+            <span class="num">Total words: 3.3k</span>
+        </p>
+        <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

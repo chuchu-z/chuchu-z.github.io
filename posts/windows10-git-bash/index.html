@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Win10 自定义 Git-Bash 终端界面 + 一言与终端结合 | chuchu-z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Git">
+    <meta name="description" content="由于Git默认的界面长的实在是不够美观, 平时用起来都无法赏心悦目, 参考网上的一些文章资料, 做了下改动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Win10 自定义 Git-Bash 终端界面 + 一言与终端结合">
+<meta property="og:url" content="https://github.com/chuchu-z/posts/windows10-git-bash/">
+<meta property="og:site_name" content="chuchu-z">
+<meta property="og:description" content="由于Git默认的界面长的实在是不够美观, 平时用起来都无法赏心悦目, 参考网上的一些文章资料, 做了下改动">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://aexphoto-1251755124.file.myqcloud.com/img/2022/02/b59d6821407fde73b5f757df99c3b600.png">
+<meta property="og:image" content="https://aexphoto-1251755124.file.myqcloud.com/img/2022/02/6000258bf5290f8a45b134500f78ed39.png">
+<meta property="og:image" content="https://aexphoto-1251755124.file.myqcloud.com/img/2022/02/4bafe9395e8ebc8797efa3ffe93e244e.png">
+<meta property="article:published_time" content="2022-02-25T02:39:27.000Z">
+<meta property="article:modified_time" content="2022-03-31T02:36:04.528Z">
+<meta property="article:author" content="chuchu-z">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://aexphoto-1251755124.file.myqcloud.com/img/2022/02/b59d6821407fde73b5f757df99c3b600.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">chuchu-z</h5>
+          <p class="description">借君三十年，繁花万里好江山</p>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/chuchu-z" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Win10 自定义 Git-Bash 终端界面 + 一言与终端结合</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale" style="padding-left: 5%;">
+        <h1 class="title">Win10 自定义 Git-Bash 终端界面 + 一言与终端结合</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2022-02-25T02:39:27.000Z" itemprop="datePublished" class="page-time">
+  2022-02-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">Git</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BF%AE%E6%94%B9Git-Bash-%E7%AA%97%E5%8F%A3%E5%B7%A6%E4%B8%8A%E8%A7%92%E6%A0%87%E9%A2%98"><span class="post-toc-text">修改Git Bash 窗口左上角标题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BF%AE%E6%94%B9%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6"><span class="post-toc-text">修改命令提示符</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%BF%AE%E6%94%B9%E7%95%8C%E9%9D%A2%E4%B8%BB%E9%A2%98"><span class="post-toc-text">修改界面主题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Fira-Code"><span class="post-toc-text">Fira Code</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E4%B8%80%E8%A8%80%E4%B8%8E%E7%BB%88%E7%AB%AF%E7%BB%93%E5%90%88"><span class="post-toc-text">一言与终端结合</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-windows10-git-bash"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Win10 自定义 Git-Bash 终端界面 + 一言与终端结合</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2022-02-25 10:39:27" datetime="2022-02-25T02:39:27.000Z"  itemprop="datePublished">2022-02-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">Git</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>由于Git默认的界面长的实在是不够美观, 平时用起来都无法赏心悦目, 参考网上的一些文章资料, 做了下改动</p>
+<span id="more"></span>
+
+
+
+<h3 id="修改Git-Bash-窗口左上角标题"><a href="#修改Git-Bash-窗口左上角标题" class="headerlink" title="修改Git Bash 窗口左上角标题"></a>修改Git Bash 窗口左上角标题</h3><pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#该命令是一次性的,关闭后重新打开会恢复, 后面有完整的 </span>
+<span class="token builtin class-name">echo</span> -ne <span class="token string">"<span class="token entity" title="\\">\\</span>e]0;title name<span class="token entity" title="\\">\\</span>a"</span></code></pre>
+
+
+
+<h3 id="修改命令提示符"><a href="#修改命令提示符" class="headerlink" title="修改命令提示符"></a>修改命令提示符</h3><p>具体操作</p>
+<p>打开 git-prompt.sh 文件</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token function">vim</span> /etc/profile.d/git-prompt.sh</code></pre>
+
+
+
+<p>将其修改为如下内容：</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token keyword">if</span> <span class="token builtin class-name">test</span> -f /etc/profile.d/git-sdk.sh
+<span class="token keyword">then</span>
+    <span class="token assign-left variable">TITLEPREFIX</span><span class="token operator">=</span>SDK-<span class="token variable">$&#123;MSYSTEM<span class="token operator">#</span>MINGW&#125;</span>
+<span class="token keyword">else</span>
+    <span class="token assign-left variable">TITLEPREFIX</span><span class="token operator">=</span><span class="token variable">$MSYSTEM</span>
+<span class="token keyword">fi</span>
+
+<span class="token keyword">if</span> <span class="token builtin class-name">test</span> -f ~/.config/git/git-prompt.sh
+<span class="token keyword">then</span>
+    <span class="token builtin class-name">.</span> ~/.config/git/git-prompt.sh
+<span class="token keyword">else</span>
+    <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">'\[\033]0;Bash\007\]'</span>      <span class="token comment"># 窗口标题</span>
+    <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$PS1</span>"</span><span class="token string">'\n'</span>                 <span class="token comment"># 换行</span>
+    <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$PS1</span>"</span><span class="token string">'\[\033[32;1m\]'</span>     <span class="token comment"># 高亮绿色</span>
+    <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$PS1</span>"</span><span class="token string">' ➜ '</span>               <span class="token comment"># unicode 字符，右箭头, 如果显示不出来大概率是utf-8编码问题</span>
+    <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$PS1</span>"</span><span class="token string">'\[\033[33;1m\]'</span>     <span class="token comment"># 高亮黄色</span>
+    <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$PS1</span>"</span><span class="token string">'\W'</span>                 <span class="token comment"># 当前目录</span>
+    <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$PS1</span>"</span><span class="token string">'\[\033[34;1m\]'</span>     <span class="token comment"># 高亮蓝色</span>
+    <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$PS1</span>"</span><span class="token string">' [\t]'</span>              <span class="token comment"># 当前时间</span>
+    
+    <span class="token keyword">if</span> <span class="token builtin class-name">test</span> -z <span class="token string">"<span class="token variable">$WINELOADERNOEXEC</span>"</span>
+    <span class="token keyword">then</span>
+        <span class="token assign-left variable">GIT_EXEC_PATH</span><span class="token operator">=</span><span class="token string">"<span class="token variable"><span class="token variable">$(</span><span class="token function">git</span> --exec-path <span class="token operator"><span class="token file-descriptor important">2</span>></span>/dev/null<span class="token variable">)</span></span>"</span>
+        <span class="token assign-left variable">COMPLETION_PATH</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$&#123;GIT_EXEC_PATH<span class="token operator">%</span><span class="token operator">/</span>libexec<span class="token operator">/</span>git-core&#125;</span>"</span>
+        <span class="token assign-left variable">COMPLETION_PATH</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$&#123;COMPLETION_PATH<span class="token operator">%</span><span class="token operator">/</span>lib<span class="token operator">/</span>git-core&#125;</span>"</span>
+        <span class="token assign-left variable">COMPLETION_PATH</span><span class="token operator">=</span><span class="token string">"<span class="token variable">$COMPLETION_PATH</span>/share/git/completion"</span>
+        <span class="token keyword">if</span> <span class="token builtin class-name">test</span> -f <span class="token string">"<span class="token variable">$COMPLETION_PATH</span>/git-prompt.sh"</span>
+        <span class="token keyword">then</span>
+            <span class="token builtin class-name">.</span> <span class="token string">"<span class="token variable">$COMPLETION_PATH</span>/git-completion.bash"</span>
+            <span class="token builtin class-name">.</span> <span class="token string">"<span class="token variable">$COMPLETION_PATH</span>/git-prompt.sh"</span>
+            <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$PS1</span>"</span><span class="token string">'\[\033[31m\]'</span>   <span class="token comment"># 红色</span>
+            <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$PS1</span>"</span><span class="token string">'`__git_ps1`'</span>    <span class="token comment"># git 插件</span>
+        <span class="token keyword">fi</span>
+    <span class="token keyword">fi</span>
+    <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$PS1</span>"</span><span class="token string">'\[\033[36m\] '</span>      <span class="token comment"># 青色</span>
+<span class="token keyword">fi</span>
+
+<span class="token assign-left variable">MSYS2_PS1</span><span class="token operator">=</span><span class="token string">"<span class="token environment constant">$PS1</span>"</span></code></pre>
+
+
+
+<p>这个非常像 oh-my-zsh 的风格, 其实一开始就是想用zsh终端的, 奈何windows不支持, 如果平时日常开发想装的话也可以在linux虚拟主机或者docker里面装一个, zsh在目前来说可以说是最强大的shell了, 谁用谁知道</p>
+<h3 id="修改界面主题"><a href="#修改界面主题" class="headerlink" title="修改界面主题"></a>修改界面主题</h3><pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token function">vim</span> ~/.minttyrc</code></pre>
+
+
+
+<p>默认配置如下:</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token assign-left variable">Transparency</span><span class="token operator">=</span>low
+<span class="token assign-left variable">Language</span><span class="token operator">=</span>
+<span class="token assign-left variable">ForegroundColour</span><span class="token operator">=</span><span class="token number">0,255</span>,64
+<span class="token assign-left variable">CursorColour</span><span class="token operator">=</span><span class="token number">0,255</span>,64
+<span class="token assign-left variable">CursorType</span><span class="token operator">=</span>block
+<span class="token assign-left variable">Scrollbar</span><span class="token operator">=</span>none
+<span class="token assign-left variable">FontHeight</span><span class="token operator">=</span><span class="token number">12</span></code></pre>
+
+
+
+<p>把以下内容添加到配置文件里面：</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token assign-left variable">Font</span><span class="token operator">=</span>Fira Code Medium
+<span class="token assign-left variable">FontHeight</span><span class="token operator">=</span><span class="token number">14</span>
+<span class="token assign-left variable">FontHeight</span><span class="token operator">=</span><span class="token number">14</span>
+<span class="token assign-left variable">Transparency</span><span class="token operator">=</span>low
+<span class="token assign-left variable">FontSmoothing</span><span class="token operator">=</span>default
+<span class="token assign-left variable">Locale</span><span class="token operator">=</span>C
+<span class="token assign-left variable">Charset</span><span class="token operator">=</span>UTF-8
+<span class="token assign-left variable">Columns</span><span class="token operator">=</span><span class="token number">88</span>
+<span class="token assign-left variable">Rows</span><span class="token operator">=</span><span class="token number">26</span>
+<span class="token assign-left variable">OpaqueWhenFocused</span><span class="token operator">=</span>no
+<span class="token assign-left variable">Scrollbar</span><span class="token operator">=</span>none
+<span class="token assign-left variable">Language</span><span class="token operator">=</span>zh_CN
+
+<span class="token assign-left variable">ForegroundColour</span><span class="token operator">=</span><span class="token number">131,148</span>,150
+<span class="token assign-left variable">BackgroundColour</span><span class="token operator">=</span><span class="token number">0,43</span>,54
+<span class="token assign-left variable">CursorColour</span><span class="token operator">=</span><span class="token number">220,130</span>,71
+
+<span class="token assign-left variable">BoldBlack</span><span class="token operator">=</span><span class="token number">128,128</span>,128
+<span class="token assign-left variable">Red</span><span class="token operator">=</span><span class="token number">255,64</span>,40
+<span class="token assign-left variable">BoldRed</span><span class="token operator">=</span><span class="token number">255,128</span>,64
+<span class="token assign-left variable">Green</span><span class="token operator">=</span><span class="token number">64,200</span>,64
+<span class="token assign-left variable">BoldGreen</span><span class="token operator">=</span><span class="token number">64,255</span>,64
+<span class="token assign-left variable">Yellow</span><span class="token operator">=</span><span class="token number">190,190</span>,0
+<span class="token assign-left variable">BoldYellow</span><span class="token operator">=</span><span class="token number">255,255</span>,64
+<span class="token assign-left variable">Blue</span><span class="token operator">=</span><span class="token number">0,128</span>,255
+<span class="token assign-left variable">BoldBlue</span><span class="token operator">=</span><span class="token number">128,160</span>,255
+<span class="token assign-left variable">Magenta</span><span class="token operator">=</span><span class="token number">211,54</span>,130
+<span class="token assign-left variable">BoldMagenta</span><span class="token operator">=</span><span class="token number">255,128</span>,255
+<span class="token assign-left variable">Cyan</span><span class="token operator">=</span><span class="token number">64,190</span>,190
+<span class="token assign-left variable">BoldCyan</span><span class="token operator">=</span><span class="token number">128,255</span>,255
+<span class="token assign-left variable">White</span><span class="token operator">=</span><span class="token number">200,200</span>,200
+<span class="token assign-left variable">BoldWhite</span><span class="token operator">=</span><span class="token number">255,255</span>,255
+
+<span class="token assign-left variable">BellTaskbar</span><span class="token operator">=</span>no
+<span class="token assign-left variable">Term</span><span class="token operator">=</span>xterm
+<span class="token assign-left variable">FontWeight</span><span class="token operator">=</span><span class="token number">400</span>
+<span class="token assign-left variable">FontIsBold</span><span class="token operator">=</span>no</code></pre>
+
+
+
+<p>最后重启Git-Bash就可以看到配置好的界面了</p>
+<p>效果图:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aexphoto-1251755124.file.myqcloud.com/img/2022/02/b59d6821407fde73b5f757df99c3b600.png" alt="image-20220225095728006" title="">
+                </div>
+                <div class="image-caption">image-20220225095728006</div>
+            </figure>
+
+
+
+
+
+<p>另外说一下第一行是在 Options 中选择字体时设置的，我使用了 Fira Code， 14号字体,   Fira Code就是一款为写程序而生的字体</p>
+<p>以上内容参考网络文章 有兴趣的可以深入了解<a target="_blank" rel="noopener" href="http://www.voidcn.com/article/p-wavhthxe-tr.html">这里</a>, 不过也有可能无法访问了</p>
+<h3 id="Fira-Code"><a href="#Fira-Code" class="headerlink" title="Fira Code"></a>Fira Code</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/266b4fa2c446?tdsourcetag=s_pctim_aiomsg">Fira</a> 是 Mozilla 公司（火狐浏览器她爹）主推的字体系列。Fira Code 是其中的一员，专为写程序而生。出来具有<code>等宽</code>等基本属性外，还加入了编程连字特性（ligatures）。</p>
+<p>Fira Code 就是利用这个特性对编程中的常用符号进行优化，比如把输入的「!=」直接显示成「≠」或者把「&gt;=」变成「≥ 」等等，以此来提高代码的可读性</p>
+<p>本人的使用的IDE也是装的这一款字体, 咳咳跑题了..</p>
+<h3 id="一言与终端结合"><a href="#一言与终端结合" class="headerlink" title="一言与终端结合"></a>一言与终端结合</h3><p>去年无意发现一个名叫 <a target="_blank" rel="noopener" href="https://hitokoto.cn/">一言</a> 的网站, 这个网站只是单纯的提供一句话,  可以是动漫中的台词，也可以是网络上的各种小段子。 或是感动，或是开心，有或是单纯的回忆</p>
+<p> 并且还官方还提供了 <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/sentence/#%E7%AE%80%E4%BB%8B">API接口文档</a> 供我们免费调用, 于是并尝试了把该功能与终端做结合, 大概就是, 启动终端时请求API, 把随机返回的句子显示在终端上, 我认为是个有趣的想法, 具体实现思路, 写一个请求一言API的脚本, 终端启动时自动调用一次这个脚本</p>
+<p>效果如下:</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aexphoto-1251755124.file.myqcloud.com/img/2022/02/6000258bf5290f8a45b134500f78ed39.png" alt="图片" title="">
+                </div>
+                <div class="image-caption">图片</div>
+            </figure>
+
+
+
+<p>编写一言脚本, 文件名和路径没有具体要求, 看个人</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token function">vim</span> yy</code></pre>
+
+
+
+<p>具体代码<a href="https://github.com/chuchu-z/local-config/blob/master/yy">GitHub</a>上也有,  直接拿下面的也行:</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 一言</span>
+
+<span class="token comment"># 返回普通文本</span>
+<span class="token comment">#`curl -ks https://v1.hitokoto.cn/?encode=text`</span>
+
+<span class="token assign-left variable">url</span><span class="token operator">=</span><span class="token string">'https://v1.hitokoto.cn'</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> x<span class="token variable">$1</span> <span class="token operator">!=</span> x <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token assign-left variable">url</span><span class="token operator">=</span><span class="token string">'https://v1.hitokoto.cn?'</span><span class="token variable">$1</span>
+<span class="token keyword">fi</span>
+
+<span class="token comment"># 处理 json 数据(处理json数据需要安装jq)</span>
+<span class="token assign-left variable">json</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">curl</span> -ks $url<span class="token variable">`</span></span>
+
+<span class="token comment"># linux 安裝jq</span>
+<span class="token comment"># yum install epel-release</span>
+<span class="token comment"># yum list jq</span>
+<span class="token comment"># yum install jq</span>
+
+<span class="token comment"># windows 安裝jq</span>
+<span class="token comment"># https://stedolan.github.io/jq/</span>
+
+<span class="token assign-left variable">random</span><span class="token operator">=</span>$<span class="token punctuation">[</span><span class="token environment constant">RANDOM</span>%7+31<span class="token punctuation">]</span>
+
+<span class="token builtin class-name">echo</span> -e
+<span class="token assign-left variable">content</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">echo</span> $<span class="token punctuation">&#123;</span>json<span class="token punctuation">&#125;</span> <span class="token operator">|</span> jq <span class="token string">'.hitokoto'</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">'s/"//g'</span> <span class="token operator">|</span> <span class="token function">tr</span> -d <span class="token string">'\n'</span><span class="token variable">`</span></span>
+<span class="token builtin class-name">printf</span> <span class="token string">"<span class="token entity" title="\033">\033</span>[1;<span class="token variable">$&#123;random&#125;</span>m%s<span class="token entity" title="\033">\033</span>[0m"</span> <span class="token string">"『 "</span> <span class="token variable">$content</span> <span class="token string">" 』"</span>
+<span class="token assign-left variable">from_who</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">echo</span> $<span class="token punctuation">&#123;</span>json<span class="token punctuation">&#125;</span> <span class="token operator">|</span> jq <span class="token string">'.from_who'</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">'s/"//g'</span> <span class="token operator">|</span> <span class="token function">tr</span> -d <span class="token string">'\n'</span><span class="token variable">`</span></span>
+<span class="token builtin class-name">echo</span> -e
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">"<span class="token variable">$from_who</span>"</span> <span class="token operator">==</span> <span class="token string">'null'</span> <span class="token punctuation">]</span>
+<span class="token keyword">then</span>
+    <span class="token assign-left variable">from_who</span><span class="token operator">=</span><span class="token string">'匿名'</span>
+<span class="token keyword">fi</span>
+
+<span class="token assign-left variable">length</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">expr</span> $<span class="token punctuation">&#123;</span>#content<span class="token punctuation">&#125;</span> <span class="token punctuation">\</span>* <span class="token number">2</span><span class="token variable">`</span></span>
+<span class="token builtin class-name">printf</span> <span class="token string">"<span class="token entity" title="\033">\033</span>[1;<span class="token variable">$&#123;random&#125;</span>m%<span class="token variable">$&#123;length&#125;</span>s<span class="token entity" title="\033">\033</span>[0m"</span> <span class="token string">"—— <span class="token variable">$from_who</span>"</span>
+
+<span class="token assign-left variable">from</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">echo</span> $<span class="token punctuation">&#123;</span>json<span class="token punctuation">&#125;</span> <span class="token operator">|</span> jq <span class="token string">'.from'</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">'s/"//g'</span> <span class="token operator">|</span> <span class="token function">tr</span> -d <span class="token string">'\n'</span><span class="token variable">`</span></span>
+<span class="token builtin class-name">printf</span> <span class="token string">"<span class="token entity" title="\033">\033</span>[1;<span class="token variable">$&#123;random&#125;</span>m%s<span class="token entity" title="\033">\033</span>[0m"</span> <span class="token string">"「"</span> <span class="token variable">$from</span> <span class="token string">"」"</span>
+<span class="token builtin class-name">echo</span> -e
+
+<span class="token builtin class-name">exit</span> <span class="token number">0</span>
+</code></pre>
+
+
+
+<p>编写完后可以试着执行 yy脚本一下试试 (代码里有说明要安装jq处理json数据)</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="https://aexphoto-1251755124.file.myqcloud.com/img/2022/02/4bafe9395e8ebc8797efa3ffe93e244e.png" alt="具体效果" title="">
+                </div>
+                <div class="image-caption">具体效果</div>
+            </figure>
+
+
+
+<p>最后编辑~/.bashrc文件, 因为Git-Bash启动时会加载此文件</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token function">vim</span> ~/.bashrc</code></pre>
+
+
+
+<p>在文件内容里加上yy后保存退出重新启动Git-Bash就行, (我能直接执行yy是配置了环境变量的, 如果没有配置的话需要写绝对路径)</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># vim ~/.bashrc</span>
+<span class="token comment"># Git-Bash 初始化加载此配置文件</span>
+<span class="token comment"># shopt -s expand_aliases</span>
+<span class="token comment"># 允许shell脚本中使用 alias 命令</span>
+<span class="token comment"># 经测试, 在 #!/bin/sh 下, 该命令可有可无, 不影响 alias 的使用</span>
+<span class="token comment"># 在 !/bin/bash 下，才有影响</span>
+
+yy</code></pre>
+
+
+        </div>
+
+        <blockquote class="post-copyright" style="display:none">
+    
+    <footer>
+        <a href="https://github.com/chuchu-z">
+            <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4" alt="chuchu-z">
+            chuchu-z
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        
+            
+
+            
+
+        
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between" style="display:none">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/posts/chrome-proxy-limit/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">关于谷歌Chrome浏览器非安全端口限制问题</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/docker-init-php-extensions/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Docker环境初始化及安装php扩展</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            <span>chuchu-z &copy; 2021 - 2022</span>
+            <span class="num">Total words: 3.3k</span>
+        </p>
+        <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
