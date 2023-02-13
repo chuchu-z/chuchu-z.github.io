@@ -64,6 +64,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install -g hexo-cli --no-fund
+          npm install -g https://github.com/xcodebuild/hexo-asset-image --save
           npm install -g --no-fund
           hexo clean
           hexo generate
