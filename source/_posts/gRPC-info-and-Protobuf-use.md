@@ -1,8 +1,8 @@
 ---
 title: gRPC的简介与Protobuf的使用
 date: 2023-2-14 03:36:50
-tags: 其他
-categories: 其他
+tags: Other
+categories: Other
 
 ---
 
@@ -10,7 +10,7 @@ categories: 其他
 
 # gRPC的简介与Protobuf的使用
 
-> **[gRPC](https://grpc.io/docs/)**实现微服务，将大的项目拆分为多个小且独立的业务模块；即服务；各服务之间使用高效的**Protobuf**协议进行RPC调用。
+> [**gRPC**](https://grpc.io/docs/)实现微服务，将大的项目拆分为多个小且独立的业务模块；即服务；各服务之间使用高效的**Protobuf**协议进行RPC调用。
 >
 > [**Protobuf**](https://developers.google.com/protocol-buffers/docs/overview) 实际是一套类似**Json或者XML**的数据传输格式和规范，用于不同应用或进程之间进行通信时使用。通信时所传递的信息是通过**Protobuf定义的message数据结构**进行打包，然后编译成**二进制**的码流再进行传输或者存储。
 >
@@ -24,7 +24,7 @@ categories: 其他
 
 ### 安装扩展
 
-在**PHP**中使用**gRPC**需要先安装**[gRPC扩展](http://pecl.php.net/package/gRPC)**和[**protobuf扩展**](http://pecl.php.net/package/protobuf)
+在**PHP**中使用**gRPC**需要先安装[**gRPC扩展**](http://pecl.php.net/package/gRPC)和[**protobuf扩展**](http://pecl.php.net/package/protobuf)
 
 ```shell
 # 使用pecl安装
