@@ -1,8 +1,8 @@
 ---
 title: 关于谷歌Chrome浏览器非安全端口限制问题
 date: 2022-3-24 12:38:16
-tags: Chrome
-categories: Chrome
+tags: Other
+categories: Other
 
 ---
 
