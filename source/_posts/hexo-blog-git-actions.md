@@ -42,11 +42,11 @@ ssh-keygen -t rsa  -C "$(git config user.name)" -f github-deploy-key
 
 设置 HEXO_DEPLOY_PUB，value 是上步生成的 github-deploy-key.pub 文件内容。
 
-![image-20230214054920822](upload\image-20230214054920822.png)
+![image-20230214054920822](./hexo-blog-git-actions/image-20230214054920822.png)
 
 设置 HEXO_DEPLOY_PRI，value 是上步生成的 github-deploy-key 文件内容。
 
-![image-20230214055043562](upload\image-20230214055043562.png)
+![image-20230214055043562](./hexo-blog-git-actions/image-20230214055043562.png)
 
 
 
