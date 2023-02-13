@@ -2,5 +2,7 @@
 Thumbs.db
 db.json
 *.log
+github-deploy-key
+github-deploy-key.pub
 public/
 .deploy*/
