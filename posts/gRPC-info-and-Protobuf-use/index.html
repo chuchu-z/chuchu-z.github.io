@@ -21,17 +21,17 @@
     
     
     <meta name="keywords" content="Other">
-    <meta name="description" content="gRPC的简介与Protobuf的使用 gRPC实现微服务，将大的项目拆分为多个小且独立的业务模块；即服务；各服务之间使用高效的Protobuf协议进行RPC调用。 Protobuf 实际是一套类似Json或者XML的数据传输格式和规范，用于不同应用或进程之间进行通信时使用。通信时所传递的信息是通过Protobuf定义的message数据结构进行打包，然后编译成二进制的码流再进行传输或者存储。 g">
+    <meta name="description" content="gRPC的简介与Protobuf的使用 gRPC实现微服务，将大的项目拆分为多个小且独立的业务模块；即服务；各服务之间使用高效的Protobuf协议进行RPC调用。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gRPC的简介与Protobuf的使用">
 <meta property="og:url" content="http://chuchu-z.com/posts/gRPC-info-and-Protobuf-use/">
 <meta property="og:site_name" content="chuchu-z">
-<meta property="og:description" content="gRPC的简介与Protobuf的使用 gRPC实现微服务，将大的项目拆分为多个小且独立的业务模块；即服务；各服务之间使用高效的Protobuf协议进行RPC调用。 Protobuf 实际是一套类似Json或者XML的数据传输格式和规范，用于不同应用或进程之间进行通信时使用。通信时所传递的信息是通过Protobuf定义的message数据结构进行打包，然后编译成二进制的码流再进行传输或者存储。 g">
+<meta property="og:description" content="gRPC的简介与Protobuf的使用 gRPC实现微服务，将大的项目拆分为多个小且独立的业务模块；即服务；各服务之间使用高效的Protobuf协议进行RPC调用。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://42.193.238.253:18888/p/file/get_file/f91a56d9cea146efa2bd31cb3e807d8e.png">
 <meta property="og:image" content="http://42.193.238.253:18888/p/file/get_file/257d88446cac4982a7338bb6978ce117.png">
 <meta property="article:published_time" content="2023-02-13T19:36:50.000Z">
-<meta property="article:modified_time" content="2023-02-16T11:11:58.588Z">
+<meta property="article:modified_time" content="2023-02-17T07:24:22.433Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="Other">
 <meta name="twitter:card" content="summary">
@@ -176,6 +176,8 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <h1 id="gRPC的简介与Protobuf的使用"><a href="#gRPC的简介与Protobuf的使用" class="headerlink" title="gRPC的简介与Protobuf的使用"></a>gRPC的简介与Protobuf的使用</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://grpc.io/docs/"><strong>gRPC</strong></a>实现微服务，将大的项目拆分为多个小且独立的业务模块；即服务；各服务之间使用高效的<strong>Protobuf</strong>协议进行RPC调用。</p>
+<span id="more"></span>
+
 <p><a target="_blank" rel="noopener" href="https://developers.google.com/protocol-buffers/docs/overview"><strong>Protobuf</strong></a> 实际是一套类似<strong>Json或者XML</strong>的数据传输格式和规范，用于不同应用或进程之间进行通信时使用。通信时所传递的信息是通过<strong>Protobuf定义的message数据结构</strong>进行打包，然后编译成<strong>二进制</strong>的码流再进行传输或者存储。</p>
 <p>gRPC开发的核心文件是*<strong>.proto</strong>文件 ，它定义了gRPC服务和消息的约定。根据这个文件，gRPC框架可以通过<strong>protoc 工具</strong>生成服务基类，消息和完整的客户端代码, 支持 <strong>C++、Java、Go、Python、Ruby、C#、Node.js、Android Java、Objective-C、PHP</strong>等多种编程语言。</p>
 <p><strong>protoc</strong> 是用于将<strong>proto文件</strong>编程成各种语言源码文件的工具。</p>
