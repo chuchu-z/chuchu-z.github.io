@@ -12,6 +12,8 @@ categories: Other
 
 > [**gRPC**](https://grpc.io/docs/)实现微服务，将大的项目拆分为多个小且独立的业务模块；即服务；各服务之间使用高效的**Protobuf**协议进行RPC调用。
 >
+> <!--more-->
+>
 > [**Protobuf**](https://developers.google.com/protocol-buffers/docs/overview) 实际是一套类似**Json或者XML**的数据传输格式和规范，用于不同应用或进程之间进行通信时使用。通信时所传递的信息是通过**Protobuf定义的message数据结构**进行打包，然后编译成**二进制**的码流再进行传输或者存储。
 >
 > gRPC开发的核心文件是***.proto**文件 ，它定义了gRPC服务和消息的约定。根据这个文件，gRPC框架可以通过**protoc 工具**生成服务基类，消息和完整的客户端代码, 支持 **C++、Java、Go、Python、Ruby、C#、Node.js、Android Java、Objective-C、PHP**等多种编程语言。
