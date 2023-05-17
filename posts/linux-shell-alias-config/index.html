@@ -29,7 +29,7 @@
 <meta property="og:description" content="在我们使用终端时, 为了提高平时工作效率和减少常用命令过长, 敲起来浪费时间, 可在&#x2F;etc&#x2F;profile文件中配置alias，自定指令的别名">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-31T01:57:18.000Z">
-<meta property="article:modified_time" content="2023-05-17T02:22:03.730Z">
+<meta property="article:modified_time" content="2023-05-17T04:30:30.635Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="Shell">
@@ -44,7 +44,7 @@
     <!-- custom head -->
     
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
     <div id="loading" class="active"></div>
@@ -171,12 +171,12 @@
 
 
 <p>打开<code>/etc/profile</code>配置文件</p>
-<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token function">vim</span> /etc/profile</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">vim</span> /etc/profile</code></pre>
 
 
 
 <p>在文件末尾增加以下配置</p>
-<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token comment">#[alias]</span>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#[alias]</span>
 
 <span class="token comment">##cd dir##</span>
 <span class="token builtin class-name">alias</span> -- -<span class="token operator">=</span><span class="token string">'cd -'</span>  		<span class="token comment"># 此处意思为输入 - 回车, 相当于执行 cd -, 快速切换回上一个目录(两个目录之间来回切换)</span>
@@ -217,13 +217,13 @@
 <span class="token builtin class-name">alias</span> <span class="token string">'dkre'</span><span class="token operator">=</span><span class="token string">'docker-compose restart'</span>
 <span class="token builtin class-name">alias</span> <span class="token string">'dkup'</span><span class="token operator">=</span><span class="token string">'docker-compose up'</span>
 <span class="token builtin class-name">alias</span> <span class="token string">'dkop'</span><span class="token operator">=</span><span class="token string">'docker-compose stop'</span>
-<span class="token builtin class-name">alias</span> <span class="token string">'dkphp'</span><span class="token operator">=</span><span class="token string">"winpty docker exec -it <span class="token variable"><span class="token variable">`</span><span class="token function">docker</span> <span class="token function">ps</span> --filter<span class="token operator">=</span><span class="token string">'name=php7'</span> -q<span class="token variable">`</span></span> bash"</span> 	<span class="token comment">#快速进入docker的php7容器</span>
-<span class="token builtin class-name">alias</span> <span class="token string">'dkphp5'</span><span class="token operator">=</span><span class="token string">"winpty docker exec -it <span class="token variable"><span class="token variable">`</span><span class="token function">docker</span> <span class="token function">ps</span> --filter<span class="token operator">=</span><span class="token string">'name=php5'</span> -q<span class="token variable">`</span></span> bash"</span></code></pre>
+<span class="token builtin class-name">alias</span> <span class="token string">'dkphp'</span><span class="token operator">=</span><span class="token string">"winpty docker exec -it <span class="token variable"><span class="token variable">`</span><span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">--filter</span><span class="token operator">=</span><span class="token string">'name=php7'</span> <span class="token parameter variable">-q</span><span class="token variable">`</span></span> bash"</span> 	<span class="token comment">#快速进入docker的php7容器</span>
+<span class="token builtin class-name">alias</span> <span class="token string">'dkphp5'</span><span class="token operator">=</span><span class="token string">"winpty docker exec -it <span class="token variable"><span class="token variable">`</span><span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">--filter</span><span class="token operator">=</span><span class="token string">'name=php5'</span> <span class="token parameter variable">-q</span><span class="token variable">`</span></span> bash"</span></code></pre>
 
 
 
 <p>执行 <code>source /etc/profile</code> 重新加载刚修改配置生效</p>
-<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token builtin class-name">source</span> /etc/profile</code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> /etc/profile</code></pre>
 
 
         </div>

@@ -29,7 +29,7 @@
 <meta property="og:description" content="Docker环境初始化及安装php扩展">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-12-30T06:53:42.000Z">
-<meta property="article:modified_time" content="2023-05-17T02:22:03.726Z">
+<meta property="article:modified_time" content="2023-05-17T04:30:30.631Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
@@ -43,7 +43,7 @@
     <!-- custom head -->
     
 
-<meta name="generator" content="Hexo 6.0.0"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <body>
     <div id="loading" class="active"></div>
@@ -173,7 +173,7 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <h3 id="Docker环境初始化及安装php扩展"><a href="#Docker环境初始化及安装php扩展" class="headerlink" title="Docker环境初始化及安装php扩展"></a>Docker环境初始化及安装php扩展</h3><span id="more"></span>
 
-<pre class="language-bash" data-language="bash"><code class="language-bash">yum -y <span class="token function">install</span> <span class="token function">vim</span>
+<pre class="language-bash" data-language="bash"><code class="language-bash">yum <span class="token parameter variable">-y</span> <span class="token function">install</span> <span class="token function">vim</span>
 <span class="token function">vim</span> /root/.bashrc
 
 <span class="token comment"># 设置alias</span>
@@ -216,8 +216,8 @@ pecl <span class="token function">install</span> grpc
 /usr/local/php/bin/pecl <span class="token function">install</span> apcu
 
 <span class="token comment"># GCC版本4.8编译报错, 升级版本到gcc 7.3</span>
-yum -y <span class="token function">install</span> centos-release-scl
-yum -y <span class="token function">install</span> devtoolset-7-gcc devtoolset-7-gcc-c++ devtoolset-7-binutils
+yum <span class="token parameter variable">-y</span> <span class="token function">install</span> centos-release-scl
+yum <span class="token parameter variable">-y</span> <span class="token function">install</span> devtoolset-7-gcc devtoolset-7-gcc-c++ devtoolset-7-binutils
 scl <span class="token builtin class-name">enable</span> devtoolset-7 <span class="token function">bash</span>
 
 <span class="token builtin class-name">echo</span> <span class="token string">"source /opt/rh/devtoolset-7/enable"</span> <span class="token operator">>></span>/etc/profile
@@ -244,12 +244,12 @@ Net start com.docker.service</code></pre>
 
 
 <h3 id="以往安装时执行过的命令参考"><a href="#以往安装时执行过的命令参考" class="headerlink" title="以往安装时执行过的命令参考"></a>以往安装时执行过的命令参考</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">1</span>   vp
-<span class="token number">2</span>   php -m
+<span class="token number">2</span>   php <span class="token parameter variable">-m</span>
 <span class="token number">3</span>   e
 <span class="token number">4</span>   <span class="token builtin class-name">logout</span>
 <span class="token number">5</span>   <span class="token builtin class-name">exit</span>
 <span class="token number">6</span>   <span class="token builtin class-name">exit</span>
-<span class="token number">7</span>   yum -y <span class="token function">install</span> <span class="token function">vim</span>
+<span class="token number">7</span>   yum <span class="token parameter variable">-y</span> <span class="token function">install</span> <span class="token function">vim</span>
 <span class="token number">8</span>   <span class="token function">vim</span> /root/.bashrc
 <span class="token number">9</span>   <span class="token builtin class-name">source</span> /root/.bashrc
 <span class="token number">10</span>  <span class="token function">vim</span> /root/.bashrc
@@ -269,7 +269,7 @@ Net start com.docker.service</code></pre>
 <span class="token number">24</span>  <span class="token function">which</span> phpize
 <span class="token number">25</span>  /usr/bin/phpize
 <span class="token number">26</span>  yum <span class="token function">install</span> php-devel 
-<span class="token number">27</span>  php -v
+<span class="token number">27</span>  php <span class="token parameter variable">-v</span>
 <span class="token number">28</span>  yum <span class="token function">install</span> php70w-devel 
 <span class="token number">29</span>  /usr/bin/phpize
 <span class="token number">30</span>  <span class="token function">which</span> php
@@ -278,18 +278,18 @@ Net start com.docker.service</code></pre>
 <span class="token number">33</span>  ll
 <span class="token number">34</span>  /usr/local/php/bin/pecl <span class="token function">install</span> protobuf
 <span class="token number">35</span>  /usr/local/php/bin/pecl <span class="token function">install</span> grpc
-<span class="token number">36</span>  gcc --version
-<span class="token number">37</span>  g++ --version
-<span class="token number">38</span>  yum -y <span class="token function">install</span> centos-release-scl
-<span class="token number">39</span>  yum -y <span class="token function">install</span> devtoolset-6-gcc devtoolset-6-gcc-c++ devtoolset-6-binutils
+<span class="token number">36</span>  gcc <span class="token parameter variable">--version</span>
+<span class="token number">37</span>  g++ <span class="token parameter variable">--version</span>
+<span class="token number">38</span>  yum <span class="token parameter variable">-y</span> <span class="token function">install</span> centos-release-scl
+<span class="token number">39</span>  yum <span class="token parameter variable">-y</span> <span class="token function">install</span> devtoolset-6-gcc devtoolset-6-gcc-c++ devtoolset-6-binutils
 <span class="token number">40</span>  scl <span class="token builtin class-name">enable</span> devtoolset-6 <span class="token function">bash</span>
 <span class="token number">41</span>  yum <span class="token function">install</span> centos-release-scl scl-utils-build
-<span class="token number">42</span>  yum list all --enablerepo<span class="token operator">=</span><span class="token string">'centos-sclo-rh'</span>
+<span class="token number">42</span>  yum list all <span class="token parameter variable">--enablerepo</span><span class="token operator">=</span><span class="token string">'centos-sclo-rh'</span>
 <span class="token number">43</span>  yum <span class="token function">install</span> devtoolset-4-gcc.x86_64 devtoolset-4-gcc-c++.x86_64 devtoolset-4-gcc-gdb-plugin.x86_64 
-<span class="token number">44</span>  scl --list 或 scl -l
-<span class="token number">45</span>  scl --list
-<span class="token number">46</span>  gcc -v
-<span class="token number">47</span>  php -m
+<span class="token number">44</span>  scl <span class="token parameter variable">--list</span> 或 scl <span class="token parameter variable">-l</span>
+<span class="token number">45</span>  scl <span class="token parameter variable">--list</span>
+<span class="token number">46</span>  gcc <span class="token parameter variable">-v</span>
+<span class="token number">47</span>  php <span class="token parameter variable">-m</span>
 <span class="token number">48</span>  e
 <span class="token number">49</span>  /usr/local/php/bin/pecl <span class="token function">install</span> protobuf
 <span class="token number">50</span>  /usr/local/php/bin/pecl channel-update pecl.php.net
@@ -302,8 +302,8 @@ Net start com.docker.service</code></pre>
 <span class="token number">57</span>  <span class="token function">vim</span> ~/.bashrc 
 <span class="token number">58</span>  <span class="token function">vim</span> ~/.bashrc 
 <span class="token number">59</span>  <span class="token builtin class-name">source</span> ~/.bashrc
-<span class="token number">60</span>  gcc --version
-<span class="token number">61</span>  g++ --version
+<span class="token number">60</span>  gcc <span class="token parameter variable">--version</span>
+<span class="token number">61</span>  g++ <span class="token parameter variable">--version</span>
 <span class="token number">62</span>  /usr/local/php/bin/pecl <span class="token function">install</span> protobuf
 <span class="token number">63</span>  <span class="token function">wget</span> http://curl.haxx.se/ca/cacert.pem <span class="token operator">&amp;&amp;</span> <span class="token function">mv</span> cacert.pem /usr/local/openssl/cert.pem
 <span class="token number">64</span>  ll
@@ -325,8 +325,8 @@ Net start com.docker.service</code></pre>
 <span class="token number">80</span>  pecl <span class="token function">install</span> grpc
 <span class="token number">81</span>  pecl channel-update pecl.php.net
 <span class="token number">82</span>  pecl <span class="token function">install</span> grpc
-<span class="token number">83</span>  yum -y <span class="token function">install</span> centos-release-scl
-<span class="token number">84</span>  yum -y <span class="token function">install</span> devtoolset-7-gcc devtoolset-7-gcc-c++ devtoolset-7-binutils
+<span class="token number">83</span>  yum <span class="token parameter variable">-y</span> <span class="token function">install</span> centos-release-scl
+<span class="token number">84</span>  yum <span class="token parameter variable">-y</span> <span class="token function">install</span> devtoolset-7-gcc devtoolset-7-gcc-c++ devtoolset-7-binutils
 <span class="token number">85</span>  scl <span class="token builtin class-name">enable</span> devtoolset-7 <span class="token function">bash</span>
 <span class="token number">86</span>  e
 <span class="token number">87</span>  www
