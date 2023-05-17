@@ -35,10 +35,11 @@
 <meta property="og:image" content="http://chuchu-z.com/posts/android-webview-develop/image-20230515192620190.png">
 <meta property="og:image" content="http://chuchu-z.com/posts/android-webview-develop/image-20230515183023944.png">
 <meta property="og:image" content="http://chuchu-z.com/posts/android-webview-develop/image-20230516103348480.png">
-<meta property="og:image" content="http://chuchu-z.com/posts/android-webview-develop/start">
+<meta property="og:image" content="http://chuchu-z.com/posts/android-webview-develop/create_device.gif">
+<meta property="og:image" content="http://chuchu-z.com/posts/android-webview-develop/start_device.gif">
 <meta property="og:image" content="http://chuchu-z.com/posts/android-webview-develop/run_app.gif">
 <meta property="article:published_time" content="2023-05-16T11:31:05.000Z">
-<meta property="article:modified_time" content="2023-05-17T01:52:45.658Z">
+<meta property="article:modified_time" content="2023-05-17T02:22:03.670Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="Webview">
@@ -304,13 +305,13 @@ android:theme：指定活动的主题样式
 <h3 id="3-res-目录"><a href="#3-res-目录" class="headerlink" title="3. res/ 目录"></a>3. res/ 目录</h3><p>在 Android 项目中的 <code>res/</code> 目录是用于存放资源文件的目录，其中包含了应用程序所需的各种资源，如布局文件、字符串、图像、颜色、样式等。这个目录是在 Android 项目创建时自动生成的，用于组织和管理应用程序的静态资源，在这些目录中，我们可以根据资源的类型和用途将相应的文件放置在相应的目录中，以便在代码中引用和使用这些资源。</p>
 <p><code>res/</code> 目录通常包含以下子目录：</p>
 <pre class="language-none"><code class="language-none">- res&#x2F;
-  |- layout&#x2F; 		# 用于存放布局文件，定义了应用程序的用户界面的组件和布局结构。
+  |- layout&#x2F;		# 用于存放布局文件，定义了应用程序的用户界面的组件和布局结构。
   |- drawable&#x2F;		# 用于存放图像资源文件，如位图文件（.png、.jpg、.gif 等）或矢量图形文件（.xml）。
   |- mipmap&#x2F;		# 用于存放应用程序图标的不同分辨率版本。通常包括 &#96;mdpi&#96;、&#96;hdpi&#96;、&#96;xhdpi&#96;、&#96;xxhdpi&#96;、&#96;xxxhdpi&#96; 等不同密度的图标文件。
   |- values&#x2F;		# 用于存放资源值文件，如字符串、颜色、尺寸、样式等。包括 &#96;strings.xml&#96;、&#96;colors.xml&#96;、&#96;dimens.xml&#96;、&#96;styles.xml&#96;。
-  |- raw&#x2F;			# 用于存放原始资源文件，如音频文件、视频文件、字体文件等。这些文件可以直接通过资源 ID 访问。
-  |- menu&#x2F;			# 用于存放菜单资源文件，定义应用程序的菜单结构。
-  |- xml&#x2F;			# 用于存放其他 XML 文件，如自定义视图、插件配置文件等。</code></pre>
+  |- raw&#x2F;    		# 用于存放原始资源文件，如音频文件、视频文件、字体文件等。这些文件可以直接通过资源 ID 访问。
+  |- menu&#x2F;  		# 用于存放菜单资源文件，定义应用程序的菜单结构。
+  |- xml&#x2F;   		# 用于存放其他 XML 文件，如自定义视图、插件配置文件等。</code></pre>
 
 
 
@@ -364,7 +365,7 @@ tasks <span class="token punctuation">&#123;</span>
 
 
 
-<h3 id="2-环境变量配置"><a href="#2-环境变量配置" class="headerlink" title="2. 环境变量配置"></a>2. 环境变量配置</h3><p>点击<code>我的电脑</code> -&gt; 属性 -&gt; 高级系统设置 -&gt; 环境变量 -&gt; 新建系统变量</p>
+<h3 id="2-环境变量配置"><a href="#2-环境变量配置" class="headerlink" title="2. 环境变量配置"></a>2. 环境变量配置</h3><p>点击我的电脑 -&gt; 属性 -&gt; 高级系统设置 -&gt; 环境变量 -&gt; 新建系统变量</p>
 <pre class="language-none"><code class="language-none">创建2个系统变量
 ANDROID_SDK_ROOT 	&#x3D;&gt;  D:\Android\SDK
 ANDROID_ADB 		&#x3D;&gt;  D:\Android\SDK\platform-tools</code></pre>
@@ -421,14 +422,14 @@ ANDROID_ADB 		&#x3D;&gt;  D:\Android\SDK\platform-tools</code></pre>
 <h2 id="四-虚拟设备安装"><a href="#四-虚拟设备安装" class="headerlink" title="四. 虚拟设备安装"></a>四. 虚拟设备安装</h2><h3 id="1-选择安装镜像"><a href="#1-选择安装镜像" class="headerlink" title="1. 选择安装镜像"></a>1. 选择安装镜像</h3><p>点击右上角的 <code>Device Manager</code>(手机机器人图标)  -&gt; Create Device (创建设备) , 在 <code>phone</code> 这一栏选择一个符合你要求的, 然后点击 <code>NEXT</code> 进入到具体得镜像选择,</p>
 <p>选择好后继续点<code>NEXT</code>后再点击<code>Finish</code>等待安装完成就可以了</p>
 <p>前面安装SDK时说过, 创建虚拟设备跟我们安装的SDK还有镜像有关, 在这里选择镜像的时候有的选项就会置灰不可选择, 因为你没有安装该虚拟设备所需要的Android SDK版本或者 镜像 </p>
-<p>![create device](./android-webview-develop/create device.gif)</p>
+<p><img src="/posts/android-webview-develop/create_device.gif" alt="create device"></p>
 <h3 id="2-启动虚拟设备"><a href="#2-启动虚拟设备" class="headerlink" title="2. 启动虚拟设备"></a>2. 启动虚拟设备</h3><p>安装好之后, 如下图, 点击 <code>Actions</code> 即可启动虚拟设备</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/posts/android-webview-develop/start" alt="start device" title="device.gif">
+                    <img src="/posts/android-webview-develop/start_device.gif" alt="start device" title>
                 </div>
-                <div class="image-caption">device.gif</div>
+                <div class="image-caption">start device</div>
             </figure>
 
 
