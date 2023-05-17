@@ -144,4 +144,4 @@ deploy:
   # repo: git@github.com:chuchu-z/chuchu-z.github.io.git #构建机器上没有配置 ssh 免密,所以使用https
   repo: https://github_token@github.com/chuchu-z/chuchu-z.github.io.git
   branch: master
-  message: TravisCI 自动部署:{{ now('YYYY-MM-DD HH:mm:ss') }}
+  message: GitHub Actions 自动部署:{{ now('YYYY-MM-DD HH:mm:ss') }}
