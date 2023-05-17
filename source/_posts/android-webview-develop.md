@@ -160,13 +160,13 @@ android:theme：指定活动的主题样式
 
 ```
 - res/
-  |- layout/ 		# 用于存放布局文件，定义了应用程序的用户界面的组件和布局结构。
+  |- layout/		# 用于存放布局文件，定义了应用程序的用户界面的组件和布局结构。
   |- drawable/		# 用于存放图像资源文件，如位图文件（.png、.jpg、.gif 等）或矢量图形文件（.xml）。
   |- mipmap/		# 用于存放应用程序图标的不同分辨率版本。通常包括 `mdpi`、`hdpi`、`xhdpi`、`xxhdpi`、`xxxhdpi` 等不同密度的图标文件。
   |- values/		# 用于存放资源值文件，如字符串、颜色、尺寸、样式等。包括 `strings.xml`、`colors.xml`、`dimens.xml`、`styles.xml`。
-  |- raw/			# 用于存放原始资源文件，如音频文件、视频文件、字体文件等。这些文件可以直接通过资源 ID 访问。
-  |- menu/			# 用于存放菜单资源文件，定义应用程序的菜单结构。
-  |- xml/			# 用于存放其他 XML 文件，如自定义视图、插件配置文件等。
+  |- raw/    		# 用于存放原始资源文件，如音频文件、视频文件、字体文件等。这些文件可以直接通过资源 ID 访问。
+  |- menu/  		# 用于存放菜单资源文件，定义应用程序的菜单结构。
+  |- xml/   		# 用于存放其他 XML 文件，如自定义视图、插件配置文件等。
 ```
 
 
@@ -240,7 +240,7 @@ tasks {
 
 ### 2. 环境变量配置
 
-点击`我的电脑` -> 属性 -> 高级系统设置 -> 环境变量 -> 新建系统变量
+点击我的电脑 -> 属性 -> 高级系统设置 -> 环境变量 -> 新建系统变量
 
 ```
 创建2个系统变量
@@ -300,13 +300,13 @@ ANDROID_ADB 		=>  D:\Android\SDK\platform-tools
 
 前面安装SDK时说过, 创建虚拟设备跟我们安装的SDK还有镜像有关, 在这里选择镜像的时候有的选项就会置灰不可选择, 因为你没有安装该虚拟设备所需要的Android SDK版本或者 镜像 
 
-![create device](./android-webview-develop/create device.gif)
+![create device](./android-webview-develop/create_device.gif)
 
 ### 2. 启动虚拟设备
 
 安装好之后, 如下图, 点击 `Actions` 即可启动虚拟设备
 
-![start device](./android-webview-develop/start device.gif)
+![start device](./android-webview-develop/start_device.gif)
 
 
 
