@@ -28,7 +28,7 @@ categories:
 
 选择 `Empty Activity`
 
-![image-20230513175557001](./android-webview-develop/image-20230513175557001.png)
+![](./android-webview-develop/image-20230513175557001.png)
 
 
 
@@ -48,7 +48,7 @@ Package name 尽量不要使用默认的  `com.example` 开头, 起个正经点�
 
 构建语言选择, Kotlin 是 Android 开发的推荐语言，它提供了现代化的语言特性、更好的性能和良好的工具支持。而 Groovy 在 Android 开发中的使用相对较少，主要适用于特定场景或个人喜好。选择哪种语言取决于个人偏好、项目需求和团队情况 。本人推荐选择`Kotlin`, 选择完点击 `Finish` ,会自动进行项目初始化,耐心等待一会就好了 。
 
-![image-20230515114344763](./android-webview-develop/image-20230515114344763.png)
+![](./android-webview-develop/image-20230515114344763.png)
 
 
 
@@ -56,7 +56,7 @@ Package name 尽量不要使用默认的  `com.example` 开头, 起个正经点�
 
 初始化好后, 可以点击左上角切换项目以什么形式展开, `Project`形式能更详细看到每个文件和目录,  `Android`形式会简化很多不必要的文件夹,看起来更加简洁舒适 。目录结构介绍较长, 着急下一步安装的可以直接跳到第三步 [SDK安装](#sdk) ,  后续再回来看结构介绍。
 
-![project](./android-webview-develop/project.gif)
+![](./android-webview-develop/project.gif)
 
 
 
@@ -250,7 +250,7 @@ ANDROID_ADB 		=>  D:\Android\SDK\platform-tools
 
 
 
-![image-20230515192521267](./android-webview-develop/image-20230515192521267.png)
+![](./android-webview-develop/image-20230515192521267.png)
 
 
 
@@ -260,7 +260,7 @@ ANDROID_ADB 		=>  D:\Android\SDK\platform-tools
 %ANDROID_ADB%
 ```
 
-![image-20230515192620190](./android-webview-develop/image-20230515192620190.png)
+![](./android-webview-develop/image-20230515192620190.png)
 
 
 
@@ -274,7 +274,7 @@ ANDROID_ADB 		=>  D:\Android\SDK\platform-tools
 >
 > 举例: 如果你没有安装Android 13的SDK, 那也没有办法安装和使用Android 13的虚拟设备, 另外安装虚拟设备时有的可能还需要用到 Google APIs 镜像的, 可以点击右下角的 Show Package Details 查看, 根据虚拟设备所需要的Google APIs 来勾选安装。
 
-![image-20230515183023944](./android-webview-develop/image-20230515183023944.png)
+![](./android-webview-develop/image-20230515183023944.png)
 
 
 
@@ -286,7 +286,7 @@ ANDROID_ADB 		=>  D:\Android\SDK\platform-tools
 4. Android Emulator Hypervisor Driver 和 Intelx6 Emulator Accelerator(HAXM installer) 都是加速 Android 模拟器用于提高 Android 模拟器性能的组件。
 5. 其他的非必选 各位实际项目需求来, 另外可能Android Studio版本不同, 下图的工具名称可能也有所不同甚至没有这个工具换成其他的替代了。
 
-![image-20230516103348480](./android-webview-develop/image-20230516103348480.png)
+![](./android-webview-develop/image-20230516103348480.png)
 
 
 
@@ -300,13 +300,13 @@ ANDROID_ADB 		=>  D:\Android\SDK\platform-tools
 
 前面安装SDK时说过, 创建虚拟设备跟我们安装的SDK还有镜像有关, 在这里选择镜像的时候有的选项就会置灰不可选择, 因为你没有安装该虚拟设备所需要的Android SDK版本或者 镜像 
 
-![create device](./android-webview-develop/create_device.gif)
+![](./android-webview-develop/create_device.gif)
 
 ### 2. 启动虚拟设备
 
 安装好之后, 如下图, 点击 `Actions` 即可启动虚拟设备
 
-![start device](./android-webview-develop/start_device.gif)
+![](./android-webview-develop/start_device.gif)
 
 
 
@@ -314,5 +314,5 @@ ANDROID_ADB 		=>  D:\Android\SDK\platform-tools
 
 经过前面的铺垫, 现在终于可以进入开发阶段了, 如果前面一切顺利的话, 现在只需要点击一下右上角的`Run app` , 项目就会运行起来, 然后就可以在虚拟设备的界面上看到`Hello Android!`
 
-![run app](./android-webview-develop/run_app.gif)
+![](./android-webview-develop/run_app.gif)
 
