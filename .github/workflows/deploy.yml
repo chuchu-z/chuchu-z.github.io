@@ -14,7 +14,7 @@ env:
   # Hexo 编译后使用此 git 用户部署到 github 仓库
   GIT_USER: chuchu-z
   # Hexo 编译后使用此 git 邮箱部署到 github 仓库
-  GIT_EMAIL: 1813713320@qq.com
+  GIT_EMAIL: chuchuzz426@gmail.com
   # Hexo 编译后要部署的 github 仓库
   GIT_DEPLOY_REPO: chuchu-z/chuchu-z.github.io
   # Hexo 编译后要部署到的分支
@@ -63,11 +63,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install -g hexo-cli --no-fund
-          npm install -g https://github.com/xcodebuild/hexo-asset-image --save
-          npm install -g --no-fund
-          hexo clean
-          hexo generate
+          npm install hexo-cli --no-fund
+          npm install --no-fund
 
       - name: Deploy hexo
         run: |
