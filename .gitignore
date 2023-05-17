@@ -6,3 +6,4 @@ github-deploy-key
 github-deploy-key.pub
 public/
 .deploy*/
+node_modules/
