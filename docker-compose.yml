@@ -6,7 +6,4 @@ services:
       dockerfile: Dockerfile
     image: chuchuzz426/blog-hexo:1.0
     ports:
-      - "4000:4000"
-    volumes:
-      - .:/app
-
+      - "80:80"
