@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install --no-fund && npx hexo generate
+RUN npm install --no-fund && npx hexo clean && npx hexo generate
 
 FROM nginx:alpine
 

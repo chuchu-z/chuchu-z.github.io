@@ -1,18 +1,18 @@
 ---
-title: Github+Actions实现Hexo自动化部署
+title: GitHub Actions实现Hexo自动化部署
 date: 2023-2-14 05:24:23
 tags: 
-- Github
+- GitHub
 - Hexo
 categories: 
-- Github
+- GitHub
 - Hexo
 
 ---
 
 
 
-# Github+Actions实现Hexo自动化部署
+# GitHub Actions实现Hexo自动化部署
 
 
 
@@ -28,7 +28,7 @@ categories:
 
 ## Hexo 持续集成
 
-由于本人是通过**Github Pages**方式来实现博客托管的，好处是不需要自己购买服务器和域名， 只需要在github上创建一个repository，这个repository的名字还有要求必须是**username.github.io**，再随便写个静态html内容上传就可以直接访问了，具体方法这里不再多说。
+由于本人是通过**GitHub Pages**方式来实现博客托管的，好处是不需要自己购买服务器和域名， 只需要在github上创建一个repository，这个repository的名字还有要求必须是**username.github.io**，再随便写个静态html内容上传就可以直接访问了，具体方法这里不再多说。
 
 先简单介绍一下项目仓库，源代码和hexo编译后的静态资源都在同一仓库（**chuchu-z.github.io**）， 只是分支不同，src分支为源代码仓库， master分支为hexo编译后的静态资源， 也就是博客展示出来的内容。
 
@@ -148,4 +148,4 @@ jobs:
 
 ### 总结
 
-在学习了网上其他大佬们的方法后自己稍微做了些修改，也是总算成功完成了，感觉这次处理起来比上次使用travis-ci简单快的多，也可能是之前踩过不少坑了，这次比较顺利，早知道github+actions这么方便就不用travis-ci了， 不过要不是travis-ci收费了我现在也还不知道github+actions也挺好用，刚好天亮了睡觉😴。
+在学习了网上其他大佬们的方法后自己稍微做了些修改，也是总算成功完成了，感觉这次处理起来比上次使用`travis-ci`简单快的多，也可能是之前踩过不少坑了，这次比较顺利，早知道`GitHub Actions`这么方便就不用`travis-ci`了， 不过要不是`travis-ci`收费了我现在也还不知道`GitHub Actions`也挺好用，刚好天亮了睡觉😴。
