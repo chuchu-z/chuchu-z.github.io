@@ -1,3 +1,17 @@
+---
+title: Hexo-Blog Docker搭建本地环境与持续集成
+date: 2023-5-22 17:59:58
+tags: 
+- Docker
+- Hexo
+categories: 
+- Docker
+- Hexo
+
+---
+
+
+
 # Hexo-Blog (indigo-hexo6)
 
 该博客使用了 [GitHub Pages](https://docs.github.com/zh/pages/quickstart) +  [Hexo](https://hexo.io/zh-cn/)  + [indigo-hexo6 主题](https://github.com/chuchu-z/hexo-theme-indigo) 搭建
