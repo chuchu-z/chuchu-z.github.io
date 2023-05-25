@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换 | chuchu-z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="AutoHotKey">
+    <meta name="description" content="利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换在日常办公中我们经常会使用到外接显示屏来辅佐我们 提高办公效率 然而多显示屏每次切换屏幕都要用鼠标来移动切换, 对鼠标的依赖非常重且非常麻烦😡 尤其是我左边显示屏是 IDE 或者 shell 终端, 右边是浏览器 于是乎在知乎上看到一篇这样的文章👇 请问win10接双显示器（扩展模式）怎么把鼠标游标切换到第二台显示器上？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换">
+<meta property="og:url" content="http://chuchu-z.com/posts/autohotkey-windows/">
+<meta property="og:site_name" content="chuchu-z">
+<meta property="og:description" content="利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换在日常办公中我们经常会使用到外接显示屏来辅佐我们 提高办公效率 然而多显示屏每次切换屏幕都要用鼠标来移动切换, 对鼠标的依赖非常重且非常麻烦😡 尤其是我左边显示屏是 IDE 或者 shell 终端, 右边是浏览器 于是乎在知乎上看到一篇这样的文章👇 请问win10接双显示器（扩展模式）怎么把鼠标游标切换到第二台显示器上？">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-05-25T09:15:04.000Z">
+<meta property="article:modified_time" content="2023-05-25T09:17:19.672Z">
+<meta property="article:author" content="chuchu-z">
+<meta property="article:tag" content="AutoHotKey">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">chuchu-z</h5>
+          <p class="description">借君三十年，繁花万里好江山</p>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/chuchu-z" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale" style="padding-left: 5%;">
+        <h1 class="title">利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2023-05-25T09:15:04.000Z" itemprop="datePublished" class="page-time">
+  2023-05-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/autohotkey/">AutoHotKey</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E5%88%A9%E7%94%A8-AutoHotKey-%E5%AE%9E%E7%8E%B0-win10-%E5%A4%9A%E6%98%BE%E7%A4%BA%E5%99%A8%EF%BC%88%E6%89%A9%E5%B1%95%E6%A8%A1%E5%BC%8F%EF%BC%89%E5%BF%AB%E9%80%9F%E5%88%87%E6%8D%A2"><span class="post-toc-text">利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Github%E4%BC%A0%E9%80%81%E9%97%A8%F0%9F%91%87"><span class="post-toc-text">Github传送门👇</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#https-github-com-chuchu-z-MoveMouseToMonitorV6"><span class="post-toc-text">https:&#x2F;&#x2F;github.com&#x2F;chuchu-z&#x2F;MoveMouseToMonitorV6</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-autohotkey-windows"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2023-05-25 17:15:04" datetime="2023-05-25T09:15:04.000Z"  itemprop="datePublished">2023-05-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/autohotkey/">AutoHotKey</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="利用-AutoHotKey-实现-win10-多显示器（扩展模式）快速切换"><a href="#利用-AutoHotKey-实现-win10-多显示器（扩展模式）快速切换" class="headerlink" title="利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换"></a>利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换</h1><p>在日常办公中我们经常会使用到外接显示屏来辅佐我们 提高办公效率</p>
+<p>然而多显示屏每次切换屏幕都要用鼠标来移动切换, 对鼠标的依赖非常重且非常麻烦😡</p>
+<p>尤其是我左边显示屏是 <strong>IDE</strong> 或者 <strong>shell</strong> 终端, 右边是浏览器</p>
+<p>于是乎在知乎上看到一篇这样的文章👇</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/50002939/answer/2482798775">请问win10接双显示器（扩展模式）怎么把鼠标游标切换到第二台显示器上？</a></p>
+<span id="more"></span>
+
+<p>是的, 这看起来能够完美解决我的问题, 于是乎我安装了答主分享的 <strong>MoveMouseToMonitor.exe</strong> 工具</p>
+<p>然而这里似乎不够完美, 因为它仅仅实现了鼠标的光标由 <strong>A显示屏</strong> 👉 <strong>B显示屏</strong> 的移动</p>
+<p>而实际的聚焦效果仍然保留在原来的 <strong>A显示屏</strong> 上</p>
+<p>通俗易懂来讲就是, <strong>鼠标</strong> 和 <strong>键盘</strong> 的聚焦是两码事</p>
+<p>这样就导致我的鼠标光标从  <strong>shell</strong> 终端 或者  <strong>IDE</strong> 切换到浏览器后</p>
+<p><strong>输入</strong>键盘时, 实际的<strong>输出</strong>仍然会停留在  <strong>shell</strong> 终端 或者  <strong>IDE</strong> 的上</p>
+<p>这。。。实现了但没完全实现我想要的效果😂</p>
+<p>于是我就花了亿点点时间研究了下 <strong>AutoHotKey</strong> 的语法和这个<strong>MoveMouseToMonitor.exe</strong> 程序的源代码</p>
+<p>然后再此基础上做了一点点改动, 当执行完 <strong>PerformMove</strong> 函数成功移动鼠标后</p>
+<p>创建一个 <strong>ActivateWindowByMousePosition</strong> 函数,  获取当前鼠标位置的窗口 <code>title</code></p>
+<p><code>WinActivate</code> 会根据鼠标窗口的<code>title</code>来激活目标窗口, 从而真正实现切换并激活窗口👍</p>
+<pre class="language-autohotkey" data-language="autohotkey"><code class="language-autohotkey"><span class="token function">PerformMove</span><span class="token punctuation">(</span>MoveMonNum<span class="token punctuation">,</span> OffX<span class="token punctuation">,</span> OffY<span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">global</span> MoveX<span class="token punctuation">,</span> MoveY
+    <span class="token command selector">Gosub</span><span class="token punctuation">,</span> CheckNumMonsChanged
+    RestoreDPI <span class="token operator">:=</span> <span class="token builtin">DllCall</span><span class="token punctuation">(</span><span class="token string">"SetThreadDpiAwarenessContext"</span><span class="token punctuation">,</span> <span class="token string">"ptr"</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">"ptr"</span><span class="token punctuation">)</span>
+    <span class="token command selector">SysGet</span><span class="token punctuation">,</span> Coordinates<span class="token variable">%MoveMonNum%</span><span class="token punctuation">,</span> Monitor<span class="token punctuation">,</span> <span class="token variable">%MoveMonNum%</span>
+    <span class="token symbol">Left</span> <span class="token operator">:=</span> Coordinates<span class="token variable">%MoveMonNum%</span><span class="token symbol">Left</span>
+    <span class="token symbol">Right</span> <span class="token operator">:=</span> Coordinates<span class="token variable">%MoveMonNum%</span><span class="token symbol">Right</span>
+    <span class="token keyword">Top</span> <span class="token operator">:=</span> Coordinates<span class="token variable">%MoveMonNum%</span><span class="token keyword">Top</span>
+    Bottom <span class="token operator">:=</span> Coordinates<span class="token variable">%MoveMonNum%</span>Bottom
+    <span class="token keyword">If</span> <span class="token punctuation">(</span>OffX <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        MoveX <span class="token operator">:=</span> <span class="token symbol">Left</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token builtin">Floor</span><span class="token punctuation">(</span><span class="token number">0.5</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token symbol">Right</span> <span class="token operator">-</span> <span class="token symbol">Left</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">Else</span>
+        MoveX <span class="token operator">:=</span> <span class="token symbol">Left</span> <span class="token operator">+</span> OffX
+    <span class="token keyword">If</span> <span class="token punctuation">(</span>OffY <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+        MoveY <span class="token operator">:=</span> <span class="token keyword">Top</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token builtin">Floor</span><span class="token punctuation">(</span><span class="token number">0.5</span> <span class="token operator">*</span> <span class="token punctuation">(</span>Bottom <span class="token operator">-</span> <span class="token keyword">Top</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">Else</span>
+        MoveY <span class="token operator">:=</span> <span class="token keyword">Top</span> <span class="token operator">+</span> OffY
+    <span class="token builtin">DllCall</span><span class="token punctuation">(</span><span class="token string">"SetCursorPos"</span><span class="token punctuation">,</span> <span class="token string">"int"</span><span class="token punctuation">,</span> MoveX<span class="token punctuation">,</span> <span class="token string">"int"</span><span class="token punctuation">,</span> MoveY<span class="token punctuation">)</span>
+    <span class="token command selector">Sleep</span><span class="token punctuation">,</span> <span class="token number">10</span>
+    <span class="token builtin">DllCall</span><span class="token punctuation">(</span><span class="token string">"SetCursorPos"</span><span class="token punctuation">,</span> <span class="token string">"int"</span><span class="token punctuation">,</span> MoveX<span class="token punctuation">,</span> <span class="token string">"int"</span><span class="token punctuation">,</span> MoveY<span class="token punctuation">)</span>
+    <span class="token builtin">DllCall</span><span class="token punctuation">(</span><span class="token string">"SetThreadDpiAwarenessContext"</span><span class="token punctuation">,</span> <span class="token string">"ptr"</span><span class="token punctuation">,</span> RestoreDPI<span class="token punctuation">,</span> <span class="token string">"ptr"</span><span class="token punctuation">)</span>
+
+    <span class="token command selector">Gosub</span><span class="token punctuation">,</span> ActivateWindowByMousePosition
+
+    <span class="token command selector">Return</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token tag">ActivateWindowByMousePosition</span><span class="token punctuation">:</span>
+    <span class="token command selector">MouseGetPos</span><span class="token punctuation">,</span> <span class="token punctuation">,</span> <span class="token punctuation">,</span> <span class="token keyword">id</span><span class="token punctuation">,</span> <span class="token command selector">control</span>
+    <span class="token command selector">WinGetTitle</span><span class="token punctuation">,</span> title<span class="token punctuation">,</span> <span class="token keyword">ahk_id</span> <span class="token variable">%id%</span>
+    <span class="token command selector">WinActivate</span><span class="token punctuation">,</span> <span class="token variable">%title%</span>
+    <span class="token command selector">Return</span>
+</code></pre>
+
+
+
+<h3 id="Github传送门👇"><a href="#Github传送门👇" class="headerlink" title="Github传送门👇"></a>Github传送门👇</h3><h3 id="https-github-com-chuchu-z-MoveMouseToMonitorV6"><a href="#https-github-com-chuchu-z-MoveMouseToMonitorV6" class="headerlink" title="https://github.com/chuchu-z/MoveMouseToMonitorV6"></a><a target="_blank" rel="noopener" href="https://github.com/chuchu-z/MoveMouseToMonitorV6">https://github.com/chuchu-z/MoveMouseToMonitorV6</a></h3>
+        </div>
+
+        <blockquote class="post-copyright" style="display:none">
+    
+    <footer>
+        <a href="http://chuchu-z.com">
+            <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4" alt="chuchu-z">
+            chuchu-z
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        
+            
+
+            
+
+        
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/hexo-blog-build/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hexo-Blog Docker搭建本地环境与持续集成</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            <span>chuchu-z &copy; 2021 - 2023</span>
+            <span class="num">Total words: 10.6k</span>
+        </p>
+        <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
