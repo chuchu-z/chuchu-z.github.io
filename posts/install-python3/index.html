@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>[记录] Install Python3 and OpenSSL | chuchu-z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python">
+    <meta name="description" content="因为有个项目要用到 Python 爬取直播间主播和弹幕数据, 所以记录一下安装过程以及途中遇到的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[记录] Install Python3 and OpenSSL">
+<meta property="og:url" content="http://chuchu-z.com/posts/install-python3/">
+<meta property="og:site_name" content="chuchu-z">
+<meta property="og:description" content="因为有个项目要用到 Python 爬取直播间主播和弹幕数据, 所以记录一下安装过程以及途中遇到的问题">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-07-18T08:31:05.000Z">
+<meta property="article:modified_time" content="2023-07-28T07:48:50.443Z">
+<meta property="article:author" content="chuchu-z">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">chuchu-z</h5>
+          <p class="description">借君三十年，繁花万里好江山</p>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/chuchu-z" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">[记录] Install Python3 and OpenSSL</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale" style="padding-left: 5%;">
+        <h1 class="title">[记录] Install Python3 and OpenSSL</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2023-07-18T08:31:05.000Z" itemprop="datePublished" class="page-time">
+  2023-07-18
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OpenSSL-Install"><span class="post-toc-text">OpenSSL Install</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Python3-install"><span class="post-toc-text">Python3 install</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#pip-Install"><span class="post-toc-text">pip Install</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#USE"><span class="post-toc-text">USE</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Error"><span class="post-toc-text">Error</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-install-python3"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">[记录] Install Python3 and OpenSSL</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2023-07-18 16:31:05" datetime="2023-07-18T08:31:05.000Z"  itemprop="datePublished">2023-07-18</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">Python</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>因为有个项目要用到 Python 爬取直播间主播和弹幕数据, 所以记录一下安装过程以及途中遇到的问题</p>
+<span id="more"></span>
+
+
+
+<p>先查看当前 Python 版本是2.7的, 后面要重新安装 Python3, 如果还没有安装过后面就更省事了</p>
+<blockquote>
+<p>python –version</p>
+<p>#输出为 Python 2.7.16</p>
+</blockquote>
+<h2 id="OpenSSL-Install"><a href="#OpenSSL-Install" class="headerlink" title="OpenSSL Install"></a>OpenSSL Install</h2><p>#安装py3新版本之前先安装openssl, 否则后面缺少ssl又需要重装， 如果 /usr/local  目录下已经有 openssl 文件夹，先把openssl 改名为 opensslbak 备份, 防止后面出现问题能恢复</p>
+<blockquote>
+<p>cd /usr/local</p>
+<p>mv openssl opensslbak</p>
+<p>wget <a target="_blank" rel="noopener" href="https://www.openssl.org/source/openssl-3.0.2.tar.gz">https://www.openssl.org/source/openssl-3.0.2.tar.gz</a> –no-check-certificate</p>
+<p>tar -zxvf openssl-3.0.2.tar.gz</p>
+<p>cd openssl-3.0.2/</p>
+<p> ./Configure –prefix=/usr/local/openssl</p>
+<p>#一般上面命令都会失败报错：Can‘t locate IPC/Cmd.pm in xxx</p>
+<p>yum install -y perl-CPAN</p>
+<p>perl -MCPAN -e shell</p>
+<p>#进入后第一步选yes，第二步选manual，第三步选yes，出现 cpan[1]&gt; 就可以了</p>
+<p>install IPC/Cmd.pm</p>
+<p>#按Ctrl+D退出cpan，重新执行./Configure –prefix=/usr/local/openssl</p>
+<p>./Configure –prefix=/usr/local/openssl</p>
+<p>make &amp;&amp; make install</p>
+<p>cd /usr/local/openssl</p>
+<p>cp -rf /usr/local/openssl/lib64 /usr/local/openssl/lib</p>
+</blockquote>
+<h2 id="Python3-install"><a href="#Python3-install" class="headerlink" title="Python3 install"></a>Python3 install</h2><blockquote>
+<p>cd ~</p>
+<p>wget <a target="_blank" rel="noopener" href="https://www.python.org/ftp/python/3.10.11/Python-3.10.11.tgz">https://www.python.org/ftp/python/3.10.11/Python-3.10.11.tgz</a></p>
+<p>tar -zxvf Python-3.10.11.tgz</p>
+<p>cd Python-3.10.11/</p>
+<p>./configure –prefix=/usr/local/python3 –with-openssl=/usr/local/openssl –with-openssl-rpath=auto</p>
+<p>yum update -y</p>
+<p>yum install -y make gcc gcc-c++</p>
+<p>make -j &amp;&amp; make install</p>
+<p>cd /usr/local/bin/</p>
+<p>#把原有的python2改成python.bak</p>
+<p>mv /usr/bin/python /usr/bin/python.bak</p>
+<p>建立软链接</p>
+<p>ln -s /usr/local/bin/python3 /usr/bin/python</p>
+<p>python –version</p>
+<p>#升级python版本之后将由默认的python指向了python3，yum不能正常使用，需要更改2个配置文件</p>
+<p>vim /usr/bin/yum</p>
+<p>vim /usr/libexec/urlgrabber-ext-down</p>
+<p>2个文件都是把开头第一行的 #!/usr/bin/python =&gt;  #!/usr/bin/python2.7</p>
+</blockquote>
+<p>注: 如果遇到了 php 程序正在使用openssl, 新安装的openssl缺少文件导致php那边报错<br>看具体缺少哪个文件, 去原来的 opensslbak 文件夹里复制过来到现有的openssl对应的目录下<br>然后重启一下Nginx和php就行了</p>
+<h2 id="pip-Install"><a href="#pip-Install" class="headerlink" title="pip Install"></a>pip Install</h2><blockquote>
+<p>pip install requests urllib3 pymysql websocket websocket-client mysql-connector-python pytz python-dotenv</p>
+</blockquote>
+<h2 id="USE"><a href="#USE" class="headerlink" title="USE"></a>USE</h2><blockquote>
+<p>python LiveChatCrawler.py</p>
+</blockquote>
+<h2 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h2><blockquote>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token number">1</span>. pip is configured with locations that require TLS/SSL
+
+<span class="token function">mkdir</span> <span class="token parameter variable">-p</span> ~/.pip
+<span class="token function">vim</span> ~/.pip/pip.conf
+
+<span class="token comment"># 修改镜像源为阿里云</span>
+<span class="token punctuation">[</span>global<span class="token punctuation">]</span>
+index-url <span class="token operator">=</span> http://mirrors.aliyun.com/pypi/simple/
+
+<span class="token punctuation">[</span>install<span class="token punctuation">]</span>
+trusted-host <span class="token operator">=</span> mirrors.aliyun.com</code></pre>
+</blockquote>
+<p>本文参考 <a target="_blank" rel="noopener" href="https://blog.csdn.net/Yaphets_dan/article/details/129421953"> CSDN 文章 =&gt; Caused by SSLError(“Can‘t connect to HTTPS URL because the SSL module is not available.“</a></p>
+<p>且在原基础上根据实际情况有所改动</p>
+
+        </div>
+
+        <blockquote class="post-copyright" style="display:none">
+    
+    <footer>
+        <a href="http://chuchu-z.com">
+            <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4" alt="chuchu-z">
+            chuchu-z
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        
+            
+
+            
+
+        
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/autohotkey-windows/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">[记录] 利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            <span>chuchu-z &copy; 2021 - 2023</span>
+            <span class="num">Total words: 11.2k</span>
+        </p>
+        <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
