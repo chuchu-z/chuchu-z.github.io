@@ -1,12 +1,10 @@
 ---
-title: Linux Shell脚本中使用alias定义别名
+title: '[记录] Linux Shell 使用alias定义别名'
 date: 2022-03-31 09:57:18
 tags:
 - Linux
-- Shell
 categories:
 - Linux
-- Shell
 ---
 
  
