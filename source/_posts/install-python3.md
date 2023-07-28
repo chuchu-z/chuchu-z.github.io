@@ -1,5 +1,5 @@
 ---
-title: '[记录] Install Python3 and OpenSSL'
+title: 'Install Python3 and OpenSSL'
 date: 2023-7-18 16:31:05
 tags:
 - Python
@@ -7,6 +7,10 @@ categories:
 - Python
 
 ---
+
+
+
+# Install Python3 and OpenSSL
 
 
 

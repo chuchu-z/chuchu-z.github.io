@@ -1,5 +1,5 @@
 ---
-title: '[记录] Git 中的奇葩玩法'
+title: 'Git 中的奇葩玩法'
 date: 2022-03-25 19:01:50
 tags: Git
 categories: Git
@@ -8,9 +8,11 @@ categories: Git
 
  
 
-一个 Git 随机生成提交日志网站, 每次刷新的内容随机
+## 随机的 git commit 你敢提交吗
 
-太搞了, 不怕挨揍的壮士可以使用如下命令进行日常代码的提交😂
+> 一个 Git 随机生成提交日志网站, 每次刷新的内容随机
+>
+> 太搞了, 不怕挨揍的壮士可以使用如下命令进行日常代码的提交😂
 
 <!--more-->
 
@@ -26,6 +28,6 @@ git commit -m $(curl -s http://whatthecommit.com/index.txt)
 
 
 
-此仓库专门收集史上最坑爹的代码片段，专治低血压 😵
+此仓库专门收集史上最坑爹的代码片段，专治低血压 😁
 
 <https://gitee.com/oschina/bullshit-codes/tree/master>

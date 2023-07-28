@@ -1,5 +1,5 @@
 ---
-title: '[记录] 利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换'
+title: '利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换'
 date: 2023-5-25 17:15:04
 tags: AutoHotKey
 categories: AutoHotKey
@@ -12,27 +12,29 @@ categories: AutoHotKey
 
 
 
-在日常办公中我们经常会使用到外接显示屏来辅佐我们 提高办公效率
-
-然而多显示屏每次切换屏幕都要用鼠标来移动切换, 对鼠标的依赖非常重且非常麻烦😡
-
-尤其是我左边显示屏是 **IDE** 或者 **shell** 终端, 右边是浏览器
-
-于是乎在知乎上看到一篇这样的文章👇
-
-[请问win10接双显示器（扩展模式）怎么把鼠标游标切换到第二台显示器上？](https://www.zhihu.com/question/50002939/answer/2482798775)
-
-
+> 在日常办公中我们经常会使用到外接显示屏来辅佐我们 提高办公效率
+>
+> 然而多显示屏每次切换屏幕都要用鼠标来移动切换, 对鼠标的依赖非常重且非常麻烦😡
+>
+> 尤其是我左边显示屏是 **IDE** 或者 **shell** 终端, 右边是浏览器
+>
+> 于是乎在知乎上看到一篇这样的文章👇
 
 <!--more-->
 
-是的, 这看起来能够完美解决我的问题, 于是乎我安装了答主分享的 **MoveMouseToMonitor.exe** 工具
 
-然而这里似乎不够完美, 因为它仅仅实现了鼠标的光标由 **A显示屏** 👉 **B显示屏** 的移动
+
+## MoveMouseToMonitor
+
+[请问win10接双显示器（扩展模式）怎么把鼠标游标切换到第二台显示器上？](https://www.zhihu.com/question/50002939/answer/2482798775)
+
+看完这篇文章瞬间就觉得它能够完美解决我的问题, 于是乎我安装了答主分享的 **MoveMouseToMonitor.exe** 工具
+
+然而使用过后似乎仍不能满足我的需求, 因为它仅仅实现了鼠标的光标由 **A显示屏** 👉 **B显示屏** 的移动
 
 而实际的聚焦效果仍然保留在原来的 **A显示屏** 上
 
-通俗易懂来讲就是, **鼠标** 和 **键盘** 的聚焦是两码事
+通俗易懂来讲就是 **鼠标的聚焦** 和 **键盘的聚焦** 是两码事
 
 这样就导致我的鼠标光标从  **shell** 终端 或者  **IDE** 切换到浏览器后
 
@@ -40,17 +42,17 @@ categories: AutoHotKey
 
 
 
-
+## MoveMouseToMonitor V2.0
 
 这。。。实现了但没完全实现我想要的效果😂
 
 于是我就花了亿点点时间研究了下 **AutoHotKey** 的语法和这个**MoveMouseToMonitor.exe** 程序的源代码
 
-然后再此基础上做了一点点改动, 当执行完 **PerformMove** 函数成功移动鼠标后
+然后再此基础上做了一点点改动,  具体改动为当执行完 **PerformMove** 函数成功移动鼠标后
 
-创建一个 **ActivateWindowByMousePosition** 函数,  获取当前鼠标位置的窗口 `title`
+创建一个 **ActivateWindowByMousePosition** 函数,  获取当前鼠标位置的窗口 **title**
 
-`WinActivate` 会根据鼠标窗口的`title`来激活目标窗口, 从而真正实现切换并激活窗口👍
+**WinActivate** 会根据鼠标窗口的 **title** 来激活目标窗口, 把键盘的聚焦也切换到该窗口, 从而真正实现切换并激活窗口👍
 
 ```autohotkey
 PerformMove(MoveMonNum, OffX, OffY)

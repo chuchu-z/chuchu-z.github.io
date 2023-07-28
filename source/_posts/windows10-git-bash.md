@@ -1,9 +1,13 @@
 ---
-title: '[记录] Win10 自定义 Git-Bash 终端界面 + 一言API与终端结合'
+title: 'Win10 自定义 Git-Bash 终端界面 + 一言API与终端结合'
 date: 2022-2-25 10:39:27
 tags: Git
 categories: Git
 ---
+
+
+
+# Win10 自定义 Git-Bash 终端界面 + 一言API与终端结合
 
 
 

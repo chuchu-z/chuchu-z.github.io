@@ -1,5 +1,5 @@
 ---
-title: '[记录] Linux Shell 使用alias定义别名'
+title: 'Linux Shell 使用alias定义别名'
 date: 2022-03-31 09:57:18
 tags:
 - Linux
@@ -8,6 +8,10 @@ categories:
 ---
 
  
+
+# Linux Shell 使用alias定义别名
+
+
 
 在我们使用终端时, 为了提高平时工作效率和减少常用命令过长, 敲起来浪费时间, 可在`/etc/profile`文件中配置`alias`，自定指令的别名
 
