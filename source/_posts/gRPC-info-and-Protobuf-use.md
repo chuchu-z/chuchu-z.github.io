@@ -108,9 +108,9 @@ protoc --php_out=out_dir file.proto
 
 示例:
 
-![protoc工具生成php代码1](http://42.193.238.253:18888/p/file/get_file/f91a56d9cea146efa2bd31cb3e807d8e.png) 
+![protoc工具生成php代码1](gRPC-info-and-Protobuf-use/f91a56d9cea146efa2bd31cb3e807d8e.png) 
 
-![protoc工具生成php代码2](http://42.193.238.253:18888/p/file/get_file/257d88446cac4982a7338bb6978ce117.png) 
+![protoc工具生成php代码2](gRPC-info-and-Protobuf-use/257d88446cac4982a7338bb6978ce117.png) 
 
 
 
