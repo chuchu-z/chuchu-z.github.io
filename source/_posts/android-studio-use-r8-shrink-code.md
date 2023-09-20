@@ -21,7 +21,7 @@ categories:
 
 > Operatorannotation for com.ezylang.evalex.operators.arithmetic PrefixPlusOperator’not found
 
-<img src="android-studio-use-r8-shrink-code/WeChat Image_20230920093908.jpg" style="zoom:25%;float:left;" />
+<img src="android-studio-use-r8-shrink-code/WeChat Image_20230920093908.jpg" style="zoom:30%;" />
 
 
 
@@ -43,11 +43,11 @@ categories:
 
 <img src="android-studio-use-r8-shrink-code/image-20230920101003148.png" alt="image-20230920101003148" style="zoom:100%;float:left;" />
 
-![img](https://developer.android.google.cn/static/studio/images/build/r8/tree-shaking.png?hl=zh-cn)
+<img src="android-studio-use-r8-shrink-code/tree-shaking.png" alt="img" style="zoom:60%;" />
 
 
 
-有意思的是, 后面还有一段说明, 表示`在某些情况下，R8 很难做出正确判断，因而可能会移除应用实际上需要的代码`
+有意思的是, 后面还有一段说明, 表示: **在某些情况下，R8 很难做出正确判断，因而可能会移除应用实际上需要的代码**
 
 <img src="android-studio-use-r8-shrink-code/image-20230920101319712.png" alt="image-20230920101319712" style="zoom:100%;float:left;" />
 
