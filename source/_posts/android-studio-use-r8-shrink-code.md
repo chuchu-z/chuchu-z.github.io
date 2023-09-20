@@ -19,6 +19,8 @@ categories:
 
 然而当我开发完成打包签名时, 进行计算时就会出现错误
 
+<!--more-->
+
 > Operatorannotation for com.ezylang.evalex.operators.arithmetic PrefixPlusOperator’not found
 
 <img src="android-studio-use-r8-shrink-code/WeChat Image_20230920093908.jpg" style="zoom:30%;" />
@@ -57,9 +59,7 @@ categories:
 
 so 👇 我们此时只需要在 `proguard-rules.pro` 文件, 加上一行, 表示保留`com.ezylang.evalex`包下的全部代码
 
-> ```
 > -keep class com.ezylang.evalex.** { *; }
-> ```
 
 
 
