@@ -14,24 +14,24 @@
     
     
     
-    <title>Git 中的奇葩玩法 | chuchu-z</title>
+    <title>chuchu-z</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Git">
-    <meta name="description" content="随机的 git commit 你敢提交吗 一个 Git 随机生成提交日志网站, 每次刷新的内容随机 太搞了, 不怕挨揍的壮士可以使用如下命令进行日常代码的提交😂">
+    <meta name="keywords" content="">
+    <meta name="description" content="交换机类型死信交换机延迟交换机发布者的确认模式(交换机可靠性) 保证生产者消息能正确到达交换机  备用交换机  设置交换机持久化   发布者的返回模式(队列可靠性) 保证消息能从交换机正确到达队列 备用队列 设置队列持久化  交换机的属性队列的属性 消息在队列中不丢失, 设置消息持久化 消费者监听队列, 自动确认改为手动确认">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git 中的奇葩玩法">
-<meta property="og:url" content="http://chuchu-z.com/posts/git-ridiculous-behavior/">
+<meta property="og:title" content="chuchu-z">
+<meta property="og:url" content="http://chuchu-z.com/posts/rabbitMQ/">
 <meta property="og:site_name" content="chuchu-z">
-<meta property="og:description" content="随机的 git commit 你敢提交吗 一个 Git 随机生成提交日志网站, 每次刷新的内容随机 太搞了, 不怕挨揍的壮士可以使用如下命令进行日常代码的提交😂">
+<meta property="og:description" content="交换机类型死信交换机延迟交换机发布者的确认模式(交换机可靠性) 保证生产者消息能正确到达交换机  备用交换机  设置交换机持久化   发布者的返回模式(队列可靠性) 保证消息能从交换机正确到达队列 备用队列 设置队列持久化  交换机的属性队列的属性 消息在队列中不丢失, 设置消息持久化 消费者监听队列, 自动确认改为手动确认">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-03-25T11:01:50.000Z">
-<meta property="article:modified_time" content="2023-10-20T03:32:53.676Z">
+<meta property="article:published_time" content="2023-10-20T03:32:53.680Z">
+<meta property="article:modified_time" content="2023-10-20T03:32:53.680Z">
 <meta property="article:author" content="chuchu-z">
-<meta property="article:tag" content="Git">
+<meta property="article:tag" content="chuchu-z">
 <meta name="twitter:card" content="summary">
     
         <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
@@ -106,7 +106,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Git 中的奇葩玩法</div>
+        <div class="flex-col header-title ellipsis"></div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -124,15 +124,13 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale" style="padding-left: 5%;">
-        <h1 class="title">Git 中的奇葩玩法</h1>
+        <h1 class="title"></h1>
         <h5 class="subtitle">
             
-                <time datetime="2022-03-25T11:01:50.000Z" itemprop="datePublished" class="page-time">
-  2022-03-25
+                <time datetime="2023-10-20T03:32:53.680Z" itemprop="datePublished" class="page-time">
+  2023-10-20
 </time>
 
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">Git</a></li></ul>
 
             
         </h5>
@@ -149,39 +147,43 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%9A%8F%E6%9C%BA%E7%9A%84-git-commit-%E4%BD%A0%E6%95%A2%E6%8F%90%E4%BA%A4%E5%90%97"><span class="post-toc-text">随机的 git commit 你敢提交吗</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B2%A1%E6%9C%89%E6%9C%80%E5%9D%91%EF%BC%8C%E5%8F%AA%E6%9C%89%E6%9B%B4%E5%9D%91%EF%BC%81"><span class="post-toc-text">没有最坑，只有更坑！</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%B1%BB%E5%9E%8B"><span class="post-toc-text">交换机类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="post-toc-text">死信交换机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BB%B6%E8%BF%9F%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="post-toc-text">延迟交换机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8F%91%E5%B8%83%E8%80%85%E7%9A%84%E7%A1%AE%E8%AE%A4%E6%A8%A1%E5%BC%8F-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="post-toc-text">发布者的确认模式(交换机可靠性)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8F%91%E5%B8%83%E8%80%85%E7%9A%84%E8%BF%94%E5%9B%9E%E6%A8%A1%E5%BC%8F-%E9%98%9F%E5%88%97%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="post-toc-text">发布者的返回模式(队列可靠性)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="post-toc-text">交换机的属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%98%9F%E5%88%97%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="post-toc-text">队列的属性</span></a></li></ol>
         </nav>
     </aside>
 
 
-<article id="post-git-ridiculous-behavior"
+<article id="post-rabbitMQ"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">Git 中的奇葩玩法</h1>
+        <h1 class="post-card-title"></h1>
         <div class="post-meta">
-            <time class="post-time" title="2022-03-25 19:01:50" datetime="2022-03-25T11:01:50.000Z"  itemprop="datePublished">2022-03-25</time>
+            <time class="post-time" title="2023-10-20 11:32:53" datetime="2023-10-20T03:32:53.680Z"  itemprop="datePublished">2023-10-20</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">Git</a></li></ul>
-
 
 
             
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="随机的-git-commit-你敢提交吗"><a href="#随机的-git-commit-你敢提交吗" class="headerlink" title="随机的 git commit 你敢提交吗"></a>随机的 git commit 你敢提交吗</h2><blockquote>
-<p>一个 Git 随机生成提交日志网站, 每次刷新的内容随机</p>
-<p>太搞了, 不怕挨揍的壮士可以使用如下命令进行日常代码的提交😂</p>
-</blockquote>
-<span id="more"></span>
-
-<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">curl</span> <span class="token parameter variable">-s</span> http://whatthecommit.com/index.txt<span class="token variable">)</span></span></code></pre>
-
-<p><a target="_blank" rel="noopener" href="http://whatthecommit.com/">http://whatthecommit.com</a></p>
-<h2 id="没有最坑，只有更坑！"><a href="#没有最坑，只有更坑！" class="headerlink" title="没有最坑，只有更坑！"></a>没有最坑，只有更坑！</h2><p>此仓库专门收集史上最坑爹的代码片段，专治低血压 😁</p>
-<p><a target="_blank" rel="noopener" href="https://gitee.com/oschina/bullshit-codes/tree/master">https://gitee.com/oschina/bullshit-codes/tree/master</a></p>
+            <h2 id="交换机类型"><a href="#交换机类型" class="headerlink" title="交换机类型"></a>交换机类型</h2><h2 id="死信交换机"><a href="#死信交换机" class="headerlink" title="死信交换机"></a>死信交换机</h2><h2 id="延迟交换机"><a href="#延迟交换机" class="headerlink" title="延迟交换机"></a>延迟交换机</h2><h2 id="发布者的确认模式-交换机可靠性"><a href="#发布者的确认模式-交换机可靠性" class="headerlink" title="发布者的确认模式(交换机可靠性)"></a>发布者的确认模式(交换机可靠性)</h2><ul>
+<li><p>保证生产者消息能正确到达交换机</p>
+</li>
+<li><p>备用交换机</p>
+</li>
+<li><p>设置交换机持久化</p>
+</li>
+</ul>
+<h2 id="发布者的返回模式-队列可靠性"><a href="#发布者的返回模式-队列可靠性" class="headerlink" title="发布者的返回模式(队列可靠性)"></a>发布者的返回模式(队列可靠性)</h2><ul>
+<li>保证消息能从交换机正确到达队列</li>
+<li>备用队列</li>
+<li>设置队列持久化</li>
+</ul>
+<h2 id="交换机的属性"><a href="#交换机的属性" class="headerlink" title="交换机的属性"></a>交换机的属性</h2><h2 id="队列的属性"><a href="#队列的属性" class="headerlink" title="队列的属性"></a>队列的属性</h2><ul>
+<li>消息在队列中不丢失, 设置消息持久化</li>
+<li>消费者监听队列, 自动确认改为手动确认</li>
+</ul>
 
         </div>
 
@@ -207,21 +209,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between" style="display:none">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/posts/linux-shell-alias-config/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Linux Shell 使用alias定义别名</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/posts/chrome-proxy-limit/" id="post-next" class="post-nav-link">
+      <a href="/posts/android-studio-use-lombok-and-evalex/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">关于谷歌Chrome浏览器非安全端口限制问题</h4>
+        <h4 class="title">Android studio 缺少lombok 导致使用EvalEx错误</h4>
       </a>
     </div>
   
