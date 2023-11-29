@@ -11,13 +11,13 @@ menu:
   home:
     text: Home
     url: /
-  archives:
-    url: /archives
-  tags:
-    url: /tags
-  # th-list:
-  #   text: Categories
-  #   url: /categories
+#  tags:
+#      url: /tags
+#  archives:
+#    url: /archives
+  th-list:
+     text: Categories
+     url: /categories
   github:
     url: https://github.com/chuchu-z
     target: _blank
@@ -32,7 +32,7 @@ brand: /img/brand.jpg
 favicon: https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4
 
 # email
-email: ''
+email: 'chuchuzz426@gmail.com'
 
 # 设置 Android L Chrome 浏览器状态栏颜色
 color: '#3F51B5'
@@ -40,14 +40,14 @@ color: '#3F51B5'
 # 页面标题
 tags_title: Tags
 archives_title: Archives
-# categories_title: Categories
+categories_title: Categories
 
 # 文章截断
 excerpt_render: false
 excerpt_length: 200
 excerpt_link: 阅读全文...
 mathjax: false
-archive_yearly: true
+archive_yearly: false
 
 # 是否显示文章最后更新时间
 show_last_updated: false
@@ -70,7 +70,7 @@ hideMenu: false
 # 是否开启toc
 # toc: false
 toc:
-  list_number: false  # 是否显示数字排序
+  list_number: true  # 是否显示数字排序
 
 # 文章页留言内容，hexo中所有变量及辅助函数等均可调用，具体请查阅 hexo.io
 postMessage: ''
@@ -154,7 +154,7 @@ post_wordcount:
   min2read: true
 
 # “不蒜子”访问量统计，详见 http://ibruce.info/2015/04/04/busuanzi/
-# visit_counter:
+#visit_counter:
 #   site_uv: 站点总访客数：
 #   site_pv: 站点总访问量：
 
