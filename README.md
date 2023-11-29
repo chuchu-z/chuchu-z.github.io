@@ -33,7 +33,7 @@ WORKDIR /usr/share/nginx/html
 
 COPY --from=builder /app/public /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 8080
 
 ```
 
@@ -48,7 +48,7 @@ services:
       dockerfile: Dockerfile
     image: chuchuzz426/blog-hexo:1.0
     ports:
-      - "80:80"
+      - "8080:80"
 
 ```
 
@@ -63,10 +63,10 @@ services:
 git clone -b src git@github.com:chuchu-z/chuchu-z.github.io.git
 
 # 在项目目录执行
-docker-compose up -d
+docker-compose build --no-cache && docker-compose up
 ```
 
-### 然后就可以打开 http://localhost/ 预览啦✨
+### 然后就可以打开 http://127.0.0.1:8080/ 预览啦✨
 
 
 
