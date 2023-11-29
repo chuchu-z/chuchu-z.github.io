@@ -29,7 +29,7 @@
 <meta property="og:description" content="Hexo-Blog (indigo-hexo6)该博客使用了 GitHub Pages +  Hexo  + indigo-hexo6 主题 搭建 GitHub Pages 允许我们 创建以自己用户名开头的username.github.io仓库用来搭建自己的静态页面网站或者博客 而 Hexo 本身就是一款支持 Markdown 静态化博客框架 有多种主题可供选择 并且上手简单 刚好契合我的需求">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-05-22T09:59:58.000Z">
-<meta property="article:modified_time" content="2023-10-20T03:32:53.676Z">
+<meta property="article:modified_time" content="2023-11-29T03:53:12.824Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="Hexo">
@@ -150,7 +150,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Hexo-Blog-indigo-hexo6"><span class="post-toc-text">Hexo-Blog (indigo-hexo6)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Dockerfile"><span class="post-toc-text">Dockerfile</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#docker-compose"><span class="post-toc-text">docker-compose</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%84%B6%E5%90%8E%E5%B0%B1%E5%8F%AF%E4%BB%A5%E6%89%93%E5%BC%80-http-localhost-%E9%A2%84%E8%A7%88%E5%95%A6%E2%9C%A8"><span class="post-toc-text">然后就可以打开 http:&#x2F;&#x2F;localhost&#x2F; 预览啦✨</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="post-toc-text">持续集成自动部署</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%F0%9F%91%89-%E5%8D%9A%E5%AE%A2%E5%9C%B0%E5%9D%80-http-chuchu-z-com"><span class="post-toc-text">👉 博客地址: http:&#x2F;&#x2F;chuchu-z.com</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%F0%9F%91%89-GitHub%E5%9C%B0%E5%9D%80-https-github-com-chuchu-z-chuchu-z-github-io"><span class="post-toc-text">👉 GitHub地址: https:&#x2F;&#x2F;github.com&#x2F;chuchu-z&#x2F;chuchu-z.github.io</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Hexo-Blog-indigo-hexo6"><span class="post-toc-text">Hexo-Blog (indigo-hexo6)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Dockerfile"><span class="post-toc-text">Dockerfile</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#docker-compose"><span class="post-toc-text">docker-compose</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%84%B6%E5%90%8E%E5%B0%B1%E5%8F%AF%E4%BB%A5%E6%89%93%E5%BC%80-http-127-0-0-1-8080-%E9%A2%84%E8%A7%88%E5%95%A6%E2%9C%A8"><span class="post-toc-text">然后就可以打开 http:&#x2F;&#x2F;127.0.0.1:8080&#x2F; 预览啦✨</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="post-toc-text">持续集成自动部署</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%F0%9F%91%89-%E5%8D%9A%E5%AE%A2%E5%9C%B0%E5%9D%80-http-chuchu-z-com"><span class="post-toc-text">👉 博客地址: http:&#x2F;&#x2F;chuchu-z.com</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%F0%9F%91%89-GitHub%E5%9C%B0%E5%9D%80-https-github-com-chuchu-z-chuchu-z-github-io"><span class="post-toc-text">👉 GitHub地址: https:&#x2F;&#x2F;github.com&#x2F;chuchu-z&#x2F;chuchu-z.github.io</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -195,7 +195,7 @@
 
 <span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">builder</span></span> /app/public /usr/share/nginx/html</span>
 
-<span class="token instruction"><span class="token keyword">EXPOSE</span> 80</span>
+<span class="token instruction"><span class="token keyword">EXPOSE</span> 8080</span>
 </code></pre>
 
 <h3 id="docker-compose"><a href="#docker-compose" class="headerlink" title="docker-compose"></a>docker-compose</h3><pre class="language-none"><code class="language-none">version: &#39;3&#39;
@@ -206,7 +206,7 @@ services:
       dockerfile: Dockerfile
     image: chuchuzz426&#x2F;blog-hexo:1.0
     ports:
-      - &quot;80:80&quot;
+      - &quot;8080:80&quot;
 </code></pre>
 
 
@@ -217,9 +217,9 @@ services:
 git clone -b src git@github.com:chuchu-z&#x2F;chuchu-z.github.io.git
 
 # 在项目目录执行
-docker-compose up -d</code></pre>
+docker-compose build --no-cache &amp;&amp; docker-compose up</code></pre>
 
-<h3 id="然后就可以打开-http-localhost-预览啦✨"><a href="#然后就可以打开-http-localhost-预览啦✨" class="headerlink" title="然后就可以打开 http://localhost/ 预览啦✨"></a>然后就可以打开 <a target="_blank" rel="noopener" href="http://localhost/">http://localhost/</a> 预览啦✨</h3><h1 id="持续集成自动部署"><a href="#持续集成自动部署" class="headerlink" title="持续集成自动部署"></a>持续集成自动部署</h1><p>为了发布文章<code>push</code> 到 <code>src</code> 分支后能自动更新到博客, 使用了 <code>GitHub Actions</code> 来实现自动部署</p>
+<h3 id="然后就可以打开-http-127-0-0-1-8080-预览啦✨"><a href="#然后就可以打开-http-127-0-0-1-8080-预览啦✨" class="headerlink" title="然后就可以打开 http://127.0.0.1:8080/ 预览啦✨"></a>然后就可以打开 <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a> 预览啦✨</h3><h1 id="持续集成自动部署"><a href="#持续集成自动部署" class="headerlink" title="持续集成自动部署"></a>持续集成自动部署</h1><p>为了发布文章<code>push</code> 到 <code>src</code> 分支后能自动更新到博客, 使用了 <code>GitHub Actions</code> 来实现自动部署</p>
 <p>通过使用 <code>GitHub Actions</code>，我们可以实现自动化的软件开发流程，提高开发效率和代码质量</p>
 <p>它还可以帮助团队协同工作，确保代码的集成和部署过程更加可靠和一致</p>
 <pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># Action 的名字</span>
