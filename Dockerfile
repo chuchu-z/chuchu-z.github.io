@@ -12,4 +12,4 @@ WORKDIR /usr/share/nginx/html
 
 COPY --from=builder /app/public /usr/share/nginx/html
 
-EXPOSE 80
+EXPOSE 8080
