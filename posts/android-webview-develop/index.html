@@ -20,13 +20,13 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Android">
-    <meta name="description" content="[教程] Android Webview 开发(App内嵌web) 自己花了2周的时间慢慢摸索出来的一点点经验, 网上教程很多, 但更多的是搬运或者年份比较久远的了, 借着着ChatGPT和网上的方法总算把项目搞定了, 打算把从开发到上架Google Play的全流程记录下来方便回顾总结, 同时希望对大家有一点点帮助。">
+    <meta name="keywords" content="">
+    <meta name="description" content="自己花了2周的时间慢慢摸索出来的一点点经验, 网上教程很多, 但更多的是搬运或者年份比较久远的了, 借着着ChatGPT和网上的方法总算把项目搞定了, 打算把从开发到上架Google Play的全流程记录下来方便回顾总结, 同时希望对大家有一点点帮助。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[教程] Android Webview 开发(App内嵌web)">
 <meta property="og:url" content="http://chuchu-z.com/posts/android-webview-develop/">
 <meta property="og:site_name" content="chuchu-z">
-<meta property="og:description" content="[教程] Android Webview 开发(App内嵌web) 自己花了2周的时间慢慢摸索出来的一点点经验, 网上教程很多, 但更多的是搬运或者年份比较久远的了, 借着着ChatGPT和网上的方法总算把项目搞定了, 打算把从开发到上架Google Play的全流程记录下来方便回顾总结, 同时希望对大家有一点点帮助。">
+<meta property="og:description" content="自己花了2周的时间慢慢摸索出来的一点点经验, 网上教程很多, 但更多的是搬运或者年份比较久远的了, 借着着ChatGPT和网上的方法总算把项目搞定了, 打算把从开发到上架Google Play的全流程记录下来方便回顾总结, 同时希望对大家有一点点帮助。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://chuchu-z.com/posts/android-webview-develop/image-20230513175557001.png">
 <meta property="og:image" content="http://chuchu-z.com/posts/android-webview-develop/image-20230515114344763.png">
@@ -39,9 +39,9 @@
 <meta property="og:image" content="http://chuchu-z.com/posts/android-webview-develop/start_device.gif">
 <meta property="og:image" content="http://chuchu-z.com/posts/android-webview-develop/run_app.gif">
 <meta property="article:published_time" content="2023-05-16T11:31:05.000Z">
-<meta property="article:modified_time" content="2023-11-29T08:43:42.727Z">
+<meta property="article:modified_time" content="2023-11-29T10:40:25.662Z">
 <meta property="article:author" content="chuchu-z">
-<meta property="article:tag" content="Android">
+<meta property="article:tag" content="chuchu-z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://chuchu-z.com/posts/android-webview-develop/image-20230513175557001.png">
     
@@ -86,16 +86,9 @@
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
               </a>
             </li>
         
@@ -160,7 +153,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#%E6%95%99%E7%A8%8B-Android-Webview-%E5%BC%80%E5%8F%91-App%E5%86%85%E5%B5%8Cweb"><span class="post-toc-text">[教程] Android Webview 开发(App内嵌web)</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="post-toc-text">一. 创建项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-Package-name"><span class="post-toc-text">1. Package name</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-Minimum-SDK"><span class="post-toc-text">2. Minimum SDK</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-Build-language"><span class="post-toc-text">3. Build language</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%8F%8A%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6"><span class="post-toc-text">二. 目录结构及重要文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-com-example-app"><span class="post-toc-text">1. com.example.app</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-AndroidManifest-xml"><span class="post-toc-text">2. AndroidManifest.xml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-res-%E7%9B%AE%E5%BD%95"><span class="post-toc-text">3. res&#x2F; 目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-build-gradle"><span class="post-toc-text">4. build.gradle</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89-SDK%E5%AE%89%E8%A3%85"><span class="post-toc-text">三. SDK安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-SDK%E7%9B%AE%E5%BD%95"><span class="post-toc-text">1. SDK目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="post-toc-text">2. 环境变量配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-SDK%E5%AE%89%E8%A3%85"><span class="post-toc-text">3. SDK安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-SDK-Tools-%E5%AE%89%E8%A3%85"><span class="post-toc-text">4. SDK Tools 安装</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%9B-%E8%99%9A%E6%8B%9F%E8%AE%BE%E5%A4%87%E5%AE%89%E8%A3%85"><span class="post-toc-text">四. 虚拟设备安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-%E9%80%89%E6%8B%A9%E5%AE%89%E8%A3%85%E9%95%9C%E5%83%8F"><span class="post-toc-text">1. 选择安装镜像</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-%E5%90%AF%E5%8A%A8%E8%99%9A%E6%8B%9F%E8%AE%BE%E5%A4%87"><span class="post-toc-text">2. 启动虚拟设备</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%94-%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE"><span class="post-toc-text">五. 启动项目</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="post-toc-number">1.</span> <span class="post-toc-text">一. 创建项目</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-Package-name"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1. Package name</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-Minimum-SDK"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2. Minimum SDK</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-Build-language"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3. Build language</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%8F%8A%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6"><span class="post-toc-number">2.</span> <span class="post-toc-text">二. 目录结构及重要文件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-com-example-app"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1. com.example.app</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-AndroidManifest-xml"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2. AndroidManifest.xml</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-res-%E7%9B%AE%E5%BD%95"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3. res&#x2F; 目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-build-gradle"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">4. build.gradle</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89-SDK%E5%AE%89%E8%A3%85"><span class="post-toc-number">3.</span> <span class="post-toc-text">三. SDK安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-SDK%E7%9B%AE%E5%BD%95"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1. SDK目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2. 环境变量配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-SDK%E5%AE%89%E8%A3%85"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3. SDK安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-SDK-Tools-%E5%AE%89%E8%A3%85"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4. SDK Tools 安装</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%9B-%E8%99%9A%E6%8B%9F%E8%AE%BE%E5%A4%87%E5%AE%89%E8%A3%85"><span class="post-toc-number">4.</span> <span class="post-toc-text">四. 虚拟设备安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-%E9%80%89%E6%8B%A9%E5%AE%89%E8%A3%85%E9%95%9C%E5%83%8F"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">1. 选择安装镜像</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-%E5%90%AF%E5%8A%A8%E8%99%9A%E6%8B%9F%E8%AE%BE%E5%A4%87"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">2. 启动虚拟设备</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%94-%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE"><span class="post-toc-number">5.</span> <span class="post-toc-text">五. 启动项目</span></a></li></ol>
         </nav>
     </aside>
 
@@ -182,7 +175,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="教程-Android-Webview-开发-App内嵌web"><a href="#教程-Android-Webview-开发-App内嵌web" class="headerlink" title="[教程] Android Webview 开发(App内嵌web)"></a>[教程] Android Webview 开发(App内嵌web)</h1><blockquote>
+            <blockquote>
 <p>自己花了2周的时间慢慢摸索出来的一点点经验, 网上教程很多, 但更多的是搬运或者年份比较久远的了, 借着着ChatGPT和网上的方法总算把项目搞定了, 打算把从开发到上架Google Play的全流程记录下来方便回顾总结, 同时希望对大家有一点点帮助。</p>
 <span id="more"></span>
 
@@ -522,7 +515,7 @@ ANDROID_ADB 		&#x3D;&gt;  D:\Android\SDK\platform-tools</code></pre>
 
         <p>
             <span>chuchu-z &copy; 2021 - 2023</span>
-            <span class="num">Total words: 14.5k</span>
+            <span class="num">Total words: 14.4k</span>
         </p>
         <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
     </div>

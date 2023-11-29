@@ -20,13 +20,13 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Android">
-    <meta name="description" content="Android studio 缺少lombok 导致使用EvalEx错误书接上文, 上一篇中说了使用了代码混淆导致EvalEx扩展包失效, 其实在此之前, 还有一个问题, 那就是缺少了 lombok 库 不过该问题也比较有趣, 在debug的情况下打包生成app, 是不会触发错误提示缺少 lombok 库的, 一切都正常运行 在进行release打包的时候才会触发错误提示,但是在我写这篇文章时,">
+    <meta name="keywords" content="">
+    <meta name="description" content="另一篇中说了使用了代码混淆导致EvalEx扩展包失效, 其实在此之前, 还有一个问题, 那就是缺少了 lombok 库 不过该问题也比较有趣, 在debug的情况下打包生成app, 是不会触发错误提示缺少 lombok 库的, 一切都正常运行 在进行release打包的时候才会触发错误提示,但是在我写这篇文章时, 该问题已被解决, 具体错误描述没法放上来了">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android studio 缺少lombok 导致使用EvalEx错误">
 <meta property="og:url" content="http://chuchu-z.com/posts/android-studio-use-lombok-and-evalex/">
 <meta property="og:site_name" content="chuchu-z">
-<meta property="og:description" content="Android studio 缺少lombok 导致使用EvalEx错误书接上文, 上一篇中说了使用了代码混淆导致EvalEx扩展包失效, 其实在此之前, 还有一个问题, 那就是缺少了 lombok 库 不过该问题也比较有趣, 在debug的情况下打包生成app, 是不会触发错误提示缺少 lombok 库的, 一切都正常运行 在进行release打包的时候才会触发错误提示,但是在我写这篇文章时,">
+<meta property="og:description" content="另一篇中说了使用了代码混淆导致EvalEx扩展包失效, 其实在此之前, 还有一个问题, 那就是缺少了 lombok 库 不过该问题也比较有趣, 在debug的情况下打包生成app, 是不会触发错误提示缺少 lombok 库的, 一切都正常运行 在进行release打包的时候才会触发错误提示,但是在我写这篇文章时, 该问题已被解决, 具体错误描述没法放上来了">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://chuchu-z.com/posts/android-studio-use-lombok-and-evalex/image-20230927162308870.png">
 <meta property="og:image" content="http://chuchu-z.com/posts/android-studio-use-lombok-and-evalex/image-20230927162533916.png">
@@ -35,9 +35,9 @@
 <meta property="og:image" content="http://chuchu-z.com/posts/android-studio-use-lombok-and-evalex/image-20230927163810244.png">
 <meta property="og:image" content="http://chuchu-z.com/posts/android-studio-use-lombok-and-evalex/image-20230927164022059.png">
 <meta property="article:published_time" content="2023-09-20T03:34:11.000Z">
-<meta property="article:modified_time" content="2023-11-29T08:43:42.723Z">
+<meta property="article:modified_time" content="2023-11-29T10:40:25.654Z">
 <meta property="article:author" content="chuchu-z">
-<meta property="article:tag" content="Android">
+<meta property="article:tag" content="chuchu-z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://chuchu-z.com/posts/android-studio-use-lombok-and-evalex/image-20230927162308870.png">
     
@@ -82,16 +82,9 @@
             </li>
         
             <li class="waves-block waves-effect">
-              <a href="/archives"  >
-                <i class="icon icon-lg icon-archives"></i>
-                Archives
-              </a>
-            </li>
-        
-            <li class="waves-block waves-effect">
-              <a href="/tags"  >
-                <i class="icon icon-lg icon-tags"></i>
-                Tags
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
               </a>
             </li>
         
@@ -153,13 +146,6 @@
 
 <div class="container body-wrap">
     
-    <aside class="post-widget">
-        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
-            <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android-studio-%E7%BC%BA%E5%B0%91lombok-%E5%AF%BC%E8%87%B4%E4%BD%BF%E7%94%A8EvalEx%E9%94%99%E8%AF%AF"><span class="post-toc-text">Android studio 缺少lombok 导致使用EvalEx错误</span></a></li></ol>
-        </nav>
-    </aside>
-
 
 <article id="post-android-studio-use-lombok-and-evalex"
   class="post-article article-type-post fade" itemprop="blogPost">
@@ -178,7 +164,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="Android-studio-缺少lombok-导致使用EvalEx错误"><a href="#Android-studio-缺少lombok-导致使用EvalEx错误" class="headerlink" title="Android studio 缺少lombok 导致使用EvalEx错误"></a>Android studio 缺少lombok 导致使用EvalEx错误</h1><p>书接上文, 上一篇中说了使用了代码混淆导致<strong>EvalEx</strong>扩展包失效, 其实在此之前, 还有一个问题, 那就是缺少了 <strong>lombok</strong> 库</p>
+            <p>另一篇中说了使用了代码混淆导致<strong>EvalEx</strong>扩展包失效, 其实在此之前, 还有一个问题, 那就是缺少了 <strong>lombok</strong> 库</p>
 <p>不过该问题也比较有趣, 在debug的情况下打包生成app, 是不会触发错误提示缺少 <strong>lombok</strong> 库的, 一切都正常运行</p>
 <p>在进行<code>release</code>打包的时候才会触发错误提示,但是在我写这篇文章时, 该问题已被解决, 具体错误描述没法放上来了</p>
 <span id="more"></span>
@@ -353,7 +339,7 @@
 
         <p>
             <span>chuchu-z &copy; 2021 - 2023</span>
-            <span class="num">Total words: 14.5k</span>
+            <span class="num">Total words: 14.4k</span>
         </p>
         <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
     </div>
