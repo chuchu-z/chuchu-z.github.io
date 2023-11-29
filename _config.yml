@@ -51,7 +51,7 @@ future: false # 显示未来文章
 highlight:
   enable: true
   line_number: false
-  auto_detect: false
+  auto_detect: true
   tab_replace: ''
   wrap: true
   hljs: true
