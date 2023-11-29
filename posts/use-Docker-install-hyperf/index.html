@@ -30,7 +30,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://chuchu-z.com/posts/use-Docker-install-hyperf/image-20231129091510911.png">
 <meta property="article:published_time" content="2023-11-29T05:41:37.000Z">
-<meta property="article:modified_time" content="2023-11-29T08:03:54.481Z">
+<meta property="article:modified_time" content="2023-11-29T08:11:01.779Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="hyperf">
@@ -332,7 +332,7 @@ FLUSH <span class="token keyword">PRIVILEGES</span><span class="token punctuatio
 
 
 <ol start="2">
-<li><strong>redis</strong>连接宿主机同上, 记得确保 Redis 服务器的配置允许远程连接, 修改<strong>redis.conf</strong></li>
+<li>redis连接宿主机同上, 记得确保 Redis 服务器的配置允许远程连接, 修改 <strong>redis.conf</strong></li>
 </ol>
 <pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#只允许本地和 172.21.240.1 连接</span>
 <span class="token builtin class-name">bind</span> <span class="token number">127.0</span>.0.1 <span class="token number">172.21</span>.240.1
@@ -342,7 +342,7 @@ FLUSH <span class="token keyword">PRIVILEGES</span><span class="token punctuatio
 
 
 
-<h2 id="server配置"><a href="#server配置" class="headerlink" title="server配置"></a>server配置</h2><p>在config/autoload/server.php的 <strong>server</strong>配置如下, 端口具体根据实际情况修改</p>
+<h2 id="server配置"><a href="#server配置" class="headerlink" title="server配置"></a>server配置</h2><p>在config/autoload/server.php的 <strong>server</strong> 配置如下, 端口具体根据实际情况修改</p>
 <pre class="language-php" data-language="php"><code class="language-php"><span class="token string single-quoted-string">'servers'</span> <span class="token operator">=></span> <span class="token punctuation">[</span>
     <span class="token punctuation">[</span>
         <span class="token string single-quoted-string">'name'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'http'</span><span class="token punctuation">,</span>
