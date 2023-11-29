@@ -1,14 +1,11 @@
 ---
 title: 'gRPC的简介与Protobuf的使用'
 date: 2023-2-14 03:36:50
-tags: Other
 categories: Other
 
 ---
 
 
-
-# gRPC的简介与Protobuf的使用
 
 > [**gRPC**](https://grpc.io/docs/)实现微服务，将大的项目拆分为多个小且独立的业务模块；即服务；各服务之间使用高效的**Protobuf**协议进行RPC调用。
 >

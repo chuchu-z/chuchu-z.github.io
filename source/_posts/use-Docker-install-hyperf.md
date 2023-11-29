@@ -1,13 +1,9 @@
 ---
 title: '使用Docker安装hyperf-admin'
 date: 2023-11-29 13:41:37
-tags: 
+categories: 
 - Docker
 - hyperf
-categories:
-- Docker
-- hyperf
-
 ---
 
 

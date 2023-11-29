@@ -1,12 +1,8 @@
 ---
 title: '浅记冒泡排序及斐波那契数列优化点'
 date: 2023-2-16 19:04:13
-tags: 
-- PHP
-- 算法
 categories: 
-- PHP
-- 算法
+- Other
 
 ---
 

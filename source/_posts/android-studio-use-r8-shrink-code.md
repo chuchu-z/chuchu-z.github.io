@@ -1,23 +1,20 @@
 ---
 title: 'Android studio 使用R8 代码混淆 错误性缩减代码'
 date: 2023-9-20 10:44:11
-tags: 
+categories: 
 - Android
-categories:
-- Android
-
 
 ---
 
 
-
-# Android studio 使用R8 代码混淆 错误性缩减代码
 
 最近开发了一个支持简单四则运算的计算器, 其中使用到了 `com.ezylang:EvalEx` 扩展包, 
 
 用于支持基本数学运算符的数学表达式, 开发阶段正常使用没有问题
 
 然而当我开发完成打包签名时, 进行计算时就会出现错误
+
+
 
 <!--more-->
 

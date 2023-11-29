@@ -1,9 +1,7 @@
 ---
 title: 'RabbitMQ简介(待补充)'
 date: 2023-10-20 11:34:11
-tags: 
-- RabbitMQ
-categories:
+categories: 
 - RabbitMQ
 
 ---

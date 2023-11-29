@@ -1,22 +1,14 @@
 ---
 title: 'Android studio 缺少lombok 导致使用EvalEx错误'
 date: 2023-9-20 11:34:11
-tags: 
+categories: 
 - Android
-categories:
-- Android
-
-
 
 ---
 
 
 
-# Android studio 缺少lombok 导致使用EvalEx错误
-
-
-
-书接上文, 上一篇中说了使用了代码混淆导致**EvalEx**扩展包失效, 其实在此之前, 还有一个问题, 那就是缺少了 **lombok** 库
+另一篇中说了使用了代码混淆导致**EvalEx**扩展包失效, 其实在此之前, 还有一个问题, 那就是缺少了 **lombok** 库
 
 不过该问题也比较有趣, 在debug的情况下打包生成app, 是不会触发错误提示缺少 **lombok** 库的, 一切都正常运行
 

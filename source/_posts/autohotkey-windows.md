@@ -1,14 +1,9 @@
 ---
 title: '利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换'
 date: 2023-5-25 17:15:04
-tags: Other
 categories: Other
 
 ---
-
-
-
-# 利用 AutoHotKey 实现 win10 多显示器（扩展模式）快速切换
 
 
 

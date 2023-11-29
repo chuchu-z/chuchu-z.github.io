@@ -1,16 +1,10 @@
 ---
 title: 'GitHub Actions实现Hexo自动化部署'
 date: 2023-2-14 05:24:23
-tags: 
-- Hexo
 categories: 
-- Hexo
+- Other
 
 ---
-
-
-
-# GitHub Actions实现Hexo自动化部署
 
 
 

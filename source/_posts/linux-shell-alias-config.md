@@ -1,15 +1,9 @@
 ---
 title: 'Linux Shell 使用alias定义别名'
 date: 2022-03-31 09:57:18
-tags:
-- Linux
 categories:
 - Linux
 ---
-
- 
-
-# Linux Shell 使用alias定义别名
 
 
 
