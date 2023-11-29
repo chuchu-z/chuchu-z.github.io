@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>使用Docker安装hyperf-admin | chuchu-z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Docker,hyperf">
+    <meta name="description" content="近期有项目用到 hyperf-admin, 顺便学习记录一下基于官方的镜像开始构建到部署过程  👉 hyperf官方地址">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Docker安装hyperf-admin">
+<meta property="og:url" content="http://chuchu-z.com/posts/use-Docker-install-hyperf/">
+<meta property="og:site_name" content="chuchu-z">
+<meta property="og:description" content="近期有项目用到 hyperf-admin, 顺便学习记录一下基于官方的镜像开始构建到部署过程  👉 hyperf官方地址">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://chuchu-z.com/posts/use-Docker-install-hyperf/image-20231129091510911.png">
+<meta property="article:published_time" content="2023-11-29T05:41:37.000Z">
+<meta property="article:modified_time" content="2023-11-29T08:03:54.481Z">
+<meta property="article:author" content="chuchu-z">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="hyperf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://chuchu-z.com/posts/use-Docker-install-hyperf/image-20231129091510911.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">chuchu-z</h5>
+          <p class="description">借君三十年，繁花万里好江山</p>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/chuchu-z" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">使用Docker安装hyperf-admin</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale" style="padding-left: 5%;">
+        <h1 class="title">使用Docker安装hyperf-admin</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2023-11-29T05:41:37.000Z" itemprop="datePublished" class="page-time">
+  2023-11-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/docker/">Docker</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/docker/hyperf/">hyperf</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85-amp-%E9%85%8D%E7%BD%AE"><span class="post-toc-text">安装&amp;配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%90%AF%E5%8A%A8hyperf"><span class="post-toc-text">启动hyperf</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Linux-shell-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%85%B3%E7%B3%BB%E8%A1%A8"><span class="post-toc-text">Linux shell 配置文件关系表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%8A%8A%E5%AE%B9%E5%99%A8%E5%88%B6%E4%BD%9C%E4%B8%BA%E9%95%9C%E5%83%8F%E5%B9%B6%E5%AF%BC%E5%87%BA%E4%B8%BAtar"><span class="post-toc-text">把容器制作为镜像并导出为tar</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%B6%E4%BD%9Cdocker-compose-yml%E5%90%AF%E5%8A%A8"><span class="post-toc-text">制作docker-compose.yml启动</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DB%E4%B8%8Eredis%E8%BF%9E%E6%8E%A5%E9%85%8D%E7%BD%AE"><span class="post-toc-text">DB与redis连接配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#server%E9%85%8D%E7%BD%AE"><span class="post-toc-text">server配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#VUE"><span class="post-toc-text">VUE</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AE%89%E8%A3%85"><span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#vue-config-js%E9%85%8D%E7%BD%AE"><span class="post-toc-text">vue.config.js配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83"><span class="post-toc-text">生产环境</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-use-Docker-install-hyperf"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">使用Docker安装hyperf-admin</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2023-11-29 13:41:37" datetime="2023-11-29T05:41:37.000Z"  itemprop="datePublished">2023-11-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/docker/">Docker</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/docker/hyperf/">hyperf</a></li></ul></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>近期有项目用到 <a target="_blank" rel="noopener" href="https://github.com/hyperf-admin/hyperf-admin"><strong>hyperf-admin</strong></a>, 顺便学习记录一下基于官方的镜像开始构建到部署过程 </p>
+<p>👉 <a target="_blank" rel="noopener" href="https://hyperf.wiki/2.0/#/zh-cn/quick-start/install">hyperf官方地址</a></p>
+<span id="more"></span>
+
+
+
+<h2 id="安装-amp-配置"><a href="#安装-amp-配置" class="headerlink" title="安装&amp;配置"></a>安装&amp;配置</h2><p>由于官方默认是在Linux执行的, 但实际我是在Win10下的 git-bash 终端执行, 所以命令稍微有点不一样, 比如指定项目路径的方式和不需要指定终端为 <strong>/bin/sh</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 官方镜像</span>
+winpty <span class="token function">docker</span> run <span class="token parameter variable">-v</span> <span class="token string">"D:\phpstudy\WWW\online-chat:/hyperf"</span> <span class="token parameter variable">-p</span> <span class="token number">9501</span>:9501 <span class="token parameter variable">-it</span> hyperf/hyperf:7.4-alpine-v3.11-swoole
+
+<span class="token comment"># 官方镜像重制后的镜像</span>
+winpty <span class="token function">docker</span> run <span class="token parameter variable">-v</span> <span class="token string">"D:\phpstudy\WWW\online-chat:/hyperf"</span> <span class="token parameter variable">-p</span> <span class="token number">9501</span>:9501 <span class="token parameter variable">-it</span> my-hyperf:latest <span class="token function">bash</span></code></pre>
+
+
+
+<p>执行完后进入容器内执行</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#安装应用</span>
+apk <span class="token function">add</span> <span class="token function">vim</span> <span class="token function">wget</span> tzdata
+
+<span class="token comment">#修改时区为上海东八区</span>
+<span class="token function">ln</span> <span class="token parameter variable">-sf</span> /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+<span class="token builtin class-name">echo</span> <span class="token string">"Asia/Shanghai"</span> <span class="token operator">></span> /etc/timezone
+
+<span class="token comment">#输出时间查看</span>
+<span class="token function">date</span>
+
+<span class="token comment">#修改配置文件</span>
+<span class="token function">vim</span> ~/.bashrc
+
+<span class="token comment">#修改PS1</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable"><span class="token environment constant">PS1</span></span><span class="token operator">=</span><span class="token string">'\[\033]0;Bash\007\]\n\[\033[32;1m\] ➜ \[\033[33;1m\]\W\[\033[34;1m\] [\t] \[\033[36m\]'</span>
+
+<span class="token comment">#添加alias</span>
+<span class="token builtin class-name">alias</span> <span class="token assign-left variable">e</span><span class="token operator">=</span><span class="token string">'exit'</span>
+<span class="token builtin class-name">alias</span> <span class="token assign-left variable">www</span><span class="token operator">=</span><span class="token string">'cd /hyperf'</span>
+<span class="token builtin class-name">alias</span> <span class="token assign-left variable">ll</span><span class="token operator">=</span><span class="token string">'ls -al'</span>
+<span class="token builtin class-name">alias</span> <span class="token assign-left variable">vp</span><span class="token operator">=</span><span class="token string">'vim ~/.bashrc'</span>
+<span class="token builtin class-name">alias</span> <span class="token assign-left variable">sp</span><span class="token operator">=</span><span class="token string">'source ~/.bashrc'</span>
+
+<span class="token comment">#保存后执行</span>
+<span class="token builtin class-name">source</span> ~/.bashrc</code></pre>
+
+
+
+<p>由于 Docker 容器默认是以非交互式且不登录的情况进入容器的, 我们需要以交互式的情况进入</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 以 sh 方式启动 则需要在后面添加 -il 参数, 表示以交互式并且模拟登录的情况进入容器, 只有模拟登陆才会初始化执行 ~/.bashrc</span>
+winpty <span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> e61fb6c63c38 <span class="token function">sh</span> <span class="token parameter variable">-il</span>
+
+<span class="token comment"># 以 bash 方式启动, 会默认初始化执行 ~/.bashrc文件</span>
+winpty <span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> e61fb6c63c38 <span class="token function">bash</span></code></pre>
+
+
+
+<h2 id="启动hyperf"><a href="#启动hyperf" class="headerlink" title="启动hyperf"></a>启动hyperf</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 进入hyperf目录</span>
+<span class="token builtin class-name">cd</span> /hyperf
+
+<span class="token comment"># 将 Composer 镜像设置为阿里云镜像，加速国内下载速度</span>
+<span class="token function">composer</span> config <span class="token parameter variable">-g</span> repo.packagist <span class="token function">composer</span> https://mirrors.aliyun.com/composer
+
+<span class="token comment"># 由于项目已经从github拉取下来 所以无需执行安装hyperf命令, 只需要执行composer update 获取依赖</span>
+<span class="token function">composer</span> update
+
+<span class="token comment"># 启动 Hyperf</span>
+php bin/hyperf.php start
+
+<span class="token comment"># 浏览器输入http://127.0.0.1:9501访问</span>
+http://127.0.0.1:9501</code></pre>
+
+
+
+<h2 id="Linux-shell-配置文件关系表"><a href="#Linux-shell-配置文件关系表" class="headerlink" title="Linux shell 配置文件关系表"></a>Linux shell 配置文件关系表</h2><p>附带上文为什么修改 <code>~/.bashrc</code> 原因, 因为想要在容器内定义一些alias命令, 而容器默认是非登录进入的, 所以说明一下初始化时读取的是哪个配置文件</p>
+<table>
+<thead>
+<tr>
+<th>文件</th>
+<th>位置</th>
+<th>作用和描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>~/.profile</code></td>
+<td>用户主目录 (<code>$HOME</code>)</td>
+<td>用户登录时执行的个人配置文件。通常在登录时执行一次，用于设置用户环境变量和执行用户的个人配置。</td>
+</tr>
+<tr>
+<td><code>~/.bashrc</code></td>
+<td>用户主目录 (<code>$HOME</code>)</td>
+<td>非登录的 Bash shell 启动时执行的个人配置文件。用于设置 Bash shell 的特定配置，如别名、自定义函数等。</td>
+</tr>
+<tr>
+<td><code>~/.bash_profile</code></td>
+<td>用户主目录 (<code>$HOME</code>)</td>
+<td>用户登录时执行的个人配置文件。如果存在该文件，则通常会覆盖 <code>~/.profile</code>。用于设置用户环境变量和执行用户的个人配置。</td>
+</tr>
+<tr>
+<td><code>/etc/profile</code></td>
+<td><code>/etc/</code> 目录</td>
+<td>系统级别的 Bash shell 配置文件。在系统启动时，用于设置全局环境变量和执行系统范围的配置。用户登录时也会执行一次。</td>
+</tr>
+</tbody></table>
+<h2 id="把容器制作为镜像并导出为tar"><a href="#把容器制作为镜像并导出为tar" class="headerlink" title="把容器制作为镜像并导出为tar"></a>把容器制作为镜像并导出为tar</h2><p>为了把修改过的容器方便在其他机器上使用, 打包制作成镜像</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#容器制作为镜像</span>
+<span class="token function">docker</span> commit e61fb6c63c38 my-hyperf
+
+<span class="token comment">#镜像导出为tar文件</span>
+<span class="token function">docker</span> save <span class="token parameter variable">-o</span> my-hyperf-image.tar my-hyperf</code></pre>
+
+
+
+<h2 id="制作docker-compose-yml启动"><a href="#制作docker-compose-yml启动" class="headerlink" title="制作docker-compose.yml启动"></a>制作docker-compose.yml启动</h2><p>为了省去配置命令的麻烦和方便后续扩展, 添加docker-compose.yml文件</p>
+<pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3'</span>
+
+<span class="token key atrule">x-project-settings</span><span class="token punctuation">:</span> <span class="token important">&amp;project-settings</span>
+  <span class="token key atrule">project_name</span><span class="token punctuation">:</span> hyperf<span class="token punctuation">-</span>app
+
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">hyperf-app</span><span class="token punctuation">:</span>
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>hyperf<span class="token punctuation">:</span>latest
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>hyperf
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token string">"9501:9501"</span>
+      <span class="token punctuation">-</span> <span class="token string">"9502:9502"</span>
+      <span class="token punctuation">-</span> <span class="token string">"9503:9503"</span>
+    <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> D<span class="token punctuation">:</span>\phpstudy\WWW\online<span class="token punctuation">-</span>chat<span class="token punctuation">:</span>/hyperf
+    <span class="token key atrule">working_dir</span><span class="token punctuation">:</span> /hyperf/hyperf
+    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"php"</span><span class="token punctuation">,</span> <span class="token string">"bin/hyperf.php"</span><span class="token punctuation">,</span> <span class="token string">"start"</span><span class="token punctuation">]</span></code></pre>
+
+
+
+<p>接下来就是 <del>原神⭕🗽</del> hyperf, 启动！</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span></code></pre>
+
+
+
+<h2 id="DB与redis连接配置"><a href="#DB与redis连接配置" class="headerlink" title="DB与redis连接配置"></a>DB与redis连接配置</h2><ol>
+<li>修改.env配置, 连接宿主机mysql, 先在宿主机执行 <strong>ipconfig</strong>  查看 <strong>WSL</strong> 的IPv4地址, 比如我的是172.21.240.1, 则 env配置文件的<strong>DB_HOST</strong>填写的就是<strong>172.21.240.1</strong></li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/posts/use-Docker-install-hyperf/image-20231129091510911.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<ol start="2">
+<li>如果mysql拒绝连接, 则修改一下mysql的用户授权</li>
+</ol>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token comment">#用户授权,记得换成对应的库名和用户名及密码</span>
+<span class="token keyword">GRANT</span> <span class="token keyword">ALL</span> <span class="token keyword">PRIVILEGES</span> <span class="token keyword">ON</span> your_database<span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">TO</span> <span class="token string">'your_username'</span><span class="token variable">@'%'</span> IDENTIFIED <span class="token keyword">BY</span> <span class="token string">'your_password'</span><span class="token punctuation">;</span>
+
+<span class="token comment">#刷新权限</span>
+FLUSH <span class="token keyword">PRIVILEGES</span><span class="token punctuation">;</span></code></pre>
+
+
+
+<ol start="2">
+<li><strong>redis</strong>连接宿主机同上, 记得确保 Redis 服务器的配置允许远程连接, 修改<strong>redis.conf</strong></li>
+</ol>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#只允许本地和 172.21.240.1 连接</span>
+<span class="token builtin class-name">bind</span> <span class="token number">127.0</span>.0.1 <span class="token number">172.21</span>.240.1
+
+<span class="token comment">#允许任何ip连接, 不推荐,特别是在生产服务器上或者没设置密码的</span>
+<span class="token builtin class-name">bind</span> <span class="token number">0.0</span>.0.0</code></pre>
+
+
+
+<h2 id="server配置"><a href="#server配置" class="headerlink" title="server配置"></a>server配置</h2><p>在config/autoload/server.php的 <strong>server</strong>配置如下, 端口具体根据实际情况修改</p>
+<pre class="language-php" data-language="php"><code class="language-php"><span class="token string single-quoted-string">'servers'</span> <span class="token operator">=></span> <span class="token punctuation">[</span>
+    <span class="token punctuation">[</span>
+        <span class="token string single-quoted-string">'name'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'http'</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'type'</span> <span class="token operator">=></span> <span class="token class-name static-context">Server</span><span class="token operator">::</span><span class="token constant">SERVER_HTTP</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'host'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'0.0.0.0'</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'port'</span> <span class="token operator">=></span> <span class="token number">9502</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'sock_type'</span> <span class="token operator">=></span> <span class="token constant">SWOOLE_SOCK_TCP</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'callbacks'</span> <span class="token operator">=></span> <span class="token punctuation">[</span>
+            <span class="token class-name static-context">Event</span><span class="token operator">::</span><span class="token constant">ON_REQUEST</span> <span class="token operator">=></span> <span class="token punctuation">[</span><span class="token class-name class-name-fully-qualified static-context">Hyperf<span class="token punctuation">\</span>HttpServer<span class="token punctuation">\</span>Server</span><span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'onRequest'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">[</span>
+        <span class="token string single-quoted-string">'name'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'ws'</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'type'</span> <span class="token operator">=></span> <span class="token class-name static-context">Server</span><span class="token operator">::</span><span class="token constant">SERVER_WEBSOCKET</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'host'</span> <span class="token operator">=></span> <span class="token string single-quoted-string">'0.0.0.0'</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'port'</span> <span class="token operator">=></span> <span class="token number">9503</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'sock_type'</span> <span class="token operator">=></span> <span class="token constant">SWOOLE_SOCK_TCP</span><span class="token punctuation">,</span>
+        <span class="token string single-quoted-string">'callbacks'</span> <span class="token operator">=></span> <span class="token punctuation">[</span>
+            <span class="token class-name static-context">Event</span><span class="token operator">::</span><span class="token constant">ON_HAND_SHAKE</span> <span class="token operator">=></span> <span class="token punctuation">[</span><span class="token class-name class-name-fully-qualified static-context">Hyperf<span class="token punctuation">\</span>WebSocketServer<span class="token punctuation">\</span>Server</span><span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'onHandShake'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token class-name static-context">Event</span><span class="token operator">::</span><span class="token constant">ON_MESSAGE</span> <span class="token operator">=></span> <span class="token punctuation">[</span><span class="token class-name class-name-fully-qualified static-context">Hyperf<span class="token punctuation">\</span>WebSocketServer<span class="token punctuation">\</span>Server</span><span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'onMessage'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token class-name static-context">Event</span><span class="token operator">::</span><span class="token constant">ON_CLOSE</span> <span class="token operator">=></span> <span class="token punctuation">[</span><span class="token class-name class-name-fully-qualified static-context">Hyperf<span class="token punctuation">\</span>WebSocketServer<span class="token punctuation">\</span>Server</span><span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token string single-quoted-string">'onClose'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">,</span></code></pre>
+
+
+
+<h2 id="VUE"><a href="#VUE" class="headerlink" title="VUE"></a>VUE</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><pre class="language-none"><code class="language-none"># 环境依赖
+# 1.  node ^v11.2.0 https:&#x2F;&#x2F;nodejs.org&#x2F;zh-cn&#x2F;download&#x2F;
+# 2.  npm ^6.4.1
+git clone https:&#x2F;&#x2F;github.com&#x2F;hyperf-admin&#x2F;hyperf-admin-frontend.git vue-admin
+cd vue-admin
+npm i
+npm run dev</code></pre>
+
+
+
+<pre class="language-none"><code class="language-none"># 打包
+npm run build:prod
+npm run build:test</code></pre>
+
+
+
+<h3 id="vue-config-js配置"><a href="#vue-config-js配置" class="headerlink" title="vue.config.js配置"></a>vue.config.js配置</h3><p>主要留意 <strong>module.exports</strong> 模块里的 <strong>devServer</strong> 和 <strong>proxy</strong> 配置要和hyperf对应上</p>
+<pre class="language-vue" data-language="vue"><code class="language-vue">module.exports &#x3D; &#123;
+  &#x2F;**
+   * You will need to set publicPath if you plan to deploy your site under a sub path,
+   * for example GitHub Pages. If you plan to deploy your site to https:&#x2F;&#x2F;foo.github.io&#x2F;bar&#x2F;,
+   * then publicPath should be set to &quot;&#x2F;bar&#x2F;&quot;.
+   * In most cases please use &#39;&#x2F;&#39; !!!
+   * Detail: https:&#x2F;&#x2F;cli.vuejs.org&#x2F;config&#x2F;#publicpath
+   *&#x2F;
+  publicPath: &#39;&#x2F;&#39;,
+  outputDir: &#39;dist&#39;,
+  assetsDir: &#39;static&#39;,
+  lintOnSave: process.env.NODE_ENV &#x3D;&#x3D;&#x3D; &#39;development&#39;,
+  productionSourceMap: false,
+  devServer: &#123;
+    port: port,
+    open: true,
+    overlay: &#123;
+      warnings: false,
+      errors: true
+    &#125;,
+    proxy: &#123;
+      &#39;&#x2F;api&#39;: &#123;
+        target: &#39;http:&#x2F;&#x2F;127.0.0.1:9502&#39;,  &#x2F;&#x2F; 后台接口地址
+        ws: &#39;ws:&#x2F;&#x2F;127.0.0.1:9503&#39;,        &#x2F;&#x2F;如果要代理 websockets，配置这个参数
+        secure: false,  &#x2F;&#x2F; 如果是https接口，需要配置这个参数
+        changeOrigin: true,  &#x2F;&#x2F;是否跨域
+        pathRewrite:&#123;	&#x2F;&#x2F; 重写路径
+          &#39;^&#x2F;api&#39;:&#39;&#39;
+        &#125;
+      &#125;
+    &#125;,
+    &#x2F;&#x2F; before: require(&#39;.&#x2F;mock&#x2F;mock-server.js&#39;)
+  &#125;,
+  ...</code></pre>
+
+
+
+<h3 id="生产环境"><a href="#生产环境" class="headerlink" title="生产环境"></a>生产环境</h3><p>留意 <strong>.env.production</strong>文件配置的 <strong>VUE_APP_BASE_API</strong> 域名改为线上域名</p>
+
+        </div>
+
+        <blockquote class="post-copyright" style="display:none">
+    
+    <footer>
+        <a href="http://chuchu-z.com">
+            <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4" alt="chuchu-z">
+            chuchu-z
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        
+            
+
+            
+
+        
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/lntroduction-to-RabbitMQ/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">RabbitMQ简介(待补充)</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            <span>chuchu-z &copy; 2021 - 2023</span>
+            <span class="num">Total words: 14.5k</span>
+        </p>
+        <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
