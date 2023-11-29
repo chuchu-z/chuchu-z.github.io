@@ -178,7 +178,7 @@ FLUSH PRIVILEGES;
 
 
 
-2. **redis**连接宿主机同上, 记得确保 Redis 服务器的配置允许远程连接, 修改**redis.conf**
+2. redis连接宿主机同上, 记得确保 Redis 服务器的配置允许远程连接, 修改 **redis.conf**
 
 ```bash
 #只允许本地和 172.21.240.1 连接
@@ -192,7 +192,7 @@ bind 0.0.0.0
 
 ## server配置
 
-在config/autoload/server.php的 **server**配置如下, 端口具体根据实际情况修改
+在config/autoload/server.php的 **server** 配置如下, 端口具体根据实际情况修改
 
 ```php
     'servers' => [
