@@ -3,7 +3,7 @@ title: 'Docker 私有化部署 wiki-MrDoc'
 date: 2023-12-19 11:52:09
 categories: 
 - Docker
-- Other
+- wiki
 
 ---
 
