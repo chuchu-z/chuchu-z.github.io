@@ -30,7 +30,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://chuchu-z.com/posts/use-Docker-install-hyperf/image-20231129091510911.png">
 <meta property="article:published_time" content="2023-11-29T05:41:37.000Z">
-<meta property="article:modified_time" content="2023-12-19T06:18:33.916Z">
+<meta property="article:modified_time" content="2023-12-19T06:45:37.182Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="chuchu-z">
 <meta name="twitter:card" content="summary">
@@ -177,7 +177,7 @@
 winpty <span class="token function">docker</span> run <span class="token parameter variable">-v</span> <span class="token string">"D:\phpstudy\WWW\online-chat:/hyperf"</span> <span class="token parameter variable">-p</span> <span class="token number">9501</span>:9501 <span class="token parameter variable">-it</span> hyperf/hyperf:7.4-alpine-v3.11-swoole
 
 <span class="token comment"># 官方镜像重制后的镜像</span>
-winpty <span class="token function">docker</span> run <span class="token parameter variable">-v</span> <span class="token string">"D:\phpstudy\WWW\online-chat:/hyperf"</span> <span class="token parameter variable">-p</span> <span class="token number">9501</span>:9501 <span class="token parameter variable">-it</span> my-hyperf:latest <span class="token function">bash</span></code></pre>
+winpty <span class="token function">docker</span> run <span class="token parameter variable">-v</span> <span class="token string">"D:\phpstudy\WWW\online-chat:/hyperf"</span> <span class="token parameter variable">-p</span> <span class="token number">9501</span>:9501 <span class="token parameter variable">-it</span> chuchuzz426/hyperf:1.0 <span class="token function">bash</span></code></pre>
 
 
 
@@ -268,10 +268,10 @@ http://127.0.0.1:9501</code></pre>
 </tbody></table>
 <h2 id="把容器制作为镜像并导出为tar"><a href="#把容器制作为镜像并导出为tar" class="headerlink" title="把容器制作为镜像并导出为tar"></a>把容器制作为镜像并导出为tar</h2><p>为了把修改过的容器方便在其他机器上使用, 打包制作成镜像</p>
 <pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#容器制作为镜像</span>
-<span class="token function">docker</span> commit e61fb6c63c38 my-hyperf
+<span class="token function">docker</span> commit e61fb6c63c38 chuchuzz426/hyperf:1.0
 
 <span class="token comment">#镜像导出为tar文件</span>
-<span class="token function">docker</span> save <span class="token parameter variable">-o</span> my-hyperf-image.tar my-hyperf</code></pre>
+<span class="token function">docker</span> save <span class="token parameter variable">-o</span> my-hyperf-image.tar chuchuzz426/hyperf:1.0</code></pre>
 
 
 
@@ -283,8 +283,8 @@ http://127.0.0.1:9501</code></pre>
 
 <span class="token key atrule">services</span><span class="token punctuation">:</span>
   <span class="token key atrule">hyperf-app</span><span class="token punctuation">:</span>
-    <span class="token key atrule">image</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>hyperf<span class="token punctuation">:</span>latest
-    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> my<span class="token punctuation">-</span>hyperf
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> chuchuzz426/hyperf<span class="token punctuation">:</span><span class="token number">1.0</span>
+    <span class="token key atrule">container_name</span><span class="token punctuation">:</span> hyperf
     <span class="token key atrule">ports</span><span class="token punctuation">:</span>
       <span class="token punctuation">-</span> <span class="token string">"9501:9501"</span>
       <span class="token punctuation">-</span> <span class="token string">"9502:9502"</span>
@@ -292,12 +292,20 @@ http://127.0.0.1:9501</code></pre>
     <span class="token key atrule">volumes</span><span class="token punctuation">:</span>
       <span class="token punctuation">-</span> D<span class="token punctuation">:</span>\phpstudy\WWW\online<span class="token punctuation">-</span>chat<span class="token punctuation">:</span>/hyperf
     <span class="token key atrule">working_dir</span><span class="token punctuation">:</span> /hyperf/hyperf
-    <span class="token key atrule">command</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"php"</span><span class="token punctuation">,</span> <span class="token string">"bin/hyperf.php"</span><span class="token punctuation">,</span> <span class="token string">"start"</span><span class="token punctuation">]</span></code></pre>
+    <span class="token comment"># command: ["php", "bin/hyperf.php", "start"]</span>
+    <span class="token comment"># 先执行一遍composer install</span>
+    <span class="token key atrule">command</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> /bin/sh
+      <span class="token punctuation">-</span> <span class="token punctuation">-</span>c
+      <span class="token punctuation">-</span> <span class="token string">"composer install &amp;&amp; php bin/hyperf.php start"</span></code></pre>
 
 
 
 <p>接下来就是 <del>原神⭕🗽</del> hyperf, 启动！</p>
-<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span></code></pre>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span>
+
+<span class="token comment"># 如果不是首次执行的话, 避免缓存问题最好执行这条</span>
+<span class="token function">docker-compose</span> build --no-cache <span class="token operator">&amp;&amp;</span> <span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span></code></pre>
 
 
 
