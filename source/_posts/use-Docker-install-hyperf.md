@@ -25,7 +25,7 @@ categories:
 winpty docker run -v "D:\phpstudy\WWW\online-chat:/hyperf" -p 9501:9501 -it hyperf/hyperf:7.4-alpine-v3.11-swoole
 
 # 官方镜像重制后的镜像
-winpty docker run -v "D:\phpstudy\WWW\online-chat:/hyperf" -p 9501:9501 -it my-hyperf:latest bash
+winpty docker run -v "D:\phpstudy\WWW\online-chat:/hyperf" -p 9501:9501 -it chuchuzz426/hyperf:1.0 bash
 ```
 
 
@@ -114,10 +114,10 @@ http://127.0.0.1:9501
 
 ```bash
 #容器制作为镜像
-docker commit e61fb6c63c38 my-hyperf
+docker commit e61fb6c63c38 chuchuzz426/hyperf:1.0
 
 #镜像导出为tar文件
-docker save -o my-hyperf-image.tar my-hyperf
+docker save -o my-hyperf-image.tar chuchuzz426/hyperf:1.0
 ```
 
 
@@ -134,8 +134,8 @@ x-project-settings: &project-settings
 
 services:
   hyperf-app:
-    image: my-hyperf:latest
-    container_name: my-hyperf
+    image: chuchuzz426/hyperf:1.0
+    container_name: hyperf
     ports:
       - "9501:9501"
       - "9502:9502"
@@ -143,7 +143,12 @@ services:
     volumes:
       - D:\phpstudy\WWW\online-chat:/hyperf
     working_dir: /hyperf/hyperf
-    command: ["php", "bin/hyperf.php", "start"]
+    # command: ["php", "bin/hyperf.php", "start"]
+    # 先执行一遍composer install
+    command:
+      - /bin/sh
+      - -c
+      - "composer install && php bin/hyperf.php start"
 ```
 
 
@@ -152,6 +157,9 @@ services:
 
 ```bash
 docker-compose up -d
+
+# 如果不是首次执行的话, 避免缓存问题最好执行这条
+docker-compose build --no-cache && docker-compose up -d
 ```
 
 
