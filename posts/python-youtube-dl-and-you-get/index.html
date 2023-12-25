@@ -14,21 +14,21 @@
     
     
     
-    <title>Git 中的奇葩玩法 | chuchu-z</title>
+    <title>Python youtube-dl与you-get工具爬取视频 | chuchu-z</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="">
-    <meta name="description" content="随机的 git commit 你敢提交吗 一个 Git 随机生成提交日志网站, 每次刷新的内容随机 太搞了, 不怕挨揍的壮士可以使用如下命令进行日常代码的提交😂">
+    <meta name="description" content="youtube-dl 和 you-get 都是用于从互联网上下载视频的命令行工具，它们支持多种网站和服务  youtube-dl  功能更加全面，支持的网站更多，但也可能更复杂一些。 you-get 相对来说更简单，更容易上手，适用于一般用户。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git 中的奇葩玩法">
-<meta property="og:url" content="http://chuchu-z.com/posts/git-ridiculous-behavior/">
+<meta property="og:title" content="Python youtube-dl与you-get工具爬取视频">
+<meta property="og:url" content="http://chuchu-z.com/posts/python-youtube-dl-and-you-get/">
 <meta property="og:site_name" content="chuchu-z">
-<meta property="og:description" content="随机的 git commit 你敢提交吗 一个 Git 随机生成提交日志网站, 每次刷新的内容随机 太搞了, 不怕挨揍的壮士可以使用如下命令进行日常代码的提交😂">
+<meta property="og:description" content="youtube-dl 和 you-get 都是用于从互联网上下载视频的命令行工具，它们支持多种网站和服务  youtube-dl  功能更加全面，支持的网站更多，但也可能更复杂一些。 you-get 相对来说更简单，更容易上手，适用于一般用户。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-03-25T11:01:50.000Z">
+<meta property="article:published_time" content="2023-12-25T03:23:21.000Z">
 <meta property="article:modified_time" content="2023-12-25T03:34:29.430Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="chuchu-z">
@@ -99,7 +99,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">Git 中的奇葩玩法</div>
+        <div class="flex-col header-title ellipsis">Python youtube-dl与you-get工具爬取视频</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -117,15 +117,15 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale" style="padding-left: 5%;">
-        <h1 class="title">Git 中的奇葩玩法</h1>
+        <h1 class="title">Python youtube-dl与you-get工具爬取视频</h1>
         <h5 class="subtitle">
             
-                <time datetime="2022-03-25T11:01:50.000Z" itemprop="datePublished" class="page-time">
-  2022-03-25
+                <time datetime="2023-12-25T03:23:21.000Z" itemprop="datePublished" class="page-time">
+  2023-12-25
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">Git</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">Python</a></li></ul>
 
             
         </h5>
@@ -142,21 +142,21 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%9A%8F%E6%9C%BA%E7%9A%84-git-commit-%E4%BD%A0%E6%95%A2%E6%8F%90%E4%BA%A4%E5%90%97"><span class="post-toc-number">1.</span> <span class="post-toc-text">随机的 git commit 你敢提交吗</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%B2%A1%E6%9C%89%E6%9C%80%E5%9D%91%EF%BC%8C%E5%8F%AA%E6%9C%89%E6%9B%B4%E5%9D%91%EF%BC%81"><span class="post-toc-number">2.</span> <span class="post-toc-text">没有最坑，只有更坑！</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9F%A5%E7%9C%8BPython%E7%89%88%E6%9C%AC"><span class="post-toc-number">1.</span> <span class="post-toc-text">查看Python版本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#youtube-dl"><span class="post-toc-number">2.</span> <span class="post-toc-text">youtube-dl</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#you-get"><span class="post-toc-number">3.</span> <span class="post-toc-text">you-get</span></a></li></ol>
         </nav>
     </aside>
 
 
-<article id="post-git-ridiculous-behavior"
+<article id="post-python-youtube-dl-and-you-get"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">Git 中的奇葩玩法</h1>
+        <h1 class="post-card-title">Python youtube-dl与you-get工具爬取视频</h1>
         <div class="post-meta">
-            <time class="post-time" title="2022-03-25 19:01:50" datetime="2022-03-25T11:01:50.000Z"  itemprop="datePublished">2022-03-25</time>
+            <time class="post-time" title="2023-12-25 11:23:21" datetime="2023-12-25T03:23:21.000Z"  itemprop="datePublished">2023-12-25</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/git/">Git</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">Python</a></li></ul>
 
 
 
@@ -164,17 +164,40 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="随机的-git-commit-你敢提交吗"><a href="#随机的-git-commit-你敢提交吗" class="headerlink" title="随机的 git commit 你敢提交吗"></a>随机的 git commit 你敢提交吗</h2><blockquote>
-<p>一个 Git 随机生成提交日志网站, 每次刷新的内容随机</p>
-<p>太搞了, 不怕挨揍的壮士可以使用如下命令进行日常代码的提交😂</p>
-</blockquote>
+            <p><strong>youtube-dl</strong> 和 <strong>you-get</strong> 都是用于从互联网上下载视频的命令行工具，它们支持多种网站和服务</p>
+<ul>
+<li><strong>youtube-dl</strong>  功能更加全面，支持的网站更多，但也可能更复杂一些。</li>
+<li><strong>you-get</strong> 相对来说更简单，更容易上手，适用于一般用户。</li>
+</ul>
 <span id="more"></span>
 
-<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token variable"><span class="token variable">$(</span><span class="token function">curl</span> <span class="token parameter variable">-s</span> http://whatthecommit.com/index.txt<span class="token variable">)</span></span></code></pre>
 
-<p><a target="_blank" rel="noopener" href="http://whatthecommit.com/">http://whatthecommit.com</a></p>
-<h2 id="没有最坑，只有更坑！"><a href="#没有最坑，只有更坑！" class="headerlink" title="没有最坑，只有更坑！"></a>没有最坑，只有更坑！</h2><p>此仓库专门收集史上最坑爹的代码片段，专治低血压 😁</p>
-<p><a target="_blank" rel="noopener" href="https://gitee.com/oschina/bullshit-codes/tree/master">https://gitee.com/oschina/bullshit-codes/tree/master</a></p>
+
+<h2 id="查看Python版本"><a href="#查看Python版本" class="headerlink" title="查看Python版本"></a>查看Python版本</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 安装Python后 查看Python版本</span>
+python <span class="token parameter variable">--version</span></code></pre>
+
+
+
+<h2 id="youtube-dl"><a href="#youtube-dl" class="headerlink" title="youtube-dl"></a>youtube-dl</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 下载youtube-dl工具</span>
+pip <span class="token function">install</span> youtube-dl
+
+<span class="token comment"># 使用工具</span>
+youtube-dl --list-formats <span class="token punctuation">[</span>url<span class="token punctuation">]</span> <span class="token comment"># 列出可用的视频格式和质量</span>
+
+youtube-dl <span class="token parameter variable">-oif</span> <span class="token punctuation">[</span> <span class="token parameter variable">-o</span> 指定输出文件名或目录<span class="token punctuation">]</span> <span class="token punctuation">[</span>-i 忽略下载过程中的错误<span class="token punctuation">]</span> <span class="token punctuation">[</span>-f 指定下载的视频格式/质量, 如mp4<span class="token punctuation">]</span> <span class="token punctuation">[</span>url<span class="token punctuation">]</span></code></pre>
+
+
+
+<h2 id="you-get"><a href="#you-get" class="headerlink" title="you-get"></a>you-get</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 下载you-get工具</span>
+pip <span class="token function">install</span> you-get
+
+<span class="token comment"># 使用工具</span>
+you-get <span class="token parameter variable">-F</span> <span class="token punctuation">[</span>url<span class="token punctuation">]</span>  <span class="token comment"># 列出可用的格式</span>
+
+you-get <span class="token parameter variable">-i</span> <span class="token punctuation">[</span>url<span class="token punctuation">]</span>  <span class="token comment"># 显示视频信息</span>
+
+you-get <span class="token parameter variable">-o</span> <span class="token operator">&lt;</span>输出目录<span class="token operator">></span> <span class="token operator">&lt;</span>视频链接<span class="token operator">></span></code></pre>
+
 
         </div>
 
@@ -200,21 +223,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between" style="display:none">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/posts/linux-shell-alias-config/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Linux Shell 使用alias定义别名</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/posts/chrome-proxy-limit/" id="post-next" class="post-nav-link">
+      <a href="/posts/docker-deploy-wiki-MrDoc/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">关于谷歌Chrome浏览器非安全端口限制问题</h4>
+        <h4 class="title">Docker 私有化部署 wiki-MrDoc</h4>
       </a>
     </div>
   
