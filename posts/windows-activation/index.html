@@ -14,21 +14,21 @@
     
     
     
-    <title>RabbitMQ简介(待补充) | chuchu-z</title>
+    <title>chuchu-z</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="">
-    <meta name="description" content="近期学习了MQ, 打算记录一下个人的理解, 具体内容待补充">
+    <meta name="description" content="title: &#39;Windows10 激活产品密钥&#39; date: 2023-12-26 09:37:20 categories: - Other      帮同事电脑重装系统 需要激活产品密钥 网上有很多 但是很大部分都不可用 找了挺久 找到一个挺多人反馈可用的 记录下来看后面用不用的上">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RabbitMQ简介(待补充)">
-<meta property="og:url" content="http://chuchu-z.com/posts/lntroduction-to-RabbitMQ/">
+<meta property="og:title" content="chuchu-z">
+<meta property="og:url" content="http://chuchu-z.com/posts/windows-activation/">
 <meta property="og:site_name" content="chuchu-z">
-<meta property="og:description" content="近期学习了MQ, 打算记录一下个人的理解, 具体内容待补充">
+<meta property="og:description" content="title: &#39;Windows10 激活产品密钥&#39; date: 2023-12-26 09:37:20 categories: - Other      帮同事电脑重装系统 需要激活产品密钥 网上有很多 但是很大部分都不可用 找了挺久 找到一个挺多人反馈可用的 记录下来看后面用不用的上">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-10-20T03:34:11.000Z">
+<meta property="article:published_time" content="2023-12-26T02:33:14.131Z">
 <meta property="article:modified_time" content="2023-12-26T02:33:14.131Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="chuchu-z">
@@ -99,7 +99,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">RabbitMQ简介(待补充)</div>
+        <div class="flex-col header-title ellipsis"></div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -117,15 +117,13 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale" style="padding-left: 5%;">
-        <h1 class="title">RabbitMQ简介(待补充)</h1>
+        <h1 class="title"></h1>
         <h5 class="subtitle">
             
-                <time datetime="2023-10-20T03:34:11.000Z" itemprop="datePublished" class="page-time">
-  2023-10-20
+                <time datetime="2023-12-26T02:33:14.131Z" itemprop="datePublished" class="page-time">
+  2023-12-26
 </time>
 
-
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/rabbitmq/">RabbitMQ</a></li></ul>
 
             
         </h5>
@@ -142,50 +140,51 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%B1%BB%E5%9E%8B"><span class="post-toc-number">1.</span> <span class="post-toc-text">交换机类型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%AD%BB%E4%BF%A1%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="post-toc-number">2.</span> <span class="post-toc-text">死信交换机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%BB%B6%E8%BF%9F%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="post-toc-number">3.</span> <span class="post-toc-text">延迟交换机</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8F%91%E5%B8%83%E8%80%85%E7%9A%84%E7%A1%AE%E8%AE%A4%E6%A8%A1%E5%BC%8F-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="post-toc-number">4.</span> <span class="post-toc-text">发布者的确认模式(交换机可靠性)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8F%91%E5%B8%83%E8%80%85%E7%9A%84%E8%BF%94%E5%9B%9E%E6%A8%A1%E5%BC%8F-%E9%98%9F%E5%88%97%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="post-toc-number">5.</span> <span class="post-toc-text">发布者的返回模式(队列可靠性)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="post-toc-number">6.</span> <span class="post-toc-text">交换机的属性</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%98%9F%E5%88%97%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="post-toc-number">7.</span> <span class="post-toc-text">队列的属性</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%BF%80%E6%B4%BB%E6%96%B9%E6%B3%95"><span class="post-toc-number">1.</span> <span class="post-toc-text">激活方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="post-toc-number">2.</span> <span class="post-toc-text">结语</span></a></li></ol>
         </nav>
     </aside>
 
 
-<article id="post-lntroduction-to-RabbitMQ"
+<article id="post-windows-activation"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">RabbitMQ简介(待补充)</h1>
+        <h1 class="post-card-title"></h1>
         <div class="post-meta">
-            <time class="post-time" title="2023-10-20 11:34:11" datetime="2023-10-20T03:34:11.000Z"  itemprop="datePublished">2023-10-20</time>
+            <time class="post-time" title="2023-12-26 10:33:14" datetime="2023-12-26T02:33:14.131Z"  itemprop="datePublished">2023-12-26</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/rabbitmq/">RabbitMQ</a></li></ul>
-
 
 
             
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>近期学习了MQ, 打算记录一下个人的理解, 具体内容待补充</p>
+            <pre class="language-none"><code class="language-none">title: &#39;Windows10 激活产品密钥&#39;
+date: 2023-12-26 09:37:20
+categories:
+- Other
+</code></pre>
+
+
+
+<blockquote>
+<p>帮同事电脑重装系统 需要激活产品密钥 网上有很多 但是很大部分都不可用 找了挺久 找到一个挺多人反馈可用的 记录下来看后面用不用的上</p>
+</blockquote>
 <span id="more"></span>
 
 
 
-<h2 id="交换机类型"><a href="#交换机类型" class="headerlink" title="交换机类型"></a>交换机类型</h2><h2 id="死信交换机"><a href="#死信交换机" class="headerlink" title="死信交换机"></a>死信交换机</h2><h2 id="延迟交换机"><a href="#延迟交换机" class="headerlink" title="延迟交换机"></a>延迟交换机</h2><h2 id="发布者的确认模式-交换机可靠性"><a href="#发布者的确认模式-交换机可靠性" class="headerlink" title="发布者的确认模式(交换机可靠性)"></a>发布者的确认模式(交换机可靠性)</h2><ul>
-<li><p>保证生产者消息能正确到达交换机</p>
-</li>
-<li><p>备用交换机</p>
-</li>
-<li><p>设置交换机持久化</p>
-</li>
-</ul>
-<h2 id="发布者的返回模式-队列可靠性"><a href="#发布者的返回模式-队列可靠性" class="headerlink" title="发布者的返回模式(队列可靠性)"></a>发布者的返回模式(队列可靠性)</h2><ul>
-<li>保证消息能从交换机正确到达队列</li>
-<li>备用队列</li>
-<li>设置队列持久化</li>
-</ul>
-<h2 id="交换机的属性"><a href="#交换机的属性" class="headerlink" title="交换机的属性"></a>交换机的属性</h2><h2 id="队列的属性"><a href="#队列的属性" class="headerlink" title="队列的属性"></a>队列的属性</h2><ul>
-<li>消息在队列中不丢失, 设置消息持久化</li>
-<li>消费者监听队列, 自动确认改为手动确认</li>
-</ul>
+<h2 id="激活方法"><a href="#激活方法" class="headerlink" title="激活方法"></a>激活方法</h2><p>win+Q, 搜索cmd, 以管理员身份打开cmd工具， 按顺序执行下面4条命令, 也有人说把第三个命令行输入后去掉 <code>http://</code>  只保留域名部分才可以成功</p>
+<p>实在不行就去 <strong>设置-更新和安全-激活</strong> 里面激活, 产品密钥 <strong>W269N-WFGWX-YVC9B-4J6C9-T83GX</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">slmgr /ckms
+slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX
+slmgr /skms http://kms.03k.org
+slmgr /ato</code></pre>
+
+
+
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>上面这个密钥不知道什么时候会失效, 以前也用过一些软件激活的, 现在想想这个东西, 其实就是写个循环 用枚举暴力破解, 假如我把网络上的产品密钥都收集起来放到一个文本文件里, 一个密钥一行, 脚本再一行一行的去读取该文本文件, 脚本循环执行上面的几行激活代码, 替换掉固定的密钥, 是不是也是一个自动激活工具呢</p>
 
         </div>
 
@@ -211,21 +210,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between" style="display:none">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/posts/use-Docker-install-hyperf/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">使用Docker安装hyperf-admin</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/posts/android-studio-use-lombok-and-evalex/" id="post-next" class="post-nav-link">
+      <a href="/posts/python-youtube-dl-and-you-get/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Android studio 缺少lombok 导致使用EvalEx错误</h4>
+        <h4 class="title">Python youtube-dl与you-get工具爬取视频</h4>
       </a>
     </div>
   
