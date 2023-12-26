@@ -53,11 +53,11 @@ winpty docker exec -it 11b3a0847350 zsh
 
 ## 补充
 
-1. 由于**.gitignore**忽略了**.ssh**, pull 代码时记得加上该目录
+1. 由于 **.gitignore** 忽略了 **.ssh** , pull 代码时记得加上该目录
 
 ```bash
 cp ~/.ssh .
 ```
 
 2. 太久没用的话记得先去看看 **docker-compose.yml**
-3. 希望下次你能解决光标对齐问题 **good luck~** ☀
+3. 希望下次你能解决光标对齐问题 **good luck~** 👍
