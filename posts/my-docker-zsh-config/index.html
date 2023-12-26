@@ -21,16 +21,16 @@
     
     
     <meta name="keywords" content="">
-    <meta name="description" content="前言 由于在 Windows 下开发 但是又想使用 zsh shell, 只好自己使用 docker 部署一套, 环境是搞好了, 但是还有个问题困扰着我 就是从 git-bash 里执行 docker exce 进入容器内部, 输入栏的光标位置与我实际输入的地方始终对不准 总是有一个空格的差距, 而在 docker desktop 里面的终端打开是正常的, 如下图, 仔细看就能发现 同样都是只输入">
+    <meta name="description" content="前言 由于在 Windows 下开发 但是又想使用 zsh shell, 只好自己使用 docker 部署一套, 环境是搞好了, 但是还有个问题困扰着我">
 <meta property="og:type" content="article">
 <meta property="og:title" content=" 个人docker-compose 配置">
 <meta property="og:url" content="http://chuchu-z.com/posts/my-docker-zsh-config/">
 <meta property="og:site_name" content="chuchu-z">
-<meta property="og:description" content="前言 由于在 Windows 下开发 但是又想使用 zsh shell, 只好自己使用 docker 部署一套, 环境是搞好了, 但是还有个问题困扰着我 就是从 git-bash 里执行 docker exce 进入容器内部, 输入栏的光标位置与我实际输入的地方始终对不准 总是有一个空格的差距, 而在 docker desktop 里面的终端打开是正常的, 如下图, 仔细看就能发现 同样都是只输入">
+<meta property="og:description" content="前言 由于在 Windows 下开发 但是又想使用 zsh shell, 只好自己使用 docker 部署一套, 环境是搞好了, 但是还有个问题困扰着我">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://chuchu-z.com/posts/my-docker-zsh-config/image-20231226170047096-17035824143912.png">
 <meta property="article:published_time" content="2023-12-26T09:15:00.000Z">
-<meta property="article:modified_time" content="2023-12-26T09:41:54.531Z">
+<meta property="article:modified_time" content="2023-12-26T09:45:39.122Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="chuchu-z">
 <meta name="twitter:card" content="summary">
@@ -168,6 +168,8 @@
         <div class="post-content" id="post-content" itemprop="postContent">
             <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>由于在 Windows 下开发 但是又想使用 zsh shell, 只好自己使用 docker 部署一套, 环境是搞好了, 但是还有个问题困扰着我</p>
+<span id="more"></span>
+
 <p>就是从 git-bash 里执行 docker exce 进入容器内部, 输入栏的光标位置与我实际输入的地方始终对不准 总是有一个空格的差距, 而在 docker desktop 里面的终端打开是正常的, 如下图, 仔细看就能发现</p>
 <p>同样都是只输入了 <code>vim</code> , 在git-bash终端里面, 光标对准的位置却发生了偏差, 光标跑到了 <code>vim a</code> 那里去了</p>
 <figure class="image-bubble">
@@ -184,10 +186,6 @@
 <p>但我仍无法解决如何在保留特殊符号的情况下不会出现那一个空格的偏差, 真是急死强迫症😓</p>
 <p>这个难题就交给未来的我来解决吧</p>
 </blockquote>
-<span id="more"></span>
-
-
-
 <h2 id="pull-Code"><a href="#pull-Code" class="headerlink" title="pull Code"></a>pull Code</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone git@github.com:chuchu-z/docker-zsh.git</code></pre>
 
 
