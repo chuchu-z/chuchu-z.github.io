@@ -12,7 +12,7 @@ categories:
 
 之前发现个很不错的网站 [ 一言网（hitokoto.cn）](hitokoto.cn) 很喜欢该网站的提供的服务
 
-![](hitokoto-api-shell/image-20231225124236829.png)
+<img src="hitokoto-api-shell/image-20231225124236829.png" style="zoom:150%;" />
 
 并且他们还提供了免费的API接口, 只需要访问该接口, 就会返回一段话 [https://v1.hitokoto.cn/?encode=text](https://v1.hitokoto.cn/?encode=text) 
 
