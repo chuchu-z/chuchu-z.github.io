@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python 实现 ChatGPT 模型训练 | chuchu-z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="ChatGPT 和 AI 的话题近两年都很火热, 自从 OpenAI 诞生出 ChatGPT 以来, 各互联网大厂公司纷纷加入并研发自家的AI大模型, 也有不少人趁着这个风口, 利用 ChatGPT 实现变现, 赚的盆满钵满,  瓜分这块AI蛋糕。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 实现 ChatGPT 模型训练">
+<meta property="og:url" content="http://chuchu-z.com/posts/chatgpt-fine-tuning/">
+<meta property="og:site_name" content="chuchu-z">
+<meta property="og:description" content="ChatGPT 和 AI 的话题近两年都很火热, 自从 OpenAI 诞生出 ChatGPT 以来, 各互联网大厂公司纷纷加入并研发自家的AI大模型, 也有不少人趁着这个风口, 利用 ChatGPT 实现变现, 赚的盆满钵满,  瓜分这块AI蛋糕。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://chuchu-z.com/posts/chatgpt-fine-tuning/image-20240106102539178.png">
+<meta property="og:image" content="http://chuchu-z.com/posts/chatgpt-fine-tuning/image-20240106112856778.png">
+<meta property="og:image" content="http://chuchu-z.com/posts/chatgpt-fine-tuning/image-20240106170858694.png">
+<meta property="og:image" content="http://chuchu-z.com/posts/chatgpt-fine-tuning/image-20240106114945504.png">
+<meta property="article:published_time" content="2024-01-06T02:19:17.000Z">
+<meta property="article:modified_time" content="2024-01-06T10:28:41.934Z">
+<meta property="article:author" content="chuchu-z">
+<meta property="article:tag" content="chuchu-z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://chuchu-z.com/posts/chatgpt-fine-tuning/image-20240106102539178.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">chuchu-z</h5>
+          <p class="description">借君三十年，繁花万里好江山</p>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/chuchu-z" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python 实现 ChatGPT 模型训练</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale" style="padding-left: 5%;">
+        <h1 class="title">Python 实现 ChatGPT 模型训练</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2024-01-06T02:19:17.000Z" itemprop="datePublished" class="page-time">
+  2024-01-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/chatgpt/">ChatGPT</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E4%B8%93%E5%B1%9EAI"><span class="post-toc-number">1.</span> <span class="post-toc-text">如何训练专属AI</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BD%BF%E7%94%A8Python%E6%8E%A5%E5%85%A5%E8%AE%AD%E7%BB%83"><span class="post-toc-number">2.</span> <span class="post-toc-text">使用Python接入训练</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-%E8%8E%B7%E5%8F%96%E5%B9%B6%E8%AE%BE%E7%BD%AE%E7%A7%98%E9%92%A5"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1.获取并设置秘钥</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1-Windows-%E6%B7%BB%E5%8A%A0%E7%A7%98%E9%92%A5"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">1.1 Windows 添加秘钥</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-2-Linux-%E6%B7%BB%E5%8A%A0%E7%A7%98%E9%92%A5"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">1.2  Linux 添加秘钥</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-clone%E4%BB%A3%E7%A0%81%E5%90%8E%E6%89%A7%E8%A1%8C"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.clone代码后执行</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-%E8%AE%BF%E9%97%AE%E6%8E%A5%E5%8F%A3"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3.访问接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-1-status"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">3.1 &#x2F;status</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-2-upload-files"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">3.2 &#x2F;upload_files</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-3-fine-tuning"><span class="post-toc-number">2.3.3.</span> <span class="post-toc-text">3.3 &#x2F;fine_tuning</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-4-retrieve"><span class="post-toc-number">2.3.4.</span> <span class="post-toc-text">3.4 &#x2F;retrieve</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-5-chat"><span class="post-toc-number">2.3.5.</span> <span class="post-toc-text">3.5 &#x2F;chat</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-jsonl%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">4.jsonl数据格式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-1-jsonl%E7%A4%BA%E4%BE%8B%E6%95%B0%E6%8D%AE"><span class="post-toc-number">2.4.1.</span> <span class="post-toc-text">4.1 jsonl示例数据</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考资料</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-chatgpt-fine-tuning"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python 实现 ChatGPT 模型训练</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2024-01-06 10:19:17" datetime="2024-01-06T02:19:17.000Z"  itemprop="datePublished">2024-01-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/chatgpt/">ChatGPT</a></li></ul></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>ChatGPT 和 AI 的话题近两年都很火热, 自从 OpenAI 诞生出 ChatGPT 以来, 各互联网大厂公司纷纷加入并研发自家的AI大模型, 也有不少人趁着这个风口, 利用 ChatGPT 实现变现, 赚的盆满钵满,  瓜分这块AI蛋糕。</p>
+<span id="more"></span>
+
+
+
+<h2 id="如何训练专属AI"><a href="#如何训练专属AI" class="headerlink" title="如何训练专属AI"></a>如何训练专属AI</h2><p>一是使用开源的大模型, 如  <a target="_blank" rel="noopener" href="https://github.com/facebookresearch/llama">llama</a> 和  <a target="_blank" rel="noopener" href="https://github.com/THUDM/ChatGLM-6B">ChatGLM-6B</a> , 其中 <strong>ChatGLM-6B</strong> 我个人也比较喜欢, 优点是中文支持的比较好, 而且在自己的电脑上都能训练, 这部分还没有去研究, 下次有机会试试, 然后再发布 <strong>ChatGLM-6B</strong> 的训练方式</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>训练数据</th>
+<th>训练数据量</th>
+<th>模型参数量</th>
+<th>词表大小</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LLaMA</td>
+<td>以英语为主的拉丁语系，不包含中日韩文</td>
+<td>1T/1.4T tokens</td>
+<td>7B、13B、33B、65B</td>
+<td>32000</td>
+</tr>
+<tr>
+<td>ChatGLM-6B</td>
+<td>中英双语，中英文比例为1:1</td>
+<td>1T tokens</td>
+<td>6B</td>
+<td>130528</td>
+</tr>
+<tr>
+<td>Bloom</td>
+<td>46种自然语言和13种编程语言，包含中文</td>
+<td>350B tokens</td>
+<td>560M、1.1B、1.7B、3B、7.1B、176B</td>
+<td>250880</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>模型结构</th>
+<th>位置编码</th>
+<th>激活函数</th>
+<th>layer norm</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LLaMA</td>
+<td>Casual decoder</td>
+<td>RoPE</td>
+<td>SwiGLU</td>
+<td>Pre RMS Norm</td>
+</tr>
+<tr>
+<td>ChatGLM-6B</td>
+<td>Prefix decoder</td>
+<td>RoPE</td>
+<td>GeGLU</td>
+<td>Post Deep Norm</td>
+</tr>
+<tr>
+<td>Bloom</td>
+<td>Casual decoder</td>
+<td>ALiBi</td>
+<td>GeLU</td>
+<td>Pre Layer Norm</td>
+</tr>
+</tbody></table>
+<p>二是接入ChatGpt, 也是本文的主角</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/posts/chatgpt-fine-tuning/image-20240106102539178.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+
+
+<p>通过上文得知, 训练 ChatGPT 的方式通常有两种办法, 一种是<strong>微调（fine-tuning）</strong>, 一种是<strong>嵌入（embedding）</strong>。</p>
+<p>大概流程就是由我们提供训练数据, 通过OpenAI官方文件上传接口给官方, 然后创建训练模型, 指定使用该文件给到该模型做训练</p>
+<p>等训练完了之后, 我们就可以使用这个被训练过的模型与我们对话看看训练效果如何了</p>
+<p>不想通过接口上传文件和创建训练模型的也可以登录OpenAI官方网站后, 在 <a target="_blank" rel="noopener" href="https://platform.openai.com/files">https://platform.openai.com/files</a> 和  <a target="_blank" rel="noopener" href="https://platform.openai.com/finetune">https://platform.openai.com/finetune</a> 操作也可以的</p>
+<p>既然简单省事, 当然人家也不提供免费的午餐, 这是要收费的, 为啥收费的我还要用, 因为它训练参数更多更强, 不需要占用自己的服务器GPU,  更重要的是这是公司要求的接入 ChatGpt</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/posts/chatgpt-fine-tuning/image-20240106112856778.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+
+
+<h2 id="使用Python接入训练"><a href="#使用Python接入训练" class="headerlink" title="使用Python接入训练"></a>使用Python接入训练</h2><p>所以本次我是基于 <strong>gpt-3.5-turbo-1106</strong> 模型, 做微调（fine-tuning）训练, 接入微调训练不难, 难得是数据源的整合, 想要训练有点效果, 我也不知道具体需要多少数据, 训练完后具体的效果如何我也不得而知, 因为我数据源还没处理完😓</p>
+<h3 id="1-获取并设置秘钥"><a href="#1-获取并设置秘钥" class="headerlink" title="1.获取并设置秘钥"></a>1.获取并设置秘钥</h3><p>创建一个<a target="_blank" rel="noopener" href="https://platform.openai.com/signup">OpenAI 帐户</a>或<a target="_blank" rel="noopener" href="https://platform.openai.com/login">登录</a>。接下来，导航到<a target="_blank" rel="noopener" href="https://platform.openai.com/account/api-keys">API 密钥页面</a>并“创建新密钥”, 拿到秘钥后, 添加到电脑环境变量里</p>
+<h4 id="1-1-Windows-添加秘钥"><a href="#1-1-Windows-添加秘钥" class="headerlink" title="1.1 Windows 添加秘钥"></a>1.1 Windows 添加秘钥</h4><blockquote>
+<p>我的电脑-属性-高级系统设置-环境变量-系统变量-新建</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/posts/chatgpt-fine-tuning/image-20240106170858694.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<p>保存后, win + R, 输入 <strong>cmd</strong> 回车, 并执行下面的命令, 输出秘钥则成功</p>
+<pre class="language-none"><code class="language-none">echo %OPENAI_API_KEY%</code></pre>
+
+<h4 id="1-2-Linux-添加秘钥"><a href="#1-2-Linux-添加秘钥" class="headerlink" title="1.2  Linux 添加秘钥"></a>1.2  Linux 添加秘钥</h4><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">vim</span> ~/.bash_profile
+
+<span class="token comment"># 在文件的末尾添加以下行:</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">OPENAI_API_KEY</span><span class="token operator">=</span><span class="token string">'your-api-key'</span>
+
+<span class="token comment"># 执行以下命令刷新配置生效</span>
+<span class="token builtin class-name">source</span> ~/.bash_profile</code></pre>
+
+
+
+<h3 id="2-clone代码后执行"><a href="#2-clone代码后执行" class="headerlink" title="2.clone代码后执行"></a>2.clone代码后执行</h3><pre class="language-bash" data-language="bash"><code class="language-bash">python Fine-tuning.py</code></pre>
+
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/posts/chatgpt-fine-tuning/image-20240106114945504.png" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+
+<h3 id="3-访问接口"><a href="#3-访问接口" class="headerlink" title="3.访问接口"></a>3.访问接口</h3><h4 id="3-1-status"><a href="#3-1-status" class="headerlink" title="3.1 /status"></a>3.1 /status</h4><p>请求URL: <a target="_blank" rel="noopener" href="http://127.0.0.1:9527/status">http://127.0.0.1:9527/status</a></p>
+<p>说明:   查看状态, 能访问则说明应用启动成功</p>
+<p>请求方式: GET</p>
+<p>请求参数: 无</p>
+<p> 返回值:</p>
+<pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"info"</span><span class="token operator">:</span> <span class="token string">"ok"</span><span class="token punctuation">,</span>
+  <span class="token property">"response"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+<h4 id="3-2-upload-files"><a href="#3-2-upload-files" class="headerlink" title="3.2 /upload_files"></a>3.2 /upload_files</h4><p>请求URL: <a target="_blank" rel="noopener" href="http://127.0.0.1:9527/upload_files">http://127.0.0.1:9527/upload_files</a></p>
+<p>说明:   要上传的数据源文件, jsonl 格式的训练数据, 成功返回file_id, 用作 <strong>/fine_tuning</strong> 接口的 <strong>training_file</strong> 参数</p>
+<p>请求方式: POST</p>
+<p>请求参数: <strong>files</strong> (postman工具中, 设置POST请求, Body 参数(application/form-data), 类型为file, 选择上传文件的方式)</p>
+<p> 返回值:</p>
+<pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"info"</span><span class="token operator">:</span> <span class="token string">"ok"</span><span class="token punctuation">,</span>
+  <span class="token property">"response"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">&#123;</span>
+      <span class="token property">"content_type"</span><span class="token operator">:</span> <span class="token string">"application/octet-stream"</span><span class="token punctuation">,</span>
+      <span class="token property">"filename"</span><span class="token operator">:</span> <span class="token string">"test.jsonl"</span><span class="token punctuation">,</span>
+      <span class="token property">"response"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token property">"bytes"</span><span class="token operator">:</span> <span class="token number">13544</span><span class="token punctuation">,</span>
+        <span class="token property">"created_at"</span><span class="token operator">:</span> <span class="token number">1704527071</span><span class="token punctuation">,</span>
+        <span class="token property">"filename"</span><span class="token operator">:</span> <span class="token string">"upload"</span><span class="token punctuation">,</span>
+        <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"file-R3qR5V2k2uUUrW5MrMn3HvTJ"</span><span class="token punctuation">,</span>
+        <span class="token property">"object"</span><span class="token operator">:</span> <span class="token string">"file"</span><span class="token punctuation">,</span>
+        <span class="token property">"purpose"</span><span class="token operator">:</span> <span class="token string">"fine-tune"</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+      <span class="token property">"size"</span><span class="token operator">:</span> <span class="token number">13544</span><span class="token punctuation">,</span>
+      <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"uploaded"</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+<h4 id="3-3-fine-tuning"><a href="#3-3-fine-tuning" class="headerlink" title="3.3 /fine_tuning"></a>3.3 /fine_tuning</h4><p>请求URL: <a target="_blank" rel="noopener" href="http://127.0.0.1:9527/fine_tuning">http://127.0.0.1:9527/fine_tuning</a></p>
+<p>说明:   创建微调训练模型, 默认 gpt-3.5-turbo-1106 模型，可通过传参suffix设置model后缀, <strong>training_file</strong> 参数来源 <strong>/upload_files</strong> 接口返回值</p>
+<p>请求方式: POST</p>
+<p>请求参数: </p>
+<pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+    <span class="token property">"training_file"</span><span class="token operator">:</span> <span class="token string">"file-UL1mPIqKcbJdt072dGLNvApN"</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p> 返回值:</p>
+<pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"info"</span><span class="token operator">:</span> <span class="token string">"ok"</span><span class="token punctuation">,</span>
+  <span class="token property">"response"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"ftjob-tMpKPC61vbAAL06dZLbnoash"</span><span class="token punctuation">,</span>
+    <span class="token property">"model"</span><span class="token operator">:</span> <span class="token string">"gpt-3.5-turbo-1106"</span><span class="token punctuation">,</span>
+    <span class="token property">"organization_id"</span><span class="token operator">:</span> <span class="token string">"org-Ugtr3J5hX9RKdSwuPWgjwjFC"</span><span class="token punctuation">,</span>
+    <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"validating_files"</span><span class="token punctuation">,</span>
+    <span class="token property">"suffix"</span><span class="token operator">:</span> <span class="token string">"suffix:8n8zwx"</span><span class="token punctuation">,</span>
+    <span class="token property">"training_file"</span><span class="token operator">:</span> <span class="token string">"file-R3qR5V2k2uUUrW5MrMn3HvTJ"</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+<h4 id="3-4-retrieve"><a href="#3-4-retrieve" class="headerlink" title="3.4 /retrieve"></a>3.4 /retrieve</h4><p>请求URL: <a target="_blank" rel="noopener" href="http://127.0.0.1:9527/retrieve">http://127.0.0.1:9527/retrieve</a></p>
+<p>说明:   获取微调模型训练结果, 返回值 <strong>fine_tuned_model</strong> 则为新模型名称, <strong>status</strong> 为 <code>succeeded</code> 则模型训练完毕</p>
+<p>请求方式: POST</p>
+<p>请求参数: </p>
+<pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+    <span class="token property">"fine_tuning_job_id"</span><span class="token operator">:</span> <span class="token string">"ftjob-tMpKPC61vbAAL06dZLbnoash"</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p> 返回值:</p>
+<pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"info"</span><span class="token operator">:</span> <span class="token string">"ok"</span><span class="token punctuation">,</span>
+  <span class="token property">"response"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">"fine_tuned_model"</span><span class="token operator">:</span> <span class="token string">"ft:gpt-3.5-turbo-1106:personal:suffix-2ywim9:8dw83FNm"</span><span class="token punctuation">,</span>
+    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"ftjob-tMpKPC61vbAAL06dZLbnoash"</span><span class="token punctuation">,</span>
+    <span class="token property">"status"</span><span class="token operator">:</span> <span class="token string">"succeeded"</span><span class="token punctuation">,</span>
+    <span class="token property">"trained_tokens"</span><span class="token operator">:</span> <span class="token number">22732</span><span class="token punctuation">,</span>
+    <span class="token property">"training_file"</span><span class="token operator">:</span> <span class="token string">"file-R3qR5V2k2uUUrW5MrMn3HvTJ"</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+<h4 id="3-5-chat"><a href="#3-5-chat" class="headerlink" title="3.5 /chat"></a>3.5 /chat</h4><p>请求URL: <a target="_blank" rel="noopener" href="http://127.0.0.1:9527/chat">http://127.0.0.1:9527/chat</a></p>
+<p>说明:   可向指定模型发起对话, 默认 gpt-3.5-turbo-1106, 可使用 上文的 <strong>fine_tuned_model</strong> 新模型, text 为提问内容</p>
+<p>请求方式: POST</p>
+<p>请求参数: </p>
+<pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+    <span class="token property">"text"</span><span class="token operator">:</span> <span class="token string">"你来自哪里"</span><span class="token punctuation">,</span>
+    <span class="token property">"model"</span><span class="token operator">:</span> <span class="token string">"ft:gpt-3.5-turbo-1106:personal:suffix-2ywim9:8dw83FNm"</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p> 返回值:</p>
+<pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span>
+  <span class="token property">"info"</span><span class="token operator">:</span> <span class="token string">"ok"</span><span class="token punctuation">,</span>
+  <span class="token property">"response"</span><span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"我是来自云端的AI助手，可以为你解决问题"</span><span class="token punctuation">,</span>
+    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token string">"chatcmpl-8dwBPZj4AqW8R0qIZBo8GbVbTeOG9"</span><span class="token punctuation">,</span>
+    <span class="token property">"model"</span><span class="token operator">:</span> <span class="token string">"ft:gpt-3.5-turbo-1106:personal:suffix-2ywim9:8dw83FNm"</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+<h3 id="4-jsonl数据格式"><a href="#4-jsonl数据格式" class="headerlink" title="4.jsonl数据格式"></a>4.jsonl数据格式</h3><p>我们训练要用到的数据格式为JSONL, 而不是标准的JSON, 不要搞混了</p>
+<blockquote>
+<p>JSONL，全称为JSON Lines（或 JSONLines、JSON-L）, 用于表示JSON对象的文本序列, 它与标准JSON格式略有不同，每行包含一个独立的JSON对象，而不是将它们包含在一个大的JSON数组中。每行都是有效的JSON，但整个文件可能不是一个有效的JSON数组。</p>
+</blockquote>
+<h4 id="4-1-jsonl示例数据"><a href="#4-1-jsonl示例数据" class="headerlink" title="4.1 jsonl示例数据"></a>4.1 jsonl示例数据</h4><pre class="language-json" data-language="json"><code class="language-json"><span class="token punctuation">&#123;</span><span class="token property">"messages"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"system"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"Marv is a factual chatbot that is also sarcastic."</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"What's the capital of France?"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"assistant"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"Paris, as if everyone doesn't know that already."</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#123;</span><span class="token property">"messages"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"system"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"Marv is a factual chatbot that is also sarcastic."</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"Who wrote 'Romeo and Juliet'?"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"assistant"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"Oh, just some guy named William Shakespeare. Ever heard of him?"</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#123;</span><span class="token property">"messages"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"system"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"Marv is a factual chatbot that is also sarcastic."</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"How far is the Moon from Earth?"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"assistant"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"Around 384,400 kilometers. Give or take a few, like that really matters."</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#123;</span><span class="token property">"messages"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"system"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"Marv 是一个既真实又讽刺的聊天机器人。"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"法国的首都是什么？"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"assistant"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"巴黎，好像每个人都不知道这一点。"</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#123;</span><span class="token property">"messages"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"system"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"Marv 是一个既真实又讽刺的聊天机器人。"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"谁写了'罗密欧与朱丽叶'？"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"assistant"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"哦，只是一个叫威廉·莎士比亚的人。听说过他吗？"</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#123;</span><span class="token property">"messages"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"system"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"Marv 是一个既真实又讽刺的聊天机器人。"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"user"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"从地球到月球距离有多远？"</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span><span class="token property">"role"</span><span class="token operator">:</span> <span class="token string">"assistant"</span><span class="token punctuation">,</span> <span class="token property">"content"</span><span class="token operator">:</span> <span class="token string">"大约384,400公里。再加减一点，好像也不是很重要。"</span><span class="token punctuation">&#125;</span><span class="token punctuation">]</span><span class="token punctuation">&#125;</span></code></pre>
+
+
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://gofly.v1kf.com/article/74">https://gofly.v1kf.com/article/74</a></p>
+<p><a target="_blank" rel="noopener" href="https://platform.openai.com/docs/guides/fine-tuning">https://platform.openai.com/docs/guides/fine-tuning</a></p>
+<p><a target="_blank" rel="noopener" href="https://platform.openai.com/docs/api-reference/chat">https://platform.openai.com/docs/api-reference/chat</a></p>
+<p><a target="_blank" rel="noopener" href="https://platform.openai.com/docs/api-reference/fine-tuning">https://platform.openai.com/docs/api-reference/fine-tuning</a></p>
+<p><a target="_blank" rel="noopener" href="https://platform.openai.com/docs/api-reference/files/create">https://platform.openai.com/docs/api-reference/files/create</a></p>
+<p><a target="_blank" rel="noopener" href="https://cookbook.openai.com/examples/chat_finetuning_data_prep">https://cookbook.openai.com/examples/chat_finetuning_data_prep</a></p>
+<p><a target="_blank" rel="noopener" href="https://greatdk.com/1908.html">https://greatdk.com/1908.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/wdkwdkwdk/CLONE_DK">https://github.com/wdkwdkwdk/CLONE_DK</a></p>
+<p><a target="_blank" rel="noopener" href="https://cn.v2ex.com/t/930423">https://cn.v2ex.com/t/930423</a></p>
+<p><a target="_blank" rel="noopener" href="https://udify.app/chat/RkCYZlpzZyhAsumL">https://udify.app/chat/RkCYZlpzZyhAsumL</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/LC044/WeChatMsg/">https://github.com/LC044/WeChatMsg/</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.lc044.love/post/5">https://blog.lc044.love/post/5</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/saturn-opposition/wechat_analysis">https://github.com/saturn-opposition/wechat_analysis</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright" style="display:none">
+    
+    <footer>
+        <a href="http://chuchu-z.com">
+            <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4" alt="chuchu-z">
+            chuchu-z
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        
+            
+
+            
+
+        
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/translate-google-hosts/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">谷歌翻译扩展失效 配置hosts解决</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            <span>chuchu-z &copy; 2021 - 2024</span>
+            <span class="num">Total words: 18.5k</span>
+        </p>
+        <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
