@@ -90,10 +90,35 @@ source ~/.bash_profile
 
 
 
-### 2.clone代码后执行
+### 2.部署
 
 ```shell
+# clone 代码
+git clone git@github.com:chuchu-z/fine-tuning.git OpenAI
+
+# 切换到OpenAI目录
+cd OpenAI
+
+# 为该项目创建独立的 Python 虚拟环境
+python -m venv venv
+
+# 激活虚拟环境, 在 Unix/Linux 系统中
+source venv/Scripts/activate
+
+# 激活虚拟环境, 在 Windows 系统中
+.\venv\Scripts\activate
+
+# 查看 sys.prefix, 是否在虚拟环境中
+python -c "import sys; print(sys.prefix)"
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 启动
 python Fine-tuning.py
+
+# 补充一个退出虚拟环境命令, 用不上的话就不用执行
+deactivate
 ```
 
 ![](chatgpt-fine-tuning/image-20240106114945504.png)
