@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python 使用 Django 框架 | chuchu-z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="一. 初始化# 安装 pip install Django  # 创建项目名 django-admin startproject your_project_name  cd your_project_name  # 创建应用名 python manage.py startapp your_app_name    二. 修改settings.py配置2.1 引入envimport os from p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 使用 Django 框架">
+<meta property="og:url" content="http://chuchu-z.com/posts/python-use-Django/">
+<meta property="og:site_name" content="chuchu-z">
+<meta property="og:description" content="一. 初始化# 安装 pip install Django  # 创建项目名 django-admin startproject your_project_name  cd your_project_name  # 创建应用名 python manage.py startapp your_app_name    二. 修改settings.py配置2.1 引入envimport os from p">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-15T01:41:42.000Z">
+<meta property="article:modified_time" content="2024-01-15T01:46:27.391Z">
+<meta property="article:author" content="chuchu-z">
+<meta property="article:tag" content="chuchu-z">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">chuchu-z</h5>
+          <p class="description">借君三十年，繁花万里好江山</p>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/chuchu-z" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python 使用 Django 框架</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale" style="padding-left: 5%;">
+        <h1 class="title">Python 使用 Django 框架</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2024-01-15T01:41:42.000Z" itemprop="datePublished" class="page-time">
+  2024-01-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%80-%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="post-toc-number">1.</span> <span class="post-toc-text">一. 初始化</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BA%8C-%E4%BF%AE%E6%94%B9settings-py%E9%85%8D%E7%BD%AE"><span class="post-toc-number">2.</span> <span class="post-toc-text">二. 修改settings.py配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-1-%E5%BC%95%E5%85%A5env"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1 引入env</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-2-%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2 配置数据库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-3-%E4%BF%AE%E6%94%B9%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">2.3 修改其他配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-4-%E8%AF%AD%E8%A8%80%E4%B8%8E%E6%97%B6%E5%8C%BA"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">2.4 语言与时区</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-5-%E9%BB%98%E8%AE%A4%E8%87%AA%E5%A2%9E%E4%B8%BB%E9%94%AE"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">2.5 默认自增主键</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%B8%89-%E4%BD%BF%E7%94%A8Django"><span class="post-toc-number">3.</span> <span class="post-toc-text">三. 使用Django</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%9B%9B-model%E7%A4%BA%E4%BE%8B"><span class="post-toc-number">4.</span> <span class="post-toc-text">四. model示例</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-python-use-Django"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python 使用 Django 框架</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2024-01-15 09:41:42" datetime="2024-01-15T01:41:42.000Z"  itemprop="datePublished">2024-01-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/python/">Python</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一-初始化"><a href="#一-初始化" class="headerlink" title="一. 初始化"></a>一. 初始化</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 安装</span>
+pip <span class="token function">install</span> Django
+
+<span class="token comment"># 创建项目名</span>
+django-admin startproject your_project_name
+
+<span class="token builtin class-name">cd</span> your_project_name
+
+<span class="token comment"># 创建应用名</span>
+python manage.py startapp your_app_name</code></pre>
+
+
+
+<h2 id="二-修改settings-py配置"><a href="#二-修改settings-py配置" class="headerlink" title="二. 修改settings.py配置"></a>二. 修改settings.py配置</h2><h3 id="2-1-引入env"><a href="#2-1-引入env" class="headerlink" title="2.1 引入env"></a>2.1 引入env</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os
+<span class="token keyword">from</span> pathlib <span class="token keyword">import</span> Path
+<span class="token keyword">from</span> dotenv <span class="token keyword">import</span> load_dotenv
+
+<span class="token comment"># 加载环境变量</span>
+load_dotenv<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+
+
+<h3 id="2-2-配置数据库"><a href="#2-2-配置数据库" class="headerlink" title="2.2 配置数据库"></a>2.2 配置数据库</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># Database</span>
+<span class="token comment"># https://docs.djangoproject.com/en/5.0/ref/settings/#databases</span>
+<span class="token comment"># mysql 版本使用5.7, 但Django要求8.0以上</span>
+<span class="token comment"># 全局搜索 check_database_version_supported ,并注释, 就不会检查mysql版本</span>
+<span class="token comment"># 位置大约在django/db/backends/base/base.py文件255行</span>
+
+DATABASES <span class="token operator">=</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment"># 'default': &#123;</span>
+    <span class="token comment">#     'ENGINE': 'django.db.backends.sqlite3',</span>
+    <span class="token comment">#     'NAME': BASE_DIR / 'db.sqlite3',</span>
+    <span class="token comment"># &#125;</span>
+    <span class="token string">'default'</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token string">'ENGINE'</span><span class="token punctuation">:</span> <span class="token string">'django.db.backends.mysql'</span><span class="token punctuation">,</span>
+        <span class="token string">'NAME'</span><span class="token punctuation">:</span> os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">"DB_NAME"</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'USER'</span><span class="token punctuation">:</span> os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">"DB_USER"</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'PASSWORD'</span><span class="token punctuation">:</span> os<span class="token punctuation">.</span>getenv<span class="token punctuation">(</span><span class="token string">"DB_PASSWORD"</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'HOST'</span><span class="token punctuation">:</span> <span class="token string">'127.0.0.1'</span><span class="token punctuation">,</span>  <span class="token comment"># 或者是数据库服务器的IP地址</span>
+        <span class="token string">'PORT'</span><span class="token punctuation">:</span> <span class="token string">'3306'</span><span class="token punctuation">,</span>  <span class="token comment"># MySQL默认端口</span>
+        <span class="token string">'OPTIONS'</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token string">'charset'</span><span class="token punctuation">:</span> <span class="token string">'utf8mb4'</span><span class="token punctuation">,</span>
+            <span class="token string">'collation'</span><span class="token punctuation">:</span> <span class="token string">'utf8mb4_general_ci'</span><span class="token punctuation">,</span>
+            <span class="token comment"># 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+<h3 id="2-3-修改其他配置"><a href="#2-3-修改其他配置" class="headerlink" title="2.3 修改其他配置"></a>2.3 修改其他配置</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 我的项目全是外部接口, 所以用不上表单和csrf, 注释csrf</span>
+MIDDLEWARE <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token comment"># 'django.middleware.csrf.CsrfViewMiddleware',</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">]</span></code></pre>
+
+
+
+<h3 id="2-4-语言与时区"><a href="#2-4-语言与时区" class="headerlink" title="2.4 语言与时区"></a>2.4 语言与时区</h3><pre class="language-python" data-language="python"><code class="language-python">LANGUAGE_CODE <span class="token operator">=</span> <span class="token string">'zh-hans'</span>
+
+TIME_ZONE <span class="token operator">=</span> <span class="token string">'Asia/Shanghai'</span>
+
+DATE_FORMAT <span class="token operator">=</span> <span class="token string">'Y-m-d'</span>
+DATETIME_FORMAT <span class="token operator">=</span> <span class="token string">'Y-m-d H:i'</span>
+
+USE_I18N <span class="token operator">=</span> <span class="token boolean">True</span>
+
+USE_TZ <span class="token operator">=</span> <span class="token boolean">False</span></code></pre>
+
+
+
+<h3 id="2-5-默认自增主键"><a href="#2-5-默认自增主键" class="headerlink" title="2.5 默认自增主键"></a>2.5 默认自增主键</h3><pre class="language-python" data-language="python"><code class="language-python">DEFAULT_AUTO_FIELD <span class="token operator">=</span> <span class="token string">'django.db.models.AutoField'</span></code></pre>
+
+
+
+<h2 id="三-使用Django"><a href="#三-使用Django" class="headerlink" title="三. 使用Django"></a>三. 使用Django</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 数据迁移</span>
+python manage.py makemigrations
+python manage.py migrate
+
+<span class="token comment"># 启动服务器, 可指定端口或指定ip+端口</span>
+python manage.py runserver
+python manage.py runserver <span class="token number">8080</span>
+python manage.py runserver <span class="token number">0.0</span>.0.0:8000
+
+<span class="token comment"># 创建管理员</span>
+python manage.py createsuperuser
+
+<span class="token comment"># 搞定后登录管理</span>
+http://127.0.0.1:8000/admin/</code></pre>
+
+
+
+<h2 id="四-model示例"><a href="#四-model示例" class="headerlink" title="四. model示例"></a>四. model示例</h2><blockquote>
+<p>说实话, django的model和数据迁移做的真不好, 和laravel的migrate对比, 很多东西都不符合常理, 比如默认datetime(6), 还自带小数点</p>
+</blockquote>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> django<span class="token punctuation">.</span>db <span class="token keyword">import</span> models
+
+
+<span class="token comment"># 自定义 datetime 字段, 因为 django 默认datetime(6)</span>
+<span class="token keyword">class</span> <span class="token class-name">MySQLDateTimeField</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>DateTimeField<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">db_type</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> connection<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">'datetime'</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">UploadedFile</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token builtin">id</span> <span class="token operator">=</span> models<span class="token punctuation">.</span>AutoField<span class="token punctuation">(</span>primary_key<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+    file_id <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">,</span> null<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> blank<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> db_default<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">,</span> db_comment<span class="token operator">=</span><span class="token string">"文件ID"</span><span class="token punctuation">)</span>
+    file_name <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">255</span><span class="token punctuation">,</span> null<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> blank<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> db_default<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">,</span> db_comment<span class="token operator">=</span><span class="token string">"文件名"</span><span class="token punctuation">)</span>
+    file_size <span class="token operator">=</span> models<span class="token punctuation">.</span>IntegerField<span class="token punctuation">(</span>null<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> db_default<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> blank<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> db_comment<span class="token operator">=</span><span class="token string">"文件大小"</span><span class="token punctuation">)</span>
+    file_status <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">,</span> null<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> blank<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> db_default<span class="token operator">=</span><span class="token string">"uploaded"</span><span class="token punctuation">,</span> db_comment<span class="token operator">=</span><span class="token string">"文件状态"</span><span class="token punctuation">)</span>
+    file_purpose <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">,</span> null<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> blank<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> db_default<span class="token operator">=</span><span class="token string">"fine-tune"</span><span class="token punctuation">,</span> db_comment<span class="token operator">=</span><span class="token string">"文件用途"</span><span class="token punctuation">)</span>
+    created_at <span class="token operator">=</span> MySQLDateTimeField<span class="token punctuation">(</span>auto_now_add<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> db_comment<span class="token operator">=</span><span class="token string">"创建时间"</span><span class="token punctuation">)</span>
+    objects <span class="token operator">=</span> models<span class="token punctuation">.</span>Manager<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">class</span> <span class="token class-name">Meta</span><span class="token punctuation">:</span>
+        db_table <span class="token operator">=</span> <span class="token string">"chatgpt_upload_files"</span>
+        indexes <span class="token operator">=</span> <span class="token punctuation">[</span>
+            models<span class="token punctuation">.</span>Index<span class="token punctuation">(</span>fields<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"file_id"</span><span class="token punctuation">,</span> <span class="token string">"file_status"</span><span class="token punctuation">,</span> <span class="token string">"created_at"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"idx_file_id_status_create"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment"># 联合索引</span>
+        <span class="token punctuation">]</span>
+        verbose_name <span class="token operator">=</span> <span class="token string">"上传文件表"</span>
+        verbose_name_plural <span class="token operator">=</span> <span class="token string">"上传文件表"</span>
+
+    <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>file_id
+</code></pre>
+
+
+        </div>
+
+        <blockquote class="post-copyright" style="display:none">
+    
+    <footer>
+        <a href="http://chuchu-z.com">
+            <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4" alt="chuchu-z">
+            chuchu-z
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        
+            
+
+            
+
+        
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/chatgpt-fine-tuning/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python 实现 ChatGPT 模型训练</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            <span>chuchu-z &copy; 2021 - 2024</span>
+            <span class="num">Total words: 19.1k</span>
+        </p>
+        <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
