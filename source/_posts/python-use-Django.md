@@ -177,3 +177,22 @@ class UploadedFile(models.Model):
 
 ```
 
+
+
+## 五. 部署到服务器
+
+```shell
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+```
+
+
+
+> 中途安装 mysqlclient 时报错
+> 参考了该博主文章解决: https://blog.csdn.net/qq_42336581/article/details/132244022
+
+![](python-use-Django/image-20240120155502627.png)
+
+
+
