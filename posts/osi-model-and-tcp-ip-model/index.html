@@ -14,27 +14,25 @@
     
     
     
-    <title> 个人docker-compose 配置 | chuchu-z</title>
+    <title>OSI 七层模型及TCP/IP 模型 | chuchu-z</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="">
-    <meta name="description" content="前言 由于在 Windows 下开发 但是又想使用 zsh shell, 只好自己使用 docker 部署一套, 环境是搞好了, 但是还有个问题困扰着我">
+    <meta name="description" content="把OSI模型以及TCP&#x2F;IP模型做成表格">
 <meta property="og:type" content="article">
-<meta property="og:title" content=" 个人docker-compose 配置">
-<meta property="og:url" content="http://chuchu-z.com/posts/my-docker-zsh-config/">
+<meta property="og:title" content="OSI 七层模型及TCP&#x2F;IP 模型">
+<meta property="og:url" content="http://chuchu-z.com/posts/osi-model-and-tcp-ip-model/">
 <meta property="og:site_name" content="chuchu-z">
-<meta property="og:description" content="前言 由于在 Windows 下开发 但是又想使用 zsh shell, 只好自己使用 docker 部署一套, 环境是搞好了, 但是还有个问题困扰着我">
+<meta property="og:description" content="把OSI模型以及TCP&#x2F;IP模型做成表格">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://chuchu-z.com/posts/my-docker-zsh-config/image-20231226170047096-17035824143912.png">
-<meta property="article:published_time" content="2023-12-26T09:15:00.000Z">
-<meta property="article:modified_time" content="2024-01-30T09:49:47.339Z">
+<meta property="article:published_time" content="2024-01-30T09:46:43.000Z">
+<meta property="article:modified_time" content="2024-01-30T09:49:47.343Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="chuchu-z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://chuchu-z.com/posts/my-docker-zsh-config/image-20231226170047096-17035824143912.png">
     
         <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
     
@@ -101,7 +99,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis"> 个人docker-compose 配置</div>
+        <div class="flex-col header-title ellipsis">OSI 七层模型及TCP/IP 模型</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -119,15 +117,15 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale" style="padding-left: 5%;">
-        <h1 class="title"> 个人docker-compose 配置</h1>
+        <h1 class="title">OSI 七层模型及TCP/IP 模型</h1>
         <h5 class="subtitle">
             
-                <time datetime="2023-12-26T09:15:00.000Z" itemprop="datePublished" class="page-time">
-  2023-12-26
+                <time datetime="2024-01-30T09:46:43.000Z" itemprop="datePublished" class="page-time">
+  2024-01-30
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/docker/">Docker</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/other/">Other</a></li></ul>
 
             
         </h5>
@@ -144,21 +142,21 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%89%8D%E8%A8%80"><span class="post-toc-number">1.</span> <span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#pull-Code"><span class="post-toc-number">2.</span> <span class="post-toc-text">pull Code</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%9E%84%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="post-toc-number">3.</span> <span class="post-toc-text">构建环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E8%A1%A5%E5%85%85"><span class="post-toc-number">4.</span> <span class="post-toc-text">补充</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OSI%E6%A8%A1%E5%9E%8B"><span class="post-toc-number">1.</span> <span class="post-toc-text">OSI模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP-IP-%E6%A8%A1%E5%9E%8B"><span class="post-toc-number">2.</span> <span class="post-toc-text">TCP&#x2F;IP 模型</span></a></li></ol>
         </nav>
     </aside>
 
 
-<article id="post-my-docker-zsh-config"
+<article id="post-osi-model-and-tcp-ip-model"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title"> 个人docker-compose 配置</h1>
+        <h1 class="post-card-title">OSI 七层模型及TCP/IP 模型</h1>
         <div class="post-meta">
-            <time class="post-time" title="2023-12-26 17:15:00" datetime="2023-12-26T09:15:00.000Z"  itemprop="datePublished">2023-12-26</time>
+            <time class="post-time" title="2024-01-30 17:46:43" datetime="2024-01-30T09:46:43.000Z"  itemprop="datePublished">2024-01-30</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/docker/">Docker</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/other/">Other</a></li></ul>
 
 
 
@@ -166,47 +164,160 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>由于在 Windows 下开发 但是又想使用 zsh shell, 只好自己使用 docker 部署一套, 环境是搞好了, 但是还有个问题困扰着我</p>
+            <p>把OSI模型以及TCP/IP模型做成表格</p>
 <span id="more"></span>
 
-<p>就是从 git-bash 里执行 docker exce 进入容器内部, 输入栏的光标位置与我实际输入的地方始终对不准 总是有一个空格的差距, 而在 docker desktop 里面的终端打开是正常的, 如下图, 仔细看就能发现</p>
-<p>同样都是只输入了 <code>vim</code> , 在git-bash终端里面, 光标对准的位置却发生了偏差, 光标跑到了 <code>vim a</code> 那里去了</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="/posts/my-docker-zsh-config/image-20231226170047096-17035824143912.png" alt title>
-                </div>
-                <div class="image-caption"></div>
-            </figure>
 
 
-
-<p>这个问题十分头疼 折腾许久找不到解决办法, 猜测是使用 agnoster.zsh-theme 主题的自带的特殊符号导致的, 因为尝试过删除特殊符号后就恢复了</p>
-<p>但我仍无法解决如何在保留特殊符号的情况下不会出现那一个空格的偏差, 真是急死强迫症😓</p>
-<p>这个难题就交给未来的我来解决吧</p>
+<h2 id="OSI模型"><a href="#OSI模型" class="headerlink" title="OSI模型"></a>OSI模型</h2><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>名称</th>
+<th>功能作用</th>
+<th>代表性协议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第七层（应用层）</td>
+<td>应用层 (Application)</td>
+<td>提供网络服务和用户接口，实现特定网络应用的通信</td>
+<td>HTTP, FTP, SMTP, DNS, Telnet, SNMP</td>
+</tr>
+<tr>
+<td>第六层（表示层）</td>
+<td>表示层 (Presentation)</td>
+<td>处理数据格式、编码和加密解密等，确保数据在不同系统之间的正确解释</td>
+<td>SSL/TLS, JPEG, GIF, MPEG</td>
+</tr>
+<tr>
+<td>第五层（会话层）</td>
+<td>会话层 (Session)</td>
+<td>管理会话或对话控制，建立、维护和终止应用程序之间的通信</td>
+<td>NetBIOS, RPC, PPTP</td>
+</tr>
+<tr>
+<td>第四层（传输层）</td>
+<td>传输层 (Transport)</td>
+<td>负责数据流的端到端通信，提供可靠的数据传输和错误检测，同时进行流量控制</td>
+<td>TCP, UDP, SCTP</td>
+</tr>
+<tr>
+<td>第三层（网络层）</td>
+<td>网络层 (Network)</td>
+<td>处理数据包的逻辑传输，提供路径选择和逻辑寻址，实现不同网络之间的路由</td>
+<td>IP, ICMP, OSPF, BGP</td>
+</tr>
+<tr>
+<td>第二层（数据链路层）</td>
+<td>数据链路层 (Data Link)</td>
+<td>提供物理寻址，错误检测和纠正，以及对物理介质的访问控制。分为逻辑链路控制（LLC）和介质访问控制（MAC）两个子层</td>
+<td>Ethernet, PPP, HDLC, ARP</td>
+</tr>
+<tr>
+<td>第一层（物理层）</td>
+<td>物理层 (Physical)</td>
+<td>在物理媒体上传输原始比特流，负责定义硬件设备和传输媒体的规范</td>
+<td>Ethernet, USB, DSL, Bluetooth</td>
+</tr>
+</tbody></table>
+<h2 id="TCP-IP-模型"><a href="#TCP-IP-模型" class="headerlink" title="TCP/IP 模型"></a>TCP/IP 模型</h2><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>名称</th>
+<th>功能作用</th>
+<th>代表性协议</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第四层（应用层）</td>
+<td>应用层 (Application)</td>
+<td>提供网络服务和用户接口，实现特定网络应用的通信</td>
+<td>HTTP, FTP, SMTP, DNS, Telnet, SNMP</td>
+</tr>
+<tr>
+<td>第三层（传输层）</td>
+<td>传输层 (Transport)</td>
+<td>提供端到端的通信</td>
+<td>TCP, UDP, SCTP</td>
+</tr>
+<tr>
+<td>第二层（网络层）</td>
+<td>网络层 (Internet)</td>
+<td>处理数据包的逻辑传输，实现不同网络之间的路由</td>
+<td>IP, ICMP, OSPF, BGP</td>
+</tr>
+<tr>
+<td>第一层（网络接口层）</td>
+<td>网络接口层 (Link)</td>
+<td>负责物理寻址和介质访问控制</td>
+<td>Ethernet, PPP, HDLC, ARP</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>计算机启动或连接到网络时涉及的协议、其功能作用以及执行阶段和层次的信息</p>
 </blockquote>
-<h2 id="pull-Code"><a href="#pull-Code" class="headerlink" title="pull Code"></a>pull Code</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> clone git@github.com:chuchu-z/docker-zsh.git</code></pre>
-
-
-
-<h2 id="构建环境"><a href="#构建环境" class="headerlink" title="构建环境"></a>构建环境</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 根据 docker-compose 配置构造镜像容器</span>
-<span class="token function">docker-compose</span> build --no-cache <span class="token operator">&amp;&amp;</span> <span class="token function">docker-compose</span> up <span class="token parameter variable">-d</span>
-
-<span class="token comment"># 启动 Zsh shell, 也可以把 zsh 改成 bash, sh, /bin/sh 等</span>
-winpty <span class="token function">docker</span> <span class="token builtin class-name">exec</span> <span class="token parameter variable">-it</span> 11b3a0847350 <span class="token function">zsh</span></code></pre>
-
-
-
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><ol>
-<li>由于 <strong>.gitignore</strong> 忽略了 <strong>.ssh</strong> , pull 代码时记得加上该目录</li>
-</ol>
-<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">cp</span> ~/.ssh <span class="token builtin class-name">.</span></code></pre>
-
-<ol start="2">
-<li>太久没用的话记得先去看看 <strong>docker-compose.yml</strong></li>
-<li>希望下次你能解决光标对齐问题 <strong>good luck~</strong> 👍</li>
-</ol>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>协议</th>
+<th>功能作用</th>
+<th>执行阶段</th>
+<th>层次</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>启动阶段</td>
+<td>无协议</td>
+<td>无</td>
+<td>计算机电源启动</td>
+<td>无</td>
+</tr>
+<tr>
+<td>网络适配器初始化阶段</td>
+<td>无协议</td>
+<td>无</td>
+<td>初始化网络适配器，加载适当的驱动程序</td>
+<td>无</td>
+</tr>
+<tr>
+<td>DHCP 获取网络配置阶段</td>
+<td>DHCP</td>
+<td>获取动态分配的网络配置，包括 IP 地址、子网掩码、默认网关、DNS 服务器等</td>
+<td>计算机启动或连接到网络时</td>
+<td>网络层（第三层）</td>
+</tr>
+<tr>
+<td>ARP 地址解析阶段</td>
+<td>ARP</td>
+<td>将目标设备的 IP 地址解析为对应的物理硬件地址（MAC 地址）</td>
+<td>在需要进行局域网通信时</td>
+<td>数据链路层（第二层）</td>
+</tr>
+<tr>
+<td>DNS 解析域名阶段</td>
+<td>DNS</td>
+<td>将域名解析为对应的 IP 地址</td>
+<td>计算机启动或进行网络通信前</td>
+<td>网络层（第三层）</td>
+</tr>
+<tr>
+<td>TCP 连接建立阶段</td>
+<td>TCP</td>
+<td>提供可靠的端到端通信</td>
+<td>在建立连接和进行应用层通信时</td>
+<td>传输层（第四层）</td>
+</tr>
+<tr>
+<td>应用层通信阶段</td>
+<td>HTTP、FTP、SMTP 等</td>
+<td>实现特定网络应用的通信</td>
+<td>计算机启动或进行网络通信时</td>
+<td>应用层（第七层）</td>
+</tr>
+</tbody></table>
 
         </div>
 
@@ -232,21 +343,14 @@ winpty <span class="token function">docker</span> <span class="token builtin cla
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between" style="display:none">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/posts/goodbye-2023/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">无聊的年终总结</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/posts/windows-activation/" id="post-next" class="post-nav-link">
+      <a href="/posts/python-use-Django/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Windows10 激活产品密钥</h4>
+        <h4 class="title">Python 使用 Django 框架</h4>
       </a>
     </div>
   
