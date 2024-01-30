@@ -72,23 +72,23 @@ categories:
 
 > cd ~
 >
-> wget https://www.python.org/ftp/python/3.10.11/Python-3.10.11.tgz
+> wget https://www.python.org/ftp/python/3.12.1/Python-3.12.1.tar.xz
 >
-> 
->
-> tar -zxvf Python-3.10.11.tgz
->
-> cd Python-3.10.11/
->
-> ./configure --prefix=/usr/local/python3 --with-openssl=/usr/local/openssl --with-openssl-rpath=auto
+> tar -xvf Python-3.12.1.tar.xz
 >
 > yum update -y
 >
-> yum install -y make gcc gcc-c++
+> yum install -y zlib-devel bzip2-devel libffi-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc make gcc gcc-c++
 >
-> make -j && make install
+> cd Python-3.12.1/
 >
-> 
+> ./configure --prefix=/usr/local/python3 --with-openssl=/usr/local/openssl --with-openssl-rpath=auto
+>
+>  
+>
+> #3个并发任务
+>
+> make -j3 && make install
 >
 > cd /usr/local/bin/
 >
