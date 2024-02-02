@@ -133,6 +133,49 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-mysql-study-01"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2024-02-02 15:24:19" datetime="2024-02-02T07:24:19.000Z"  itemprop="datePublished">2024-02-02</time>
+
+        
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/mysql/">MySql</a></li></ul>
+
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/posts/mysql-study-01/">MySQL学习之执行流程篇</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        MySQL执行流程
+连接器-查询缓存(如果是select才查询缓存, MySQL8.0废弃)-解析器(词法分析, 语法分析)-预处理器(判断表/字段是否存在)-优化器-执行器(验证权限, 调用存储引擎API, 如果有索引下推则携带索引条件给存储引擎判断-存储引擎查询数据并利用索引下推过滤数据, 然后执行回表查询数据, 向执行器(server层)返回结果)
+
+    
+
+        <a href="/posts/mysql-study-01/" class="post-more waves-effect waves-button">
+            
+        </a>
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-osi-model-and-tcp-ip-model"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -512,49 +555,6 @@ you-get 相对来说更简单，更容易上手，适用于一般用户。
 
         </li>
     
-        <li class="post-list-item fade">
-            <article id="post-docker-deploy-wiki-MrDoc"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2023-12-19 11:52:09" datetime="2023-12-19T03:52:09.000Z"  itemprop="datePublished">2023-12-19</time>
-
-        
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/docker/">Docker</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/docker/wiki/">wiki</a></li></ul></li></ul>
-
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/posts/docker-deploy-wiki-MrDoc/">Docker 私有化部署 wiki-MrDoc</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        为完善公司内部技术人员沟通以及共享信息文档, 使用wiki工具是很有必要的, 私有化部署可以避免信息外泄, MrDoc 是一款很不错的wiki工具, 有开源版以及功能更全的专业版
-👉Gitee 地址
-👉MrDoc 官方文档
-    
-
-        <a href="/posts/docker-deploy-wiki-MrDoc/" class="post-more waves-effect waves-button">
-            
-        </a>
-    </div>
-    
-</article>
-
-        </li>
-    
     </ul>
 
     
@@ -573,7 +573,7 @@ you-get 相对来说更简单，更容易上手，适用于一般用户。
 
         <p>
             <span>chuchu-z &copy; 2021 - 2024</span>
-            <span class="num">Total words: 20k</span>
+            <span class="num">Total words: 20.5k</span>
         </p>
         <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
     </div>

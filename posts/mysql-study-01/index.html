@@ -14,25 +14,28 @@
     
     
     
-    <title>OSI 七层模型及TCP/IP 模型 | chuchu-z</title>
+    <title>MySQL学习之执行流程篇 | chuchu-z</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="">
-    <meta name="description" content="把OSI模型以及TCP&#x2F;IP模型做成表格">
+    <meta name="description" content="MySQL执行流程 连接器-查询缓存(如果是select才查询缓存, MySQL8.0废弃)-解析器(词法分析, 语法分析)-预处理器(判断表&#x2F;字段是否存在)-优化器-执行器(验证权限, 调用存储引擎API, 如果有索引下推则携带索引条件给存储引擎判断-存储引擎查询数据并利用索引下推过滤数据, 然后执行回表查询数据, 向执行器(server层)返回结果)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OSI 七层模型及TCP&#x2F;IP 模型">
-<meta property="og:url" content="http://chuchu-z.com/posts/osi-model-and-tcp-ip-model/">
+<meta property="og:title" content="MySQL学习之执行流程篇">
+<meta property="og:url" content="http://chuchu-z.com/posts/mysql-study-01/">
 <meta property="og:site_name" content="chuchu-z">
-<meta property="og:description" content="把OSI模型以及TCP&#x2F;IP模型做成表格">
+<meta property="og:description" content="MySQL执行流程 连接器-查询缓存(如果是select才查询缓存, MySQL8.0废弃)-解析器(词法分析, 语法分析)-预处理器(判断表&#x2F;字段是否存在)-优化器-执行器(验证权限, 调用存储引擎API, 如果有索引下推则携带索引条件给存储引擎判断-存储引擎查询数据并利用索引下推过滤数据, 然后执行回表查询数据, 向执行器(server层)返回结果)">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-01-30T09:46:43.000Z">
+<meta property="og:image" content="http://chuchu-z.com/posts/mysql-study-01/format,webp.webp">
+<meta property="og:image" content="http://chuchu-z.com/posts/mysql-study-01/db-mysql-sql-parser-2.png">
+<meta property="article:published_time" content="2024-02-02T07:24:19.000Z">
 <meta property="article:modified_time" content="2024-02-02T07:25:57.095Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="chuchu-z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://chuchu-z.com/posts/mysql-study-01/format,webp.webp">
     
         <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
     
@@ -99,7 +102,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">OSI 七层模型及TCP/IP 模型</div>
+        <div class="flex-col header-title ellipsis">MySQL学习之执行流程篇</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -117,15 +120,15 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale" style="padding-left: 5%;">
-        <h1 class="title">OSI 七层模型及TCP/IP 模型</h1>
+        <h1 class="title">MySQL学习之执行流程篇</h1>
         <h5 class="subtitle">
             
-                <time datetime="2024-01-30T09:46:43.000Z" itemprop="datePublished" class="page-time">
-  2024-01-30
+                <time datetime="2024-02-02T07:24:19.000Z" itemprop="datePublished" class="page-time">
+  2024-02-02
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/other/">Other</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/mysql/">MySql</a></li></ul>
 
             
         </h5>
@@ -142,21 +145,21 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#OSI%E6%A8%A1%E5%9E%8B"><span class="post-toc-number">1.</span> <span class="post-toc-text">OSI模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP-IP-%E6%A8%A1%E5%9E%8B"><span class="post-toc-number">2.</span> <span class="post-toc-text">TCP&#x2F;IP 模型</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MySQL%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B"><span class="post-toc-number">1.</span> <span class="post-toc-text">MySQL执行流程</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%88%86%E6%9E%90%E5%99%A8"><span class="post-toc-number">2.</span> <span class="post-toc-text">分析器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#varchar%E5%AD%97%E6%AE%B5%E6%9C%80%E5%A4%A7%E5%8F%96%E5%80%BC%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="post-toc-number">3.</span> <span class="post-toc-text">varchar字段最大取值计算公式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#InnoDB-%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%BA%A2%E5%87%BA%E5%A4%84%E7%90%86%E6%96%B9%E5%BC%8F"><span class="post-toc-number">4.</span> <span class="post-toc-text">InnoDB 行格式及数据溢出处理方式</span></a></li></ol>
         </nav>
     </aside>
 
 
-<article id="post-osi-model-and-tcp-ip-model"
+<article id="post-mysql-study-01"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">OSI 七层模型及TCP/IP 模型</h1>
+        <h1 class="post-card-title">MySQL学习之执行流程篇</h1>
         <div class="post-meta">
-            <time class="post-time" title="2024-01-30 17:46:43" datetime="2024-01-30T09:46:43.000Z"  itemprop="datePublished">2024-01-30</time>
+            <time class="post-time" title="2024-02-02 15:24:19" datetime="2024-02-02T07:24:19.000Z"  itemprop="datePublished">2024-02-02</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/other/">Other</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/mysql/">MySql</a></li></ul>
 
 
 
@@ -164,160 +167,61 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>把OSI模型以及TCP/IP模型做成表格</p>
+            <h2 id="MySQL执行流程"><a href="#MySQL执行流程" class="headerlink" title="MySQL执行流程"></a>MySQL执行流程</h2><blockquote>
+<p>连接器-查询缓存(如果是select才查询缓存, MySQL8.0废弃)-解析器(词法分析, 语法分析)-预处理器(判断表/字段是否存在)-优化器-执行器(验证权限, 调用存储引擎API, 如果有索引下推则携带索引条件给存储引擎判断-存储引擎查询数据并利用索引下推过滤数据, 然后执行回表查询数据, 向执行器(server层)返回结果)</p>
+</blockquote>
 <span id="more"></span>
 
 
 
-<h2 id="OSI模型"><a href="#OSI模型" class="headerlink" title="OSI模型"></a>OSI模型</h2><table>
-<thead>
-<tr>
-<th>层次</th>
-<th>名称</th>
-<th>功能作用</th>
-<th>代表性协议</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>第七层（应用层）</td>
-<td>应用层 (Application)</td>
-<td>提供网络服务和用户接口，实现特定网络应用的通信</td>
-<td>HTTP, FTP, SMTP, DNS, Telnet, SNMP</td>
-</tr>
-<tr>
-<td>第六层（表示层）</td>
-<td>表示层 (Presentation)</td>
-<td>处理数据格式、编码和加密解密等，确保数据在不同系统之间的正确解释</td>
-<td>SSL/TLS, JPEG, GIF, MPEG</td>
-</tr>
-<tr>
-<td>第五层（会话层）</td>
-<td>会话层 (Session)</td>
-<td>管理会话或对话控制，建立、维护和终止应用程序之间的通信</td>
-<td>NetBIOS, RPC, PPTP</td>
-</tr>
-<tr>
-<td>第四层（传输层）</td>
-<td>传输层 (Transport)</td>
-<td>负责数据流的端到端通信，提供可靠的数据传输和错误检测，同时进行流量控制</td>
-<td>TCP, UDP, SCTP</td>
-</tr>
-<tr>
-<td>第三层（网络层）</td>
-<td>网络层 (Network)</td>
-<td>处理数据包的逻辑传输，提供路径选择和逻辑寻址，实现不同网络之间的路由</td>
-<td>IP, ICMP, OSPF, BGP</td>
-</tr>
-<tr>
-<td>第二层（数据链路层）</td>
-<td>数据链路层 (Data Link)</td>
-<td>提供物理寻址，错误检测和纠正，以及对物理介质的访问控制。分为逻辑链路控制（LLC）和介质访问控制（MAC）两个子层</td>
-<td>Ethernet, PPP, HDLC, ARP</td>
-</tr>
-<tr>
-<td>第一层（物理层）</td>
-<td>物理层 (Physical)</td>
-<td>在物理媒体上传输原始比特流，负责定义硬件设备和传输媒体的规范</td>
-<td>Ethernet, USB, DSL, Bluetooth</td>
-</tr>
-</tbody></table>
-<h2 id="TCP-IP-模型"><a href="#TCP-IP-模型" class="headerlink" title="TCP/IP 模型"></a>TCP/IP 模型</h2><table>
-<thead>
-<tr>
-<th>层次</th>
-<th>名称</th>
-<th>功能作用</th>
-<th>代表性协议</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>第四层（应用层）</td>
-<td>应用层 (Application)</td>
-<td>提供网络服务和用户接口，实现特定网络应用的通信</td>
-<td>HTTP, FTP, SMTP, DNS, Telnet, SNMP</td>
-</tr>
-<tr>
-<td>第三层（传输层）</td>
-<td>传输层 (Transport)</td>
-<td>提供端到端的通信</td>
-<td>TCP, UDP, SCTP</td>
-</tr>
-<tr>
-<td>第二层（网络层）</td>
-<td>网络层 (Internet)</td>
-<td>处理数据包的逻辑传输，实现不同网络之间的路由</td>
-<td>IP, ICMP, OSPF, BGP</td>
-</tr>
-<tr>
-<td>第一层（网络接口层）</td>
-<td>网络接口层 (Link)</td>
-<td>负责物理寻址和介质访问控制</td>
-<td>Ethernet, PPP, HDLC, ARP</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>计算机启动或连接到网络时涉及的协议、其功能作用以及执行阶段和层次的信息</p>
+<p><img src="/posts/mysql-study-01/format,webp.webp" alt="MySQL执行流程图"></p>
+<h2 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/posts/mysql-study-01/db-mysql-sql-parser-2.png" alt="分析器, 来自小林coding" title>
+                </div>
+                <div class="image-caption">分析器, 来自小林coding</div>
+            </figure>
+
+
+
+<h2 id="varchar字段最大取值计算公式"><a href="#varchar字段最大取值计算公式" class="headerlink" title="varchar字段最大取值计算公式"></a>varchar字段最大取值计算公式</h2><blockquote>
+<p>65535 - 变长字段字节数列表所占用的字节数 - NULL值列表所占用的字节数 = 65535 - 2 - 1 = 65532</p>
+<p>如果有多个字段的话，要保证所有字段的长度 + 变长字段字节数列表所占用的字节数 + NULL值列表所占用的字节数 &lt;= 65535</p>
 </blockquote>
-<table>
+<h2 id="InnoDB-行格式及数据溢出处理方式"><a href="#InnoDB-行格式及数据溢出处理方式" class="headerlink" title="InnoDB 行格式及数据溢出处理方式"></a>InnoDB 行格式及数据溢出处理方式</h2><table>
 <thead>
 <tr>
-<th>阶段</th>
-<th>协议</th>
-<th>功能作用</th>
-<th>执行阶段</th>
-<th>层次</th>
+<th>行格式</th>
+<th>适用场景</th>
+<th>存储空白列</th>
+<th>行头大小</th>
+<th>溢出处理</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>启动阶段</td>
-<td>无协议</td>
-<td>无</td>
-<td>计算机电源启动</td>
-<td>无</td>
+<td>Compact</td>
+<td>适用于索引列，OLAP 场景</td>
+<td>不存储</td>
+<td>固定</td>
+<td>部分真实数据存储在数据页，溢出数据存储在溢出页中，通过指针连接溢出页</td>
 </tr>
 <tr>
-<td>网络适配器初始化阶段</td>
-<td>无协议</td>
-<td>无</td>
-<td>初始化网络适配器，加载适当的驱动程序</td>
-<td>无</td>
+<td>Dynamic</td>
+<td>适用于非索引列，OLTP 场景</td>
+<td>存储</td>
+<td>可变</td>
+<td>完全的行溢出方式，记录的真实数据处不存储该列的一部分数据，只存储 20 个字节的指针来指向溢出页</td>
 </tr>
 <tr>
-<td>DHCP 获取网络配置阶段</td>
-<td>DHCP</td>
-<td>获取动态分配的网络配置，包括 IP 地址、子网掩码、默认网关、DNS 服务器等</td>
-<td>计算机启动或连接到网络时</td>
-<td>网络层（第三层）</td>
-</tr>
-<tr>
-<td>ARP 地址解析阶段</td>
-<td>ARP</td>
-<td>将目标设备的 IP 地址解析为对应的物理硬件地址（MAC 地址）</td>
-<td>在需要进行局域网通信时</td>
-<td>数据链路层（第二层）</td>
-</tr>
-<tr>
-<td>DNS 解析域名阶段</td>
-<td>DNS</td>
-<td>将域名解析为对应的 IP 地址</td>
-<td>计算机启动或进行网络通信前</td>
-<td>网络层（第三层）</td>
-</tr>
-<tr>
-<td>TCP 连接建立阶段</td>
-<td>TCP</td>
-<td>提供可靠的端到端通信</td>
-<td>在建立连接和进行应用层通信时</td>
-<td>传输层（第四层）</td>
-</tr>
-<tr>
-<td>应用层通信阶段</td>
-<td>HTTP、FTP、SMTP 等</td>
-<td>实现特定网络应用的通信</td>
-<td>计算机启动或进行网络通信时</td>
-<td>应用层（第七层）</td>
+<td>Compressed</td>
+<td>适用于需要压缩存储的场景，Barracuda</td>
+<td>存储</td>
+<td>可变</td>
+<td>完全的行溢出方式，记录的真实数据处不存储该列的一部分数据，只存储 20 个字节的指针来指向溢出页</td>
 </tr>
 </tbody></table>
+<p>在 <code>Compressed</code> 行格式中，如果数据行的大小超过了页的大小，InnoDB 存储引擎会使用分页压缩算法来减小数据的存储空间，但这并不是通过将溢出的数据存储在溢出页中来实现的。</p>
 
         </div>
 
@@ -343,21 +247,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between" style="display:none">
-  
-    <div class="waves-block waves-effect prev">
-      <a href="/posts/mysql-study-01/" id="post-prev" class="post-nav-link">
-        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">MySQL学习之执行流程篇</h4>
-      </a>
-    </div>
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/posts/python-use-Django/" id="post-next" class="post-nav-link">
+      <a href="/posts/osi-model-and-tcp-ip-model/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">Python 使用 Django 框架</h4>
+        <h4 class="title">OSI 七层模型及TCP/IP 模型</h4>
       </a>
     </div>
   
