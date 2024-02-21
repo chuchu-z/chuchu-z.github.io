@@ -7,17 +7,13 @@ categories:
 
 
 
-
-
 闲来无事, 想起之前本地构建博客想看看效果时, 老是出现文章内容丢失的问题, 后来构建时尝试加上`--no-cache`可以解决该问题, 现在又想折腾一下容器静态文件挂载到宿主机
+
+<!--more-->
 
 ```
 docker-compose build --no-cache && docker-compose up -d
 ```
-
-
-
-<!--more-->
 
 
 
@@ -85,61 +81,62 @@ services:
 
 ## 方案
 
-1. **不挂载，只使用Dockerfile中的COPY：** 如果只关心构建时的操作而不需要在运行时修改文件，那么可以仅使用Dockerfile中的`COPY`命令，而不进行挂载。
+#### 1. 不挂载，只使用Dockerfile中的COPY：
 
-   ```yaml
-   version: '3'
-   services:
-     hexo:
-       build:
-         context: .
-         dockerfile: Dockerfile
-       image: chuchuzz426/blog-hexo:1.0
-       ports:
-         - "8080:80"
-   ```
+如果只关心构建时的操作而不需要在运行时修改文件，那么可以仅使用Dockerfile中的`COPY`命令，而不进行挂载。
 
-   这样构建时会将静态文件复制到镜像中，但在运行时对容器的`/usr/share/nginx/html`目录将不会受到冲突。
+```yaml
+version: '3'
+services:
+  hexo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: chuchuzz426/blog-hexo:1.0
+    ports:
+      - "8080:80"
+```
 
-2. **分阶段处理: **
+这样构建时会将静态文件复制到镜像中，但在运行时对容器的`/usr/share/nginx/html`目录将不会受到冲突。
 
-   之所以要分阶段处理, 是因为构建过程中, 是没办法把内部文件拷贝或挂载到宿主机的,只能等构建完成后单独处理。
-   
-   Dockerfile.build
-   
-   ```dockerfile
-   # 第一阶段：构建阶段
-   FROM node:14 AS builder
-   WORKDIR /app
-   COPY . .
-   RUN npm install --no-fund && npx hexo clean && npx hexo generate
-   
-   # 第二阶段：导出静态资源到临时目录
-   FROM alpine as export
-   WORKDIR /export
-   COPY --from=builder /app/public /export/public
-   ```
-   
-   ```bash
-   # 运行构建
-   docker build -t myimage -f Dockerfile.build .
-   
-   # 创建一个临时容器，从中复制文件到宿主机
-   docker create --name extract myimage
-   docker cp extract:/export/public ./public
-   docker rm -f extract
-   ```
-   
-   Dockerfile.run
-   
-   ```dockerfile
-   # 第三阶段：Nginx阶段
-   FROM nginx:alpine
-   WORKDIR /usr/share/nginx/html
-   COPY --from=export /export/public /usr/share/nginx/html
-   EXPOSE 8080
-   ```
-   
+#### 2. 分阶段处理:
+
+之所以要分阶段处理, 是因为构建过程中, 是没办法把内部文件拷贝或挂载到宿主机的,只能等构建完成后单独处理。
+
+Dockerfile.build
+
+```dockerfile
+# 第一阶段：构建阶段
+FROM node:14 AS builder
+WORKDIR /app
+COPY . .
+RUN npm install --no-fund && npx hexo clean && npx hexo generate
+
+# 第二阶段：导出静态资源到临时目录
+FROM alpine as export
+WORKDIR /export
+COPY --from=builder /app/public /export/public
+```
+
+```bash
+# 运行构建
+docker build -t myimage -f Dockerfile.build .
+
+# 创建一个临时容器，从中复制文件到宿主机
+docker create --name extract myimage
+docker cp extract:/export/public ./public
+docker rm -f extract
+```
+
+Dockerfile.run
+
+```dockerfile
+# 第三阶段：Nginx阶段
+FROM nginx:alpine
+WORKDIR /usr/share/nginx/html
+COPY --from=export /export/public /usr/share/nginx/html
+EXPOSE 8080
+```
 
 然而这样的做法虽然能实现挂载, 但对我来说已经没有意义了
 
