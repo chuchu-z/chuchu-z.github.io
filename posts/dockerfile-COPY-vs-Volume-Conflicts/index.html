@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Dockerfile中的COPY与volume挂载冲突问题 | chuchu-z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="闲来无事, 想起之前本地构建博客想看看效果时, 老是出现文章内容丢失的问题, 后来构建时尝试加上--no-cache可以解决该问题, 现在又想折腾一下容器静态文件挂载到宿主机 docker-compose build --no-cache &amp;&amp; docker-compose up -d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dockerfile中的COPY与volume挂载冲突问题">
+<meta property="og:url" content="http://chuchu-z.com/posts/dockerfile-COPY-vs-Volume-Conflicts/">
+<meta property="og:site_name" content="chuchu-z">
+<meta property="og:description" content="闲来无事, 想起之前本地构建博客想看看效果时, 老是出现文章内容丢失的问题, 后来构建时尝试加上--no-cache可以解决该问题, 现在又想折腾一下容器静态文件挂载到宿主机 docker-compose build --no-cache &amp;&amp; docker-compose up -d">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-02-21T02:52:28.000Z">
+<meta property="article:modified_time" content="2024-02-21T03:05:56.983Z">
+<meta property="article:author" content="chuchu-z">
+<meta property="article:tag" content="chuchu-z">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">chuchu-z</h5>
+          <p class="description">借君三十年，繁花万里好江山</p>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/chuchu-z" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Dockerfile中的COPY与volume挂载冲突问题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale" style="padding-left: 5%;">
+        <h1 class="title">Dockerfile中的COPY与volume挂载冲突问题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2024-02-21T02:52:28.000Z" itemprop="datePublished" class="page-time">
+  2024-02-21
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/docker/">Docker</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Dockerfile"><span class="post-toc-number">1.</span> <span class="post-toc-text">Dockerfile</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#docker-compose-yml"><span class="post-toc-number">2.</span> <span class="post-toc-text">docker-compose.yml</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%83%B3%E6%B3%95"><span class="post-toc-number">3.</span> <span class="post-toc-text">想法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E9%97%AE%E9%A2%98"><span class="post-toc-number">4.</span> <span class="post-toc-text">问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8E%9F%E5%9B%A0"><span class="post-toc-number">5.</span> <span class="post-toc-text">原因</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%96%B9%E6%A1%88"><span class="post-toc-number">6.</span> <span class="post-toc-text">方案</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%80%BB%E7%BB%93"><span class="post-toc-number">7.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-dockerfile-COPY-vs-Volume-Conflicts"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Dockerfile中的COPY与volume挂载冲突问题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2024-02-21 10:52:28" datetime="2024-02-21T02:52:28.000Z"  itemprop="datePublished">2024-02-21</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/docker/">Docker</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>闲来无事, 想起之前本地构建博客想看看效果时, 老是出现文章内容丢失的问题, 后来构建时尝试加上<code>--no-cache</code>可以解决该问题, 现在又想折腾一下容器静态文件挂载到宿主机</p>
+<pre class="language-none"><code class="language-none">docker-compose build --no-cache &amp;&amp; docker-compose up -d</code></pre>
+
+
+
+<span id="more"></span>
+
+
+
+<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><pre class="language-docker" data-language="docker"><code class="language-docker"><span class="token instruction"><span class="token keyword">FROM</span> node:14 <span class="token keyword">AS</span> builder</span>
+
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /app</span>
+
+<span class="token instruction"><span class="token keyword">COPY</span> . .</span>
+
+<span class="token instruction"><span class="token keyword">RUN</span> npm install --no-fund &amp;&amp; npx hexo clean &amp;&amp; npx hexo generate</span>
+
+<span class="token instruction"><span class="token keyword">FROM</span> nginx:alpine</span>
+
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /usr/share/nginx/html</span>
+
+<span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">builder</span></span> /app/public /usr/share/nginx/html</span>
+
+<span class="token instruction"><span class="token keyword">EXPOSE</span> 8080</span></code></pre>
+
+
+
+<h2 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h2><pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">hexo</span><span class="token punctuation">:</span>
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">context</span><span class="token punctuation">:</span> .
+      <span class="token key atrule">dockerfile</span><span class="token punctuation">:</span> Dockerfile
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> chuchuzz426/blog<span class="token punctuation">-</span>hexo<span class="token punctuation">:</span><span class="token number">1.0</span>
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token string">"8080:80"</span>
+	<span class="token key atrule">volume</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> ./public<span class="token punctuation">:</span>/usr/share/nginx/html <span class="token comment"># 挂载会把Dockerfile中的COPY覆盖</span></code></pre>
+
+
+
+<h2 id="想法"><a href="#想法" class="headerlink" title="想法"></a>想法</h2><p>我想把 <code>COPY --from=builder /app/public /usr/share/nginx/html</code> 这一步的/usr/share/nginx/html目录下的静态资源挂载到宿主机</p>
+<p>当时脑回路有点迷糊, 想着这样能方便查看或者在宿主机也能刷新静态资源? 但是犯傻忘了每次新的静态资源也是要先通过容器才能生成的😓, 还折腾了起来 </p>
+<p>最后挂载没成功, 倒是遇到了个COPY与挂载的冲突问题。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><blockquote>
+<p>如果已经在 Dockerfile 中使用<code>COPY --from=builder /app/public /usr/share/nginx/html</code>将一阶段的静态文件复制到Nginx阶段，然后在运行容器时再试图使用<code>-v</code>或<code>--volume</code>在宿主机上把./public目录挂载到容器的<code>/usr/share/nginx/html</code>，会导致挂载冲突, 具体表现方式为, COPY的文件被宿主机上挂载的目录覆盖。</p>
+</blockquote>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><blockquote>
+<p>在Docker中，一旦使用<code>COPY</code>命令将文件复制到容器中，该文件就会被视为镜像的一部分，并且在运行容器时使用<code>-v</code>或<code>--volume</code>挂载宿主机目录到这个位置时，宿主机的内容将覆盖容器中的内容，导致挂载冲突。</p>
+</blockquote>
+<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><ol>
+<li><p><strong>不挂载，只使用Dockerfile中的COPY：</strong> 如果只关心构建时的操作而不需要在运行时修改文件，那么可以仅使用Dockerfile中的<code>COPY</code>命令，而不进行挂载。</p>
+<pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token string">'3'</span>
+<span class="token key atrule">services</span><span class="token punctuation">:</span>
+  <span class="token key atrule">hexo</span><span class="token punctuation">:</span>
+    <span class="token key atrule">build</span><span class="token punctuation">:</span>
+      <span class="token key atrule">context</span><span class="token punctuation">:</span> .
+      <span class="token key atrule">dockerfile</span><span class="token punctuation">:</span> Dockerfile
+    <span class="token key atrule">image</span><span class="token punctuation">:</span> chuchuzz426/blog<span class="token punctuation">-</span>hexo<span class="token punctuation">:</span><span class="token number">1.0</span>
+    <span class="token key atrule">ports</span><span class="token punctuation">:</span>
+      <span class="token punctuation">-</span> <span class="token string">"8080:80"</span></code></pre>
+
+<p>这样构建时会将静态文件复制到镜像中，但在运行时对容器的<code>/usr/share/nginx/html</code>目录将不会受到冲突。</p>
+</li>
+<li><p>**分阶段处理: **</p>
+<p>之所以要分阶段处理, 是因为构建过程中, 是没办法把内部文件拷贝或挂载到宿主机的,只能等构建完成后单独处理。</p>
+<p>Dockerfile.build</p>
+<pre class="language-docker" data-language="docker"><code class="language-docker"><span class="token comment"># 第一阶段：构建阶段</span>
+<span class="token instruction"><span class="token keyword">FROM</span> node:14 <span class="token keyword">AS</span> builder</span>
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /app</span>
+<span class="token instruction"><span class="token keyword">COPY</span> . .</span>
+<span class="token instruction"><span class="token keyword">RUN</span> npm install --no-fund &amp;&amp; npx hexo clean &amp;&amp; npx hexo generate</span>
+
+<span class="token comment"># 第二阶段：导出静态资源到临时目录</span>
+<span class="token instruction"><span class="token keyword">FROM</span> alpine <span class="token keyword">as</span> export</span>
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /export</span>
+<span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">builder</span></span> /app/public /export/public</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 运行构建</span>
+<span class="token function">docker</span> build <span class="token parameter variable">-t</span> myimage <span class="token parameter variable">-f</span> Dockerfile.build <span class="token builtin class-name">.</span>
+
+<span class="token comment"># 创建一个临时容器，从中复制文件到宿主机</span>
+<span class="token function">docker</span> create <span class="token parameter variable">--name</span> extract myimage
+<span class="token function">docker</span> <span class="token function">cp</span> extract:/export/public ./public
+<span class="token function">docker</span> <span class="token function">rm</span> <span class="token parameter variable">-f</span> extract</code></pre>
+
+<p>Dockerfile.run</p>
+<pre class="language-docker" data-language="docker"><code class="language-docker"><span class="token comment"># 第三阶段：Nginx阶段</span>
+<span class="token instruction"><span class="token keyword">FROM</span> nginx:alpine</span>
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /usr/share/nginx/html</span>
+<span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">export</span></span> /export/public /usr/share/nginx/html</span>
+<span class="token instruction"><span class="token keyword">EXPOSE</span> 8080</span></code></pre>
+
+
+</li>
+</ol>
+<p>然而这样的做法虽然能实现挂载, 但对我来说已经没有意义了</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>我的初衷是新发布的文章能在本地执行编译, 然后生成的静态文件资源能够和容器中的/usr/share/nginx/html互通, 避免本地每次发布新文章都要重新构建容器很麻烦, 但是现在回头想想, 其实写完新文章不想重新构建的话直接进入容器执行<code>hexo g</code>效果也一样的, 没白折腾, 又学到了有用的知识。</p>
+
+        </div>
+
+        <blockquote class="post-copyright" style="display:none">
+    
+    <footer>
+        <a href="http://chuchu-z.com">
+            <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4" alt="chuchu-z">
+            chuchu-z
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        
+            
+
+            
+
+        
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/24-02-note/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">24-02 笔记</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            <span>chuchu-z &copy; 2021 - 2024</span>
+            <span class="num">Total words: 21.6k</span>
+        </p>
+        <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

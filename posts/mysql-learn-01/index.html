@@ -14,7 +14,7 @@
     
     
     
-    <title>MySQL学习之执行流程篇 | chuchu-z</title>
+    <title>MySQL执行流程 | chuchu-z</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -23,19 +23,19 @@
     <meta name="keywords" content="">
     <meta name="description" content="MySQL执行流程 连接器-查询缓存(如果是select才查询缓存, MySQL8.0废弃)-解析器(词法分析, 语法分析)-预处理器(判断表&#x2F;字段是否存在)-优化器-执行器(验证权限, 调用存储引擎API, 如果有索引下推则携带索引条件给存储引擎判断-存储引擎查询数据并利用索引下推过滤数据, 然后执行回表查询数据, 向执行器(server层)返回结果)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL学习之执行流程篇">
-<meta property="og:url" content="http://chuchu-z.com/posts/mysql-study-01/">
+<meta property="og:title" content="MySQL执行流程">
+<meta property="og:url" content="http://chuchu-z.com/posts/mysql-learn-01/">
 <meta property="og:site_name" content="chuchu-z">
 <meta property="og:description" content="MySQL执行流程 连接器-查询缓存(如果是select才查询缓存, MySQL8.0废弃)-解析器(词法分析, 语法分析)-预处理器(判断表&#x2F;字段是否存在)-优化器-执行器(验证权限, 调用存储引擎API, 如果有索引下推则携带索引条件给存储引擎判断-存储引擎查询数据并利用索引下推过滤数据, 然后执行回表查询数据, 向执行器(server层)返回结果)">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://chuchu-z.com/posts/mysql-study-01/format,webp.webp">
-<meta property="og:image" content="http://chuchu-z.com/posts/mysql-study-01/db-mysql-sql-parser-2.png">
+<meta property="og:image" content="http://chuchu-z.com/posts/mysql-learn-01/format,webp.webp">
+<meta property="og:image" content="http://chuchu-z.com/posts/mysql-learn-01/db-mysql-sql-parser-2.png">
 <meta property="article:published_time" content="2024-02-02T07:24:19.000Z">
-<meta property="article:modified_time" content="2024-02-18T08:30:12.031Z">
+<meta property="article:modified_time" content="2024-02-21T03:05:56.987Z">
 <meta property="article:author" content="chuchu-z">
 <meta property="article:tag" content="chuchu-z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://chuchu-z.com/posts/mysql-study-01/format,webp.webp">
+<meta name="twitter:image" content="http://chuchu-z.com/posts/mysql-learn-01/format,webp.webp">
     
         <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
     
@@ -102,7 +102,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">MySQL学习之执行流程篇</div>
+        <div class="flex-col header-title ellipsis">MySQL执行流程</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -120,7 +120,7 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale" style="padding-left: 5%;">
-        <h1 class="title">MySQL学习之执行流程篇</h1>
+        <h1 class="title">MySQL执行流程</h1>
         <h5 class="subtitle">
             
                 <time datetime="2024-02-02T07:24:19.000Z" itemprop="datePublished" class="page-time">
@@ -128,7 +128,7 @@
 </time>
 
 
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/mysql/">MySql</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/mysql/">MySQL</a></li></ul>
 
             
         </h5>
@@ -150,16 +150,16 @@
     </aside>
 
 
-<article id="post-mysql-study-01"
+<article id="post-mysql-learn-01"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">MySQL学习之执行流程篇</h1>
+        <h1 class="post-card-title">MySQL执行流程</h1>
         <div class="post-meta">
             <time class="post-time" title="2024-02-02 15:24:19" datetime="2024-02-02T07:24:19.000Z"  itemprop="datePublished">2024-02-02</time>
 
             
-	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/mysql/">MySql</a></li></ul>
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/mysql/">MySQL</a></li></ul>
 
 
 
@@ -174,11 +174,11 @@
 
 
 
-<p><img src="/posts/mysql-study-01/format,webp.webp" alt="MySQL执行流程图"></p>
+<p><img src="/posts/mysql-learn-01/format,webp.webp" alt="MySQL执行流程图"></p>
 <h2 id="分析器"><a href="#分析器" class="headerlink" title="分析器"></a>分析器</h2><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/posts/mysql-study-01/db-mysql-sql-parser-2.png" alt="分析器, 来自小林coding" title>
+                    <img src="/posts/mysql-learn-01/db-mysql-sql-parser-2.png" alt="分析器, 来自小林coding" title>
                 </div>
                 <div class="image-caption">分析器, 来自小林coding</div>
             </figure>
@@ -302,7 +302,7 @@
 
         <p>
             <span>chuchu-z &copy; 2021 - 2024</span>
-            <span class="num">Total words: 20.7k</span>
+            <span class="num">Total words: 21.6k</span>
         </p>
         <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
     </div>
