@@ -1,8 +1,8 @@
 ---
-title: 'MySQL学习之执行流程篇'
+title: 'MySQL执行流程'
 date: 2024-2-2 15:24:19
 categories: 
-- MySql
+- MySQL
 ---
 
 
@@ -17,13 +17,13 @@ categories:
 
 
 
-![MySQL执行流程图](mysql-study-01/format,webp.webp)
+![MySQL执行流程图](mysql-learn-01/format,webp.webp)
 
 
 
 ## 分析器
 
-![分析器, 来自小林coding](mysql-study-01/db-mysql-sql-parser-2.png)
+![分析器, 来自小林coding](mysql-learn-01/db-mysql-sql-parser-2.png)
 
 
 
