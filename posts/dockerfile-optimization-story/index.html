@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Dockerfile 优化历程 | chuchu-z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="使用dockerfile构建一个Python环境的容器, 但是构建出来的镜像太大了, 可以优化一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dockerfile 优化历程">
+<meta property="og:url" content="http://chuchu-z.com/posts/dockerfile-optimization-story/">
+<meta property="og:site_name" content="chuchu-z">
+<meta property="og:description" content="使用dockerfile构建一个Python环境的容器, 但是构建出来的镜像太大了, 可以优化一下。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://chuchu-z.com/posts/dockerfile-optimization-story/image-20240228095131880.png">
+<meta property="og:image" content="http://chuchu-z.com/posts/dockerfile-optimization-story/image-20240228102909647.png">
+<meta property="og:image" content="http://chuchu-z.com/posts/dockerfile-optimization-story/image-20240228175650361.png">
+<meta property="og:image" content="http://chuchu-z.com/posts/dockerfile-optimization-story/image-20240228180117254.png">
+<meta property="article:published_time" content="2024-02-28T01:53:59.000Z">
+<meta property="article:modified_time" content="2024-02-29T06:54:33.795Z">
+<meta property="article:author" content="chuchu-z">
+<meta property="article:tag" content="chuchu-z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://chuchu-z.com/posts/dockerfile-optimization-story/image-20240228095131880.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">chuchu-z</h5>
+          <p class="description">借君三十年，繁花万里好江山</p>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/chuchu-z" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Dockerfile 优化历程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale" style="padding-left: 5%;">
+        <h1 class="title">Dockerfile 优化历程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2024-02-28T01:53:59.000Z" itemprop="datePublished" class="page-time">
+  2024-02-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/docker/">Docker</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E5%8E%9FDockerfile"><span class="post-toc-number">1.</span> <span class="post-toc-text">原Dockerfile</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BC%98%E5%8C%961-%E5%A4%9A%E9%98%B6%E6%AE%B5%E6%9E%84%E5%BB%BA"><span class="post-toc-number">2.</span> <span class="post-toc-text">优化1-多阶段构建</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BC%98%E5%8C%962-%E4%BD%BF%E7%94%A8Alpine%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F"><span class="post-toc-number">3.</span> <span class="post-toc-text">优化2-使用Alpine基础镜像</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E4%BC%98%E5%8C%963-%E4%BD%BF%E7%94%A8Alpine%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F-%E5%A4%9A%E9%98%B6%E6%AE%B5%E6%9E%84%E5%BB%BA"><span class="post-toc-number">4.</span> <span class="post-toc-text">优化3-使用Alpine基础镜像+多阶段构建</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-dockerfile-optimization-story"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Dockerfile 优化历程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2024-02-28 09:53:59" datetime="2024-02-28T01:53:59.000Z"  itemprop="datePublished">2024-02-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/docker/">Docker</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>使用dockerfile构建一个Python环境的容器, 但是构建出来的镜像太大了, 可以优化一下。</p>
+<span id="more"></span>
+
+
+
+<h2 id="原Dockerfile"><a href="#原Dockerfile" class="headerlink" title="原Dockerfile"></a>原Dockerfile</h2><pre class="language-docker" data-language="docker"><code class="language-docker"><span class="token instruction"><span class="token keyword">FROM</span> python:3.12</span>
+
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /app</span>
+
+<span class="token instruction"><span class="token keyword">COPY</span> . /app</span>
+
+<span class="token comment"># pip 安装 Python 依赖后, 使用 sed 注释 /usr/local/lib/python3.12/site-packages/django/db/backends/base/base.py 的 225行, 避免检查mysql版本</span>
+<span class="token instruction"><span class="token keyword">RUN</span> apt-get update &amp;&amp; <span class="token operator">\</span>
+    apt-get install -y sed &amp;&amp; <span class="token operator">\</span>
+    pip install --no-cache-dir -r requirements.txt &amp;&amp; <span class="token operator">\</span>
+    sed -i <span class="token string">'225s/^/#/'</span> /usr/local/lib/python3.12/site-packages/django/db/backends/base/base.py</span>
+
+<span class="token instruction"><span class="token keyword">EXPOSE</span> 9527</span>
+
+<span class="token instruction"><span class="token keyword">CMD</span> [<span class="token string">"python"</span>, <span class="token string">"manage.py"</span>, <span class="token string">"runserver"</span>, <span class="token string">"0.0.0.0:9527"</span>]</span></code></pre>
+
+<p>镜像大小: 1.35GB</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/posts/dockerfile-optimization-story/image-20240228095131880.png" alt="image-20240228095131880" title>
+                </div>
+                <div class="image-caption">image-20240228095131880</div>
+            </figure>
+
+
+
+<h2 id="优化1-多阶段构建"><a href="#优化1-多阶段构建" class="headerlink" title="优化1-多阶段构建"></a>优化1-多阶段构建</h2><pre class="language-docker" data-language="docker"><code class="language-docker"><span class="token comment"># 阶段1</span>
+<span class="token instruction"><span class="token keyword">FROM</span> python:3.12 <span class="token keyword">AS</span> builder</span>
+
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /app</span>
+
+<span class="token instruction"><span class="token keyword">COPY</span> . /app</span>
+
+<span class="token comment"># 创建并激活虚拟环境</span>
+<span class="token instruction"><span class="token keyword">RUN</span> python -m venv /venv &amp;&amp; <span class="token operator">\</span>
+	<span class="token comment"># 使用 pip 安装 Python 依赖</span>
+	/venv/bin/pip install --no-cache-dir -r requirements.txt &amp;&amp; <span class="token operator">\</span>
+	<span class="token comment"># 更新 apt-get</span>
+	apt-get update &amp;&amp; <span class="token operator">\</span>
+	<span class="token comment"># 安装 sed</span>
+    apt-get install -y sed &amp;&amp; <span class="token operator">\</span>
+    <span class="token comment"># 使用 sed 注释 /venv/lib/python3.12/site-packages/django/db/backends/base/base.py 的 225行，避免检查mysql版本</span>
+    sed -i <span class="token string">'225s/^/#/'</span> /venv/lib/python3.12/site-packages/django/db/backends/base/base.py</span>
+
+<span class="token comment"># 阶段2</span>
+<span class="token instruction"><span class="token keyword">FROM</span> python:3.12</span>
+
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /app</span>
+
+<span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">builder</span></span> /venv /venv</span>
+<span class="token instruction"><span class="token keyword">COPY</span> <span class="token options"><span class="token property">--from</span><span class="token punctuation">=</span><span class="token string">builder</span></span> /app /app</span>
+
+<span class="token comment"># 设置环境变量</span>
+<span class="token instruction"><span class="token keyword">ENV</span> PATH=<span class="token string">"/venv/bin:$PATH"</span></span>
+
+<span class="token instruction"><span class="token keyword">EXPOSE</span> 9527</span>
+
+<span class="token instruction"><span class="token keyword">CMD</span> [<span class="token string">"python"</span>, <span class="token string">"manage.py"</span>, <span class="token string">"runserver"</span>, <span class="token string">"0.0.0.0:9527"</span>]</span></code></pre>
+
+<p>镜像大小: 1.17GB</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/posts/dockerfile-optimization-story/image-20240228102909647.png" alt="image-20240228102909647" title>
+                </div>
+                <div class="image-caption">image-20240228102909647</div>
+            </figure>
+
+
+
+<h2 id="优化2-使用Alpine基础镜像"><a href="#优化2-使用Alpine基础镜像" class="headerlink" title="优化2-使用Alpine基础镜像"></a>优化2-使用Alpine基础镜像</h2><p>使用Alpine Linux 时, 由于缺少完整的扩展包依赖, 然后又遇到了安装 mysqlclient 时错误的问题, 折腾好久, 功夫不负有心人, 在 <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/76533384/docker-alpine-build-fails-on-mysqlclient-installation-with-error-exception-can">Stack Overflow</a> 找到了一个可参考的, 然后稍作修改</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/posts/dockerfile-optimization-story/image-20240228175650361.png" alt="image-20240228175650361" title>
+                </div>
+                <div class="image-caption">image-20240228175650361</div>
+            </figure>
+
+<pre class="language-docker" data-language="docker"><code class="language-docker"><span class="token instruction"><span class="token keyword">FROM</span> python:3.12-alpine</span>
+
+<span class="token instruction"><span class="token keyword">WORKDIR</span> /app</span>
+
+<span class="token instruction"><span class="token keyword">COPY</span> requirements.txt .</span>
+
+<span class="token comment"># 更新 Alpine Linux 软件包索引</span>
+<span class="token instruction"><span class="token keyword">RUN</span> apk update &amp;&amp; <span class="token operator">\</span>
+    <span class="token comment"># 安装构建依赖和 MariaDB 开发依赖</span>
+    apk add --no-cache --virtual build-deps gcc musl-dev libffi-dev pkgconf mariadb-dev &amp;&amp; <span class="token operator">\</span>
+    <span class="token comment"># 安装 mariadb-connector-c-dev 依赖</span>
+    apk add --no-cache mariadb-connector-c-dev &amp;&amp; <span class="token operator">\</span>
+    <span class="token comment"># 使用 pip 安装 Python 依赖</span>
+    pip install --no-cache-dir -r requirements.txt &amp;&amp; <span class="token operator">\</span>
+    <span class="token comment"># 使用 sed 注释 /usr/local/lib/python3.12/site-packages/django/db/backends/base/base.py 的 225行，避免检查mysql版本</span>
+    sed -i <span class="token string">'225s/^/#/'</span> /usr/local/lib/python3.12/site-packages/django/db/backends/base/base.py &amp;&amp; <span class="token operator">\</span>
+    <span class="token comment"># 删除构建依赖，减小镜像体积</span>
+    apk del build-deps</span>
+
+<span class="token instruction"><span class="token keyword">COPY</span> . .</span>
+
+<span class="token instruction"><span class="token keyword">EXPOSE</span> 9527</span>
+
+<span class="token instruction"><span class="token keyword">CMD</span> [<span class="token string">"python"</span>, <span class="token string">"manage.py"</span>, <span class="token string">"runserver"</span>, <span class="token string">"0.0.0.0:9527"</span>]</span></code></pre>
+
+<p>此时再看镜像大小, 已经来到了210MB</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/posts/dockerfile-optimization-story/image-20240228180117254.png" alt="image-20240228180117254" title>
+                </div>
+                <div class="image-caption">image-20240228180117254</div>
+            </figure>
+
+
+
+<h2 id="优化3-使用Alpine基础镜像-多阶段构建"><a href="#优化3-使用Alpine基础镜像-多阶段构建" class="headerlink" title="优化3-使用Alpine基础镜像+多阶段构建"></a>优化3-使用Alpine基础镜像+多阶段构建</h2><p>虽然210MB已经达到我的预期标准了, 但是我还想试试alpine+多阶段构建后有多大, 但是在分阶段这里总是遇到一些问题, 多次尝试还是未能攻克, 但是这个想法还是保留下来, 后期对docker构建流程更为精进再回来重新尝试。</p>
+
+        </div>
+
+        <blockquote class="post-copyright" style="display:none">
+    
+    <footer>
+        <a href="http://chuchu-z.com">
+            <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4" alt="chuchu-z">
+            chuchu-z
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        
+            
+
+            
+
+        
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/dockerfile-COPY-vs-Volume-Conflicts/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Dockerfile中的COPY与volume挂载冲突问题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            <span>chuchu-z &copy; 2021 - 2024</span>
+            <span class="num">Total words: 22.2k</span>
+        </p>
+        <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
