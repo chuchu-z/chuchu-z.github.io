@@ -35,7 +35,7 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:9527"]
 
 镜像大小: 1.35GB
 
-![image-20240228095131880](dockerfile-optimization-story/image-20240228095131880.png)
+![](dockerfile-optimization-story/image-20240228095131880.png)
 
 
 
@@ -78,7 +78,7 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:9527"]
 
 镜像大小: 1.17GB
 
-![image-20240228102909647](dockerfile-optimization-story/image-20240228102909647.png)
+![](dockerfile-optimization-story/image-20240228102909647.png)
 
 
 
@@ -86,7 +86,7 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:9527"]
 
 使用Alpine Linux 时, 由于缺少完整的扩展包依赖, 然后又遇到了安装 mysqlclient 时错误的问题, 折腾好久, 功夫不负有心人, 在 [Stack Overflow](https://stackoverflow.com/questions/76533384/docker-alpine-build-fails-on-mysqlclient-installation-with-error-exception-can) 找到了一个可参考的, 然后稍作修改
 
-![image-20240228175650361](dockerfile-optimization-story/image-20240228175650361.png)
+![](dockerfile-optimization-story/image-20240228175650361.png)
 
 ```dockerfile
 FROM python:3.12-alpine
@@ -117,7 +117,7 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:9527"]
 
 此时再看镜像大小, 已经来到了210MB
 
-![image-20240228180117254](dockerfile-optimization-story/image-20240228180117254.png)
+![](dockerfile-optimization-story/image-20240228180117254.png)
 
 
 
