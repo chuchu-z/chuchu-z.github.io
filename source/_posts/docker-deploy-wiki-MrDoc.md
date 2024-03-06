@@ -23,6 +23,8 @@ categories:
 
 
 
+## 部署
+
 ```shell
 cd /www/wwwroot
 
@@ -71,3 +73,37 @@ server {
 
 ```
 
+## 迁移到其他服务器部署
+
+如果使用一段时间后, 需要将其部署到其他服务器
+
+项目源代码在 **/www/wwwroot/wiki-Mrdoc** 目录下, 并且使用docker部署的
+
+只需要将整个 **wiki-Mrdoc** 项目打包成压缩包文件, 并上传到其他服务器, 然后在新的服务器上执行部署命令
+
+```bash
+cd /www/wwwroot
+
+# 压缩
+tar -czvf wiki-Mrdoc.tar.gz wiki-Mrdoc
+
+# 传输到新服务器
+scp /www/wwwroot/wiki-Mrdoc.tar.gz root@{ip}:/www/wwwroot/
+```
+
+```bash
+cd /www/wwwroot
+
+# 解压 .tar.gz 文件
+tar -xzvf wiki-Mrdoc.tar.gz
+
+cd wiki-Mrdoc
+
+# pull镜像(先安装docker)
+docker pull zmister/mrdoc:v7
+
+# 修改挂载的项目目录为/www/wwwroot/wiki-Mrdoc
+docker run -d --name mrdoc -p 10086:10086 -v /www/wwwroot/wiki-Mrdoc:/app/MrDoc zmister/mrdoc:v7
+```
+
+然后正常配置网站站点, 配置反向代理即可
