@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>MySQL索引事务 | chuchu-z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="索引与引擎及其关系索引 一种提高查询性能的数据结构, 类似于一本字典中的目录, 使得可以快速定位和检索数据位置, 具有以空间换时间的设计思想, 所以并不是任何情况都适合创建索引, 索引的价值是快速定位，如果起不到定位的字段通常是不需要创建索引的，因为索引会占用物理空间, 另外, 经常更新且不需要用作where条件的字段不必要创建索引, 数据频繁修改, 动态维护索引也需要额外的开销将影响数据库性能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL索引事务">
+<meta property="og:url" content="http://chuchu-z.com/posts/mysql-learn-02/">
+<meta property="og:site_name" content="chuchu-z">
+<meta property="og:description" content="索引与引擎及其关系索引 一种提高查询性能的数据结构, 类似于一本字典中的目录, 使得可以快速定位和检索数据位置, 具有以空间换时间的设计思想, 所以并不是任何情况都适合创建索引, 索引的价值是快速定位，如果起不到定位的字段通常是不需要创建索引的，因为索引会占用物理空间, 另外, 经常更新且不需要用作where条件的字段不必要创建索引, 数据频繁修改, 动态维护索引也需要额外的开销将影响数据库性能。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://chuchu-z.com/posts/mysql-learn-02/243b1466779a9e107ae3ef0155604a17.png">
+<meta property="og:image" content="http://chuchu-z.com/posts/mysql-learn-02/fabd6dadd61a0aa342d7107213955a72.png">
+<meta property="article:published_time" content="2024-02-19T01:53:36.000Z">
+<meta property="article:modified_time" content="2024-03-06T10:09:24.959Z">
+<meta property="article:author" content="chuchu-z">
+<meta property="article:tag" content="chuchu-z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://chuchu-z.com/posts/mysql-learn-02/243b1466779a9e107ae3ef0155604a17.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">chuchu-z</h5>
+          <p class="description">借君三十年，繁花万里好江山</p>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/chuchu-z" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">MySQL索引事务</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale" style="padding-left: 5%;">
+        <h1 class="title">MySQL索引事务</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2024-02-19T01:53:36.000Z" itemprop="datePublished" class="page-time">
+  2024-02-19
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/mysql/">MySQL</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%B4%A2%E5%BC%95%E4%B8%8E%E5%BC%95%E6%93%8E%E5%8F%8A%E5%85%B6%E5%85%B3%E7%B3%BB"><span class="post-toc-number">1.</span> <span class="post-toc-text">索引与引擎及其关系</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">索引</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">存储引擎</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%85%B3%E7%B3%BB"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">关系</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#InnoDB"><span class="post-toc-number">2.</span> <span class="post-toc-text">InnoDB</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%B4%A2%E5%BC%95%E5%88%92%E5%88%86"><span class="post-toc-number">3.</span> <span class="post-toc-text">索引划分</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%B4%A2%E5%BC%95%E4%BC%98%E5%8C%96"><span class="post-toc-number">4.</span> <span class="post-toc-text">索引优化</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-mysql-learn-02"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">MySQL索引事务</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2024-02-19 09:53:36" datetime="2024-02-19T01:53:36.000Z"  itemprop="datePublished">2024-02-19</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/mysql/">MySQL</a></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="索引与引擎及其关系"><a href="#索引与引擎及其关系" class="headerlink" title="索引与引擎及其关系"></a>索引与引擎及其关系</h2><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><blockquote>
+<p>一种提高查询性能的数据结构, 类似于一本字典中的目录, 使得可以快速定位和检索数据位置, 具有以空间换时间的设计思想,</p>
+<p>所以并不是任何情况都适合创建索引, 索引的价值是快速定位，如果起不到定位的字段通常是不需要创建索引的，因为索引会占用物理空间,</p>
+<p>另外, 经常更新且不需要用作where条件的字段不必要创建索引, 数据频繁修改, 动态维护索引也需要额外的开销将影响数据库性能。</p>
+</blockquote>
+<span id="more"></span>
+
+
+
+<h3 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h3><blockquote>
+<p>解决如何存储数据, 如何为存储的数据建立索引以及如何更新、查询数据等技术。</p>
+<p>MySQL 存储引擎有 MyISAM 、InnoDB、Memory等, 其中 InnoDB 是在 MySQL 5.5 之后成为默认的存储引擎。</p>
+</blockquote>
+<h3 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h3><blockquote>
+<p>存储引擎决定表的物理存储结构, 包括: 数据文件的格式、索引文件的格式, 包括如何组织数据、如何处理索引、如何处理事务、如何处理并发等。</p>
+<p>而索引则是在这个物理存储结构上建立的数据结构, 不同的存储引擎可以支持不同类型的索引，例如B+树索引、B树索引、HASH索引。</p>
+</blockquote>
+<h2 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h2><blockquote>
+<p>InnoDB数据按[数据页]为单位进行读写</p>
+<p>InnoDB数据页默认大小为16KB, 所以InnoDB每次I/O操作数据最少操作16KB数据</p>
+</blockquote>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/posts/mysql-learn-02/243b1466779a9e107ae3ef0155604a17.png" alt="数据页(图片来源小林coding)" title>
+                </div>
+                <div class="image-caption">数据页(图片来源小林coding)</div>
+            </figure>
+
+
+
+<p><img src="/posts/mysql-learn-02/fabd6dadd61a0aa342d7107213955a72.png" alt="数据页说明(图片来源小林coding)"></p>
+<h2 id="索引划分"><a href="#索引划分" class="headerlink" title="索引划分"></a>索引划分</h2><table>
+<thead>
+<tr>
+<th align="center">分类</th>
+<th align="center">索引类型</th>
+<th align="center">特点</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">数据结构分类</td>
+<td align="center">B+Tree 索引</td>
+<td align="center">适用于等值查询和范围查询。</td>
+<td align="center">B+Tree 索引是一种平衡树结构，适用于范围查询和排序，是 MySQL 默认的索引类型。</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">HASH 索引</td>
+<td align="center">适用于等值查询，不支持范围查询，对于大数据量的表性能较好。</td>
+<td align="center">HASH 索引适用于等值查询，通过散列算法将索引列的值映射为散列值，对于大型数据集可以提供快速的查找。</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">Full-Text 索引</td>
+<td align="center">用于全文搜索，支持对文本数据进行高效的模糊查询。</td>
+<td align="center">Full-Text 索引是为了支持全文搜索，可以在文本数据中执行模糊查询，适用于需要搜索关键词的场景。</td>
+</tr>
+<tr>
+<td align="center">物理存储分类</td>
+<td align="center">聚簇索引（主键索引）</td>
+<td align="center">数据行的物理顺序与索引的顺序一致，InnoDB 存储引擎默认使用。</td>
+<td align="center">聚簇索引决定了数据在磁盘上的物理存储顺序，通常是主键索引。在 InnoDB 存储引擎中，表的数据行实际上是按照主键顺序存储的。</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">二级索引（辅助索引）</td>
+<td align="center">非主键索引，存储实际数据行的引用而不是实际的数据。</td>
+<td align="center">二级索引是不基于表的物理存储顺序的索引，而是存储指向实际数据行的引用。</td>
+</tr>
+<tr>
+<td align="center">字段特性分类</td>
+<td align="center">单列索引</td>
+<td align="center">仅基于单个列创建的索引。</td>
+<td align="center">单列索引是最基本的索引类型，没有唯一性或其他特殊约束，可以包含重复的值。</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">联合索引（复合索引）</td>
+<td align="center">基于多个列创建的索引，适用于同时查询多个列的情况。</td>
+<td align="center">联合索引可以包含多个列，有助于优化多列的查询条件。</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">唯一索引</td>
+<td align="center">确保索引列的值唯一，可用于强制实施表的唯一性约束。</td>
+<td align="center">唯一索引确保索引列中的值是唯一的，可用于强制表中的数据唯一性。</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">普通索引</td>
+<td align="center">基本索引类型，没有特殊约束，可以包含重复的值。</td>
+<td align="center">普通索引是最基本的索引类型，没有唯一性或其他特殊约束，可以包含重复的值。</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center">前缀索引</td>
+<td align="center">仅对列的前几个字符创建索引，可减小索引的大小。</td>
+<td align="center">前缀索引是指对列的前几个字符创建的索引，用于减小索引的存储空间。</td>
+</tr>
+</tbody></table>
+<h2 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h2>
+        </div>
+
+        <blockquote class="post-copyright" style="display:none">
+    
+    <footer>
+        <a href="http://chuchu-z.com">
+            <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4" alt="chuchu-z">
+            chuchu-z
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        
+            
+
+            
+
+        
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between" style="display:none">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/posts/dockerfile-COPY-vs-Volume-Conflicts/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Dockerfile中的COPY与volume挂载冲突问题</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/24-02-note/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">24-02 笔记</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            <span>chuchu-z &copy; 2021 - 2024</span>
+            <span class="num">Total words: 23.5k</span>
+        </p>
+        <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
