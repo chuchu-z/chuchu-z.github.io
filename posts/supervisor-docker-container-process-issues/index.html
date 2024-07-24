@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Supervisor 管理 Docker 容器内进程问题 | chuchu-z</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="问题描述：在测试环境中发现，宿主机的 Supervisor 进程管理工具无法有效管理 Docker 容器内由 docker exec php7 命令创建的 PHP 进程。这导致 Supervisor 对 Docker 容器内的 PHP 进程无法进行有效的控制和重启 预期行为：宿主机的 Supervisor 应能够控制 Docker 容器内由 docker exec php7 命令创建的 PHP 进">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Supervisor 管理 Docker 容器内进程问题">
+<meta property="og:url" content="http://chuchu-z.com/posts/supervisor-docker-container-process-issues/">
+<meta property="og:site_name" content="chuchu-z">
+<meta property="og:description" content="问题描述：在测试环境中发现，宿主机的 Supervisor 进程管理工具无法有效管理 Docker 容器内由 docker exec php7 命令创建的 PHP 进程。这导致 Supervisor 对 Docker 容器内的 PHP 进程无法进行有效的控制和重启 预期行为：宿主机的 Supervisor 应能够控制 Docker 容器内由 docker exec php7 命令创建的 PHP 进">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-07-24T09:49:33.000Z">
+<meta property="article:modified_time" content="2024-07-24T10:00:53.267Z">
+<meta property="article:author" content="chuchu-z">
+<meta property="article:tag" content="chuchu-z">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" type="application/atom+xml" title="chuchu-z" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">chuchu-z</h5>
+          <p class="description">借君三十年，繁花万里好江山</p>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/chuchu-z" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Supervisor 管理 Docker 容器内进程问题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Search">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale" style="padding-left: 5%;">
+        <h1 class="title">Supervisor 管理 Docker 容器内进程问题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2024-07-24T09:49:33.000Z" itemprop="datePublished" class="page-time">
+  2024-07-24
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/">Linux</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/docker/">Docker</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E7%8E%B0%E8%B1%A1%E4%B8%8E%E5%88%86%E6%9E%90"><span class="post-toc-number">1.</span> <span class="post-toc-text">现象与分析</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决方案</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-supervisor-docker-container-process-issues"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Supervisor 管理 Docker 容器内进程问题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2024-07-24 17:49:33" datetime="2024-07-24T09:49:33.000Z"  itemprop="datePublished">2024-07-24</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/">Linux</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/linux/docker/">Docker</a></li></ul></li></ul>
+
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p><strong>问题描述</strong>：在测试环境中发现，宿主机的 Supervisor 进程管理工具无法有效管理 Docker 容器内由 <code>docker exec php7</code> 命令创建的 PHP 进程。这导致 Supervisor 对 Docker 容器内的 PHP 进程无法进行有效的控制和重启</p>
+<p><strong>预期行为</strong>：宿主机的 Supervisor 应能够控制 Docker 容器内由 <code>docker exec php7</code> 命令创建的 PHP 进程，包括启动、停止和重启</p>
+<span id="more"></span>
+
+
+
+<p>supervisor 配置如下:</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>program:laikeduo_test_rabbitmq_processor<span class="token punctuation">]</span>
+<span class="token assign-left variable">command</span><span class="token operator">=</span>docker <span class="token builtin class-name">exec</span> php7 php /var/www/laikeduo_test/artisan rabbitmq:process-messages
+<span class="token assign-left variable">directory</span><span class="token operator">=</span>/var/www/laikeduo_test
+<span class="token assign-left variable">autostart</span><span class="token operator">=</span>true
+<span class="token assign-left variable">autorestart</span><span class="token operator">=</span>true
+<span class="token assign-left variable">stopasgroup</span><span class="token operator">=</span>true
+<span class="token assign-left variable">killasgroup</span><span class="token operator">=</span>true
+<span class="token assign-left variable">stderr_logfile</span><span class="token operator">=</span>/var/www/laikeduo_test/storage/logs/laikeduo_test_rabbitmq_processor.err.log
+<span class="token assign-left variable">stdout_logfile</span><span class="token operator">=</span>/var/www/laikeduo_test/storage/logs/laikeduo_test_rabbitmq_processor.out.log</code></pre>
+
+<h3 id="现象与分析"><a href="#现象与分析" class="headerlink" title="现象与分析"></a>现象与分析</h3><p><strong>现象</strong>：关闭或重启Supervisor, 只会对本身的<code>docker exec php7</code>命令生效, 容器内部已经启动的进程不受影响</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>root@iZwz995otwrhk15lyjqnpkZ laikeduo_test<span class="token punctuation">]</span><span class="token comment"># ps -aux | grep artisan</span>
+root     <span class="token number">19379</span>  <span class="token number">0.0</span>  <span class="token number">0.9</span> <span class="token number">1307524</span> <span class="token number">16776</span> ?       Sl   <span class="token number">16</span>:47   <span class="token number">0</span>:00 <span class="token function">docker</span> <span class="token builtin class-name">exec</span> php7 php /var/www/laikeduo_test/artisan queue:work
+root     <span class="token number">19380</span>  <span class="token number">0.1</span>  <span class="token number">0.9</span> <span class="token number">1307780</span> <span class="token number">16584</span> ?       Sl   <span class="token number">16</span>:47   <span class="token number">0</span>:00 <span class="token function">docker</span> <span class="token builtin class-name">exec</span> php7 php /var/www/laikeduo_test/artisan rabbitmq:process-messages
+www      <span class="token number">19407</span>  <span class="token number">0.6</span>  <span class="token number">1.7</span>  <span class="token number">92228</span> <span class="token number">30780</span> ?        Ss   <span class="token number">16</span>:47   <span class="token number">0</span>:00 php /var/www/laikeduo_test/artisan queue:work
+www      <span class="token number">19416</span>  <span class="token number">0.7</span>  <span class="token number">1.6</span>  <span class="token number">92228</span> <span class="token number">30200</span> ?        Ss   <span class="token number">16</span>:47   <span class="token number">0</span>:00 php /var/www/laikeduo_test/artisan rabbitmq:process-messages
+www      <span class="token number">19433</span>  <span class="token number">0.0</span>  <span class="token number">1.3</span>  <span class="token number">92228</span> <span class="token number">23532</span> ?        S    <span class="token number">16</span>:47   <span class="token number">0</span>:00 php /var/www/laikeduo_test/artisan rabbitmq:process-messages
+www      <span class="token number">19434</span>  <span class="token number">0.0</span>  <span class="token number">1.3</span>  <span class="token number">92228</span> <span class="token number">23528</span> ?        S    <span class="token number">16</span>:47   <span class="token number">0</span>:00 php /var/www/laikeduo_test/artisan rabbitmq:process-messages
+www      <span class="token number">19435</span>  <span class="token number">0.0</span>  <span class="token number">1.3</span>  <span class="token number">92228</span> <span class="token number">23524</span> ?        S    <span class="token number">16</span>:47   <span class="token number">0</span>:00 php /var/www/laikeduo_test/artisan rabbitmq:process-messages
+www      <span class="token number">19436</span>  <span class="token number">0.0</span>  <span class="token number">1.3</span>  <span class="token number">92228</span> <span class="token number">23532</span> ?        S    <span class="token number">16</span>:47   <span class="token number">0</span>:00 php /var/www/laikeduo_test/artisan rabbitmq:process-messages
+root     <span class="token number">19441</span>  <span class="token number">0.0</span>  <span class="token number">0.0</span> <span class="token number">112816</span>   <span class="token number">980</span> pts/0    R+   <span class="token number">16</span>:47   <span class="token number">0</span>:00 <span class="token function">grep</span> <span class="token parameter variable">--color</span><span class="token operator">=</span>auto artisan
+<span class="token punctuation">[</span>root@iZwz995otwrhk15lyjqnpkZ laikeduo_test<span class="token punctuation">]</span><span class="token comment"># systemctl stop supervisord</span>
+<span class="token punctuation">[</span>root@iZwz995otwrhk15lyjqnpkZ laikeduo_test<span class="token punctuation">]</span><span class="token comment"># ps -aux | grep artisan</span>
+www      <span class="token number">19407</span>  <span class="token number">0.3</span>  <span class="token number">1.7</span>  <span class="token number">92228</span> <span class="token number">30780</span> ?        Ss   <span class="token number">16</span>:47   <span class="token number">0</span>:00 php /var/www/laikeduo_test/artisan queue:work
+www      <span class="token number">19416</span>  <span class="token number">0.3</span>  <span class="token number">1.6</span>  <span class="token number">92228</span> <span class="token number">30200</span> ?        Ss   <span class="token number">16</span>:47   <span class="token number">0</span>:00 php /var/www/laikeduo_test/artisan rabbitmq:process-messages
+www      <span class="token number">19433</span>  <span class="token number">0.0</span>  <span class="token number">1.3</span>  <span class="token number">92228</span> <span class="token number">23532</span> ?        S    <span class="token number">16</span>:47   <span class="token number">0</span>:00 php /var/www/laikeduo_test/artisan rabbitmq:process-messages
+www      <span class="token number">19434</span>  <span class="token number">0.0</span>  <span class="token number">1.3</span>  <span class="token number">92228</span> <span class="token number">23528</span> ?        S    <span class="token number">16</span>:47   <span class="token number">0</span>:00 php /var/www/laikeduo_test/artisan rabbitmq:process-messages
+www      <span class="token number">19435</span>  <span class="token number">0.0</span>  <span class="token number">1.3</span>  <span class="token number">92228</span> <span class="token number">23524</span> ?        S    <span class="token number">16</span>:47   <span class="token number">0</span>:00 php /var/www/laikeduo_test/artisan rabbitmq:process-messages
+www      <span class="token number">19436</span>  <span class="token number">0.0</span>  <span class="token number">1.3</span>  <span class="token number">92228</span> <span class="token number">23532</span> ?        S    <span class="token number">16</span>:47   <span class="token number">0</span>:00 php /var/www/laikeduo_test/artisan rabbitmq:process-messages
+root     <span class="token number">19451</span>  <span class="token number">0.0</span>  <span class="token number">0.0</span> <span class="token number">112812</span>   <span class="token number">980</span> pts/0    R+   <span class="token number">16</span>:47   <span class="token number">0</span>:00 <span class="token function">grep</span> <span class="token parameter variable">--color</span><span class="token operator">=</span>auto artisan
+<span class="token punctuation">[</span>root@iZwz995otwrhk15lyjqnpkZ laikeduo_test<span class="token punctuation">]</span><span class="token comment"># ps -aux | grep 'artisan' | grep -v grep | awk '&#123;print $2&#125;' | xargs kill -9</span>
+<span class="token punctuation">[</span>root@iZwz995otwrhk15lyjqnpkZ laikeduo_test<span class="token punctuation">]</span><span class="token comment"># ps -aux | grep artisan</span>
+root     <span class="token number">19493</span>  <span class="token number">0.0</span>  <span class="token number">0.0</span> <span class="token number">112812</span>   <span class="token number">980</span> pts/0    S+   <span class="token number">16</span>:48   <span class="token number">0</span>:00 <span class="token function">grep</span> <span class="token parameter variable">--color</span><span class="token operator">=</span>auto artisan</code></pre>
+
+<p><strong>分析</strong>：</p>
+<ul>
+<li>  <code>docker exec</code> 命令在宿主机上启动，并不能直接控制容器内的进程。Supervisor 对 <code>docker exec</code> 命令的控制只限于启动和停止 <code>docker exec</code> 进程，而不会直接影响容器内部的进程</li>
+<li>  Supervisor 对宿主机上的 <code>docker exec</code> 命令进行管理，但不具备对容器内 PHP 进程的控制能力，因此无法有效管理已经在容器内启动的 PHP 进程</li>
+</ul>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>如果容器内部已经存在过多相关的进程无法删除, 只能指定删除包含<code>artisan</code>关键词的所有进程或者直接关闭再启动php7容器</p>
+<p><strong>方法 1</strong>：直接 kill 掉包含 <code>artisan</code> 关键词的进程</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">ps</span> <span class="token parameter variable">-aux</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">'artisan'</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token parameter variable">-v</span> <span class="token function">grep</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'&#123;print $2&#125;'</span> <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token function">kill</span> <span class="token parameter variable">-9</span></code></pre>
+
+<p><strong>方法 2</strong>：先关闭再启动 PHP 容器, 经测试, <code>docker-compose restart php7</code> 可能无效</p>
+<pre class="language-none"><code class="language-none">docker-compose stop php7
+docker-compose start php7</code></pre>
+
+
+
+
+        </div>
+
+        <blockquote class="post-copyright" style="display:none">
+    
+    <footer>
+        <a href="http://chuchu-z.com">
+            <img src="https://avatars.githubusercontent.com/u/33407400?s=400&u=a9cabf4402e2e3a38e67aa43da21164bbdd22f00&v=4" alt="chuchu-z">
+            chuchu-z
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        
+            
+
+            
+
+        
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse" style="display:none">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/posts/dockerfile-optimization-story/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Dockerfile 优化历程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+
+        <p>
+            <span>chuchu-z &copy; 2021 - 2024</span>
+            <span class="num">Total words: 24.3k</span>
+        </p>
+        <p><span>This blog is <a rel="help noopener" target="_blank" href="https://github.com/chuchu-z/chuchu-z.github.io/tree/src">open-source</a> and licensed under <a rel="license noopener" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</span></p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.js?v=1.7.2" async></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
