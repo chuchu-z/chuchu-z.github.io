@@ -18,7 +18,7 @@ categories:
 
 跟服务商平台网页cookies（缓存）有关。如果只登录服务商平台，这个时候平台页面对应的cookies中，只有一个Name（名称）为 **session_id** 的cookies，该cookies的domain（域）为 **pay.weixin.qq.com** 。
 
-![ad58873cdaabdd1ddab3d63af394d6f9](pay-weixin-login-failed/ad58873cdaabdd1ddab3d63af394d6f9.png)
+![](pay-weixin-login-failed/ad58873cdaabdd1ddab3d63af394d6f9.png)
 
 但是一旦访问过腾讯地图的商户标注页面，那么服务商平台页面对应的cookies中，就有2个Name为 **session_id** 的cookies，多了一个domain为 **.qq.com** 的。
 
@@ -34,7 +34,7 @@ categories:
 javascript: void((function(){function delecookie(a){var b=new Date;b.setTime(b.getTime()-1e5),document.cookie=a+"=v;expires="+b.toGMTString()+";path=/;domain=.qq.com"}delecookie("session_id");window.location.href = $(".page-error p a").attr("href")})())
 ```
 
-![ad58873cdaabdd1ddab3d63f2jd34o1](pay-weixin-login-failed/ad58873cdaabdd1ddab3d63f2jd34o1.png)
+![](pay-weixin-login-failed/ad58873cdaabdd1ddab3d63f2jd34o1.png)
 
 
 
